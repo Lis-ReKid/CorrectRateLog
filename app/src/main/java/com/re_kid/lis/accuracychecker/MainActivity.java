@@ -12,7 +12,6 @@ import androidx.core.view.WindowInsetsCompat;
 import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
-    TextView _tvAccuracy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +22,5 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        _tvAccuracy = findViewById(R.id.tv_accracy);
-        _tvAccuracy.setText(R.string.no_data_msg);
     }
 }
