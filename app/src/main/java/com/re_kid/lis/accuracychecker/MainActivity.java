@@ -1,6 +1,7 @@
 package com.re_kid.lis.accuracychecker;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,8 +9,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+import org.w3c.dom.Text;
 
+public class MainActivity extends AppCompatActivity {
+    TextView _tvAccuracy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,5 +23,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        _tvAccuracy = findViewById(R.id.tv_accracy);
+        _tvAccuracy.setText(R.string.no_data_msg);
     }
 }
