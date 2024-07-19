@@ -13,14 +13,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "_id INTEGER PRIMARY KEY NOT NULL, "
             + "history_date TEXT NOT NULL, "
             + "accurate_number INTEGER NOT NULL, "
-            + "entire_number INTEGER NOT NULL)";
+            + "entire_number INTEGER NOT NULL, "
+            + "accuracy_rate INTEGER NOT NULL)";
     private static final String CREATE_TAGS = "CREATE TABLE Tags("
             + "_id INTEGER PRIMARY KEY NOT NULL, "
-            + "tag_name TEXT NOT NULL)";
+            + "tag_name TEXT NOT NULL, "
+            + "tag_order INTEGER NOT NULL)";
     private static final String CREATE_HIST_TAG = "CREATE TABLE Hist_Tag("
             + "_id INTEGER PRIMARY KEY NOT NULL, "
             + "history_id INTEGER NOT NULL, "
-            + "tag_id INTEGER NOT NULL,  "
+            + "tag_id INTEGER NOT NULL, "
             + "FOREIGN KEY(history_id) REFERENCES Histories(_id) ON DELETE CASCADE, "
             + "FOREIGN KEY(tag_id) REFERENCES Tags(_id) ON DELETE CASCADE)";
 
