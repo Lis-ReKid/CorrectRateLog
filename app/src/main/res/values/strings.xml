@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">正答率チェッカー</string>
     <string name="no_data_msg">データがありません。\n勉強履歴を登録しましょう！</string>
+    <string name="create_history_btn">勉強履歴を登録する</string>
     <string name="accuracy_title">正答率</string>
     <string name="accuracy_unit">%</string>
     <!-- TODO: Remove or change this placeholder text -->
