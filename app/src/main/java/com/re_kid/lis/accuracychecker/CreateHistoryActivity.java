@@ -1,6 +1,8 @@
 package com.re_kid.lis.accuracychecker;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +22,14 @@ public class CreateHistoryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Button btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new CreateHistoryListener());
+    }
+
+    private class CreateHistoryListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
     }
 }
