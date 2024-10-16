@@ -1,4 +1,6 @@
 <resources>
+    <!-- General -->
+    <string name="btn_back">前の画面に戻る</string>
     <!-- ホーム画面回り -->
     <string name="app_name">正答率チェッカー</string>
     <string name="no_data_msg">データがありません。\n勉強履歴を登録しましょう！</string>
