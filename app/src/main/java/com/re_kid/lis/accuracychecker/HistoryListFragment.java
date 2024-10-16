@@ -25,7 +25,6 @@ public class HistoryListFragment extends Fragment {
         super(R.layout.fragment_history_list);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,14 +38,15 @@ public class HistoryListFragment extends Fragment {
 
         ListView lvHistory = view.findViewById(R.id.lvHistory);
         //テスト用仮リスト
-        List<Map<String, Integer>> tempList = new ArrayList<>();
-        Map<String, Integer> tempMap = new HashMap<>();
+        List<Map<String, Object>> tempList = new ArrayList<>();
+        Map<String, Object> tempMap = new HashMap<>();
         for (int i = 1; i <= 10; i++) {
             tempMap.put("temp", i);
             tempList.add(tempMap);
         }
         String[] from = {};
         int[] to = {};
+        //仮リストここまで
         SimpleAdapter adapter = new SimpleAdapter(getActivity(), tempList, R.layout.history_row, from, to);
         lvHistory.setAdapter(adapter);
     }
