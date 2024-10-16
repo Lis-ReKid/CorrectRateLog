@@ -22,14 +22,18 @@ public class CreateHistoryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        CreateHistoryListener listener = new CreateHistoryListener();
         Button btn_back = findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(new CreateHistoryListener());
+        btn_back.setOnClickListener(listener);
     }
 
     private class CreateHistoryListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            finish();
+            int vId = v.getId();
+            if (vId == R.id.btn_back) {
+                finish();
+            }
         }
     }
 }
