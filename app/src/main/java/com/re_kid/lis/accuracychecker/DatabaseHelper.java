@@ -11,7 +11,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_HISTORIES = "CREATE TABLE Histories ("
             + "_id INTEGER PRIMARY KEY NOT NULL, "
-            + "history_date TEXT NOT NULL, "
+            + "history_datetime TEXT NOT NULL, "
             + "accurate_number INTEGER NOT NULL, "
             + "entire_number INTEGER NOT NULL, "
             + "accuracy_rate INTEGER NOT NULL)";
