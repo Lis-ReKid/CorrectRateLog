@@ -14,7 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "history_datetime TEXT NOT NULL, "
             + "accurate_number INTEGER NOT NULL, "
             + "entire_number INTEGER NOT NULL, "
-            + "accuracy_rate INTEGER NOT NULL)";
+            + "accuracy_rate REAL NOT NULL)";
     private static final String CREATE_TAGS = "CREATE TABLE Tags("
             + "_id INTEGER PRIMARY KEY NOT NULL, "
             + "tag_name TEXT NOT NULL, "
