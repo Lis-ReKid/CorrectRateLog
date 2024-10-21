@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class CreateHistoryActivity extends AppCompatActivity {
+    private DatabaseHelper _helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class CreateHistoryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        _helper = new DatabaseHelper(CreateHistoryActivity.this);
         CreateHistoryListener listener = new CreateHistoryListener();
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(listener);
@@ -35,5 +37,11 @@ public class CreateHistoryActivity extends AppCompatActivity {
                 finish();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        _helper.close();
+        super.onDestroy();
     }
 }
