@@ -78,6 +78,7 @@ public class CreateHistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        _helper.close();
         super.onDestroy();
     }
 }
