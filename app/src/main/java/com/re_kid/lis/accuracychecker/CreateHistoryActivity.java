@@ -70,6 +70,7 @@ public class CreateHistoryActivity extends AppCompatActivity {
         public void onClick(View v) {
             int vId = v.getId();
             if (vId == R.id.btn_back) {
+                _helper.close();
                 finish();
             }
         }
@@ -77,7 +78,6 @@ public class CreateHistoryActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        _helper.close();
         super.onDestroy();
     }
 }
