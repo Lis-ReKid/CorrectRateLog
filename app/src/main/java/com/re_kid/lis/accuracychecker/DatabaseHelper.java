@@ -10,17 +10,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "accuracychecker.db";
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_HISTORIES = "CREATE TABLE Histories ("
-            + "_id INTEGER PRIMARY KEY NOT NULL, "
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "history_datetime TEXT NOT NULL, "
             + "accurate_number INTEGER NOT NULL, "
             + "entire_number INTEGER NOT NULL, "
-            + "accuracy_rate INTEGER NOT NULL)";
+            + "accuracy_rate REAL NOT NULL)";
     private static final String CREATE_TAGS = "CREATE TABLE Tags("
-            + "_id INTEGER PRIMARY KEY NOT NULL, "
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "tag_name TEXT NOT NULL, "
             + "tag_order INTEGER NOT NULL)";
     private static final String CREATE_HIST_TAG = "CREATE TABLE Hist_Tag("
-            + "_id INTEGER PRIMARY KEY NOT NULL, "
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "history_id INTEGER NOT NULL, "
             + "tag_id INTEGER NOT NULL, "
             + "FOREIGN KEY(history_id) REFERENCES Histories(_id) ON DELETE CASCADE, "

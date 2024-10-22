@@ -1,8 +1,13 @@
 package com.re_kid.lis.accuracychecker;
 
+import static java.lang.Long.parseLong;
+
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class CreateHistoryActivity extends AppCompatActivity {
+    private DatabaseHelper _helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +28,41 @@ public class CreateHistoryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        _helper = new DatabaseHelper(CreateHistoryActivity.this);
+
         CreateHistoryListener listener = new CreateHistoryListener();
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(listener);
+    }
+
+    public void onCreateBtnClick(View view) {
+        // 入力内容を取得
+        EditText etLearnedDate = findViewById(R.id.et_learned_date);
+        String strLearnedDate = etLearnedDate.getText().toString();
+        EditText etAccurateNumber = findViewById(R.id.et_accurate_number);
+        long longAccurateNumber = parseLong(etAccurateNumber.getText().toString());
+        EditText etEntireNumber = findViewById(R.id.et_entire_number);
+        long longEntireNumber = parseLong(etEntireNumber.getText().toString());
+
+        // 正答率の産出
+        // TO DO 仮で入れてるので処理追加してください
+        double accuracyRate = 100.0;
+
+        SQLiteDatabase db = _helper.getWritableDatabase();
+
+        // SQLを作成
+        String sqlInsert = "INSERT INTO Histories " +
+                "(history_datetime, accurate_number, entire_number, accuracy_rate)" +
+                "VALUES(?, ?, ?, ?)";
+        SQLiteStatement stmt = db.compileStatement(sqlInsert);
+        stmt.bindString(1, strLearnedDate);
+        stmt.bindLong(2, longAccurateNumber);
+        stmt.bindLong(3, longEntireNumber);
+        stmt.bindDouble(4, accuracyRate);
+
+        // SQLを実行
+        stmt.executeInsert();
     }
 
     private class CreateHistoryListener implements View.OnClickListener {
@@ -32,8 +70,14 @@ public class CreateHistoryActivity extends AppCompatActivity {
         public void onClick(View v) {
             int vId = v.getId();
             if (vId == R.id.btn_back) {
+                _helper.close();
                 finish();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
