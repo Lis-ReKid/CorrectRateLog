@@ -135,14 +135,4 @@
         app:layout_constraintTop_toBottomOf="@+id/et_entire_number"
         tools:ignore="VisualLintButtonSize" />
 
-    <EditText
-        android:id="@+id/et_history_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
