@@ -47,7 +47,7 @@ public class CreateHistoryActivity extends AppCompatActivity {
 
         // 正答率の産出
         // TO DO 仮で入れてるので処理追加してください
-        double accuracyRate = 100.0;
+        double accuracyRate = Common.calcRate(strAccurateNumber, strEntireNumber);
 
         SQLiteDatabase db = _helper.getWritableDatabase();
 
