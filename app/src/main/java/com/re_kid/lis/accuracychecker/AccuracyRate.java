@@ -3,7 +3,7 @@ package com.re_kid.lis.accuracychecker;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Common {
+public class AccuracyRate {
     /**
      *
      * @param dividend 割られる数
