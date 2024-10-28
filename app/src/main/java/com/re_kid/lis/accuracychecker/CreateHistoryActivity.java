@@ -47,7 +47,6 @@ public class CreateHistoryActivity extends AppCompatActivity {
         String strEntireNumber = etEntireNumber.getText().toString();
 
         // 正答率の産出
-        // TO DO 仮で入れてるので処理追加してください
         double accuracyRate = AccuracyRate.calcRate(strAccurateNumber, strEntireNumber);
 
         SQLiteDatabase db = _helper.getWritableDatabase();
