@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,8 +39,8 @@ public class CreateHistoryActivity extends AppCompatActivity {
 
     public void onCreateBtnClick(View view) {
         // 入力内容を取得
-        EditText etLearnedDate = findViewById(R.id.et_learned_date);
-        String strLearnedDate = etLearnedDate.getText().toString();
+        TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
+        String strLearnedDate = tvLearnedDate.getText().toString();
         EditText etAccurateNumber = findViewById(R.id.et_accurate_number);
         String strAccurateNumber = etAccurateNumber.getText().toString();
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
