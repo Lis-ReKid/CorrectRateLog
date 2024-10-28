@@ -41,13 +41,13 @@ public class CreateHistoryActivity extends AppCompatActivity {
         EditText etLearnedDate = findViewById(R.id.et_learned_date);
         String strLearnedDate = etLearnedDate.getText().toString();
         EditText etAccurateNumber = findViewById(R.id.et_accurate_number);
-        long longAccurateNumber = parseLong(etAccurateNumber.getText().toString());
+        String strAccurateNumber = etAccurateNumber.getText().toString();
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
-        long longEntireNumber = parseLong(etEntireNumber.getText().toString());
+        String strEntireNumber = etEntireNumber.getText().toString();
 
         // 正答率の産出
         // TO DO 仮で入れてるので処理追加してください
-        double accuracyRate = 100.0;
+        double accuracyRate = AccuracyRate.calcRate(strAccurateNumber, strEntireNumber);
 
         SQLiteDatabase db = _helper.getWritableDatabase();
 
@@ -57,8 +57,8 @@ public class CreateHistoryActivity extends AppCompatActivity {
                 "VALUES(?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
         stmt.bindString(1, strLearnedDate);
-        stmt.bindLong(2, longAccurateNumber);
-        stmt.bindLong(3, longEntireNumber);
+        stmt.bindLong(2, parseLong(strAccurateNumber));
+        stmt.bindLong(3, parseLong(strEntireNumber));
         stmt.bindDouble(4, accuracyRate);
 
         // SQLを実行
