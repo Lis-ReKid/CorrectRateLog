@@ -16,6 +16,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class CreateHistoryActivity extends AppCompatActivity {
     private DatabaseHelper _helper;
 
@@ -31,6 +36,15 @@ public class CreateHistoryActivity extends AppCompatActivity {
         });
 
         _helper = new DatabaseHelper(CreateHistoryActivity.this);
+
+        final Locale locale = Locale.getDefault();
+        final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", locale);
+        final DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
+        final Date nowDateTime = new Date(System.currentTimeMillis());
+        TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
+        TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
+        tvLearnedDate.setText(dateFormat.format(nowDateTime));
+        tvLearnedTime.setText(timeFormat.format(nowDateTime));
 
         CreateHistoryListener listener = new CreateHistoryListener();
         Button btn_back = findViewById(R.id.btn_back);
