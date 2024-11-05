@@ -8,12 +8,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class CreateHistoryActivity extends AppCompatActivity {
     private DatabaseHelper _helper;
@@ -31,6 +37,16 @@ public class CreateHistoryActivity extends AppCompatActivity {
 
         _helper = new DatabaseHelper(CreateHistoryActivity.this);
 
+        // 日時の初期値入力
+        final Locale locale = Locale.getDefault();
+        final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", locale);
+        final DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
+        final Date nowDateTime = new Date(System.currentTimeMillis());
+        TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
+        TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
+        tvLearnedDate.setText(dateFormat.format(nowDateTime));
+        tvLearnedTime.setText(timeFormat.format(nowDateTime));
+
         CreateHistoryListener listener = new CreateHistoryListener();
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(listener);
@@ -38,15 +54,14 @@ public class CreateHistoryActivity extends AppCompatActivity {
 
     public void onCreateBtnClick(View view) {
         // 入力内容を取得
-        EditText etLearnedDate = findViewById(R.id.et_learned_date);
-        String strLearnedDate = etLearnedDate.getText().toString();
+        TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
+        String strLearnedDate = tvLearnedDate.getText().toString();
         EditText etAccurateNumber = findViewById(R.id.et_accurate_number);
         String strAccurateNumber = etAccurateNumber.getText().toString();
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         String strEntireNumber = etEntireNumber.getText().toString();
 
-        // 正答率の産出
-        // TO DO 仮で入れてるので処理追加してください
+        // 正答率の算出
         double accuracyRate = AccuracyRate.calcRate(strAccurateNumber, strEntireNumber);
 
         SQLiteDatabase db = _helper.getWritableDatabase();
