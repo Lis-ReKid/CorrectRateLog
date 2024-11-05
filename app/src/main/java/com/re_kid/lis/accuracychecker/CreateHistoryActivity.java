@@ -60,7 +60,7 @@ public class CreateHistoryActivity extends AppCompatActivity {
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         String strEntireNumber = etEntireNumber.getText().toString();
 
-        // 正答率の産出
+        // 正答率の算出
         double accuracyRate = AccuracyRate.calcRate(strAccurateNumber, strEntireNumber);
 
         SQLiteDatabase db = _helper.getWritableDatabase();
