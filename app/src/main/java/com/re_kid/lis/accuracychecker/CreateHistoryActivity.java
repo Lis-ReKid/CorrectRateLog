@@ -37,6 +37,7 @@ public class CreateHistoryActivity extends AppCompatActivity {
 
         _helper = new DatabaseHelper(CreateHistoryActivity.this);
 
+        // 日時の初期値入力
         final Locale locale = Locale.getDefault();
         final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", locale);
         final DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
