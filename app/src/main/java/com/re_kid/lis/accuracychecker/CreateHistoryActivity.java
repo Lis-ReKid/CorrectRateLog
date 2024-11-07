@@ -2,11 +2,13 @@ package com.re_kid.lis.accuracychecker;
 
 import static java.lang.Long.parseLong;
 
+import android.app.DatePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class CreateHistoryActivity extends AppCompatActivity {
+public class CreateHistoryActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private DatabaseHelper _helper;
 
     @Override
@@ -47,9 +49,13 @@ public class CreateHistoryActivity extends AppCompatActivity {
         tvLearnedDate.setText(dateFormat.format(nowDateTime));
         tvLearnedTime.setText(timeFormat.format(nowDateTime));
 
+        // イベントリスナ登録
         CreateHistoryListener listener = new CreateHistoryListener();
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(listener);
+        tvLearnedDate.setOnClickListener(listener);
+        tvLearnedTime.setOnClickListener(listener);
+
     }
 
     public void onCreateBtnClick(View view) {
@@ -80,6 +86,16 @@ public class CreateHistoryActivity extends AppCompatActivity {
         stmt.executeInsert();
     }
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        System.out.println("onDataSet() called.");
+        System.out.println("year : " + year);
+        System.out.println("month : " + month);
+        System.out.println("dayOfMonth : " + dayOfMonth);
+        TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
+        tvLearnedDate.setText(String.format("%d/%02d/%02d", year, month + 1, dayOfMonth));
+    }
+
     private class CreateHistoryListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -87,6 +103,19 @@ public class CreateHistoryActivity extends AppCompatActivity {
             if (vId == R.id.btn_back) {
                 _helper.close();
                 finish();
+            } else if(vId == R.id.tv_learned_date) {
+                DatePickerDialogFragment datePicker = new DatePickerDialogFragment();
+                Bundle args = new Bundle();
+                TextView temp = (TextView)v;
+                args.putString("Date", temp.getText().toString());
+                datePicker.setArguments(args);
+                datePicker.show(getSupportFragmentManager(), "datePicker");
+            } else if(vId == R.id.tv_learned_time) {
+                TimePickerDialogFragment timePicker = new TimePickerDialogFragment();
+                Bundle args = new Bundle();
+                args.putString("Time", findViewById(R.id.tv_learned_time).toString());
+                timePicker.setArguments(args);
+                timePicker.show(getSupportFragmentManager(), "timePicker");
             }
         }
     }

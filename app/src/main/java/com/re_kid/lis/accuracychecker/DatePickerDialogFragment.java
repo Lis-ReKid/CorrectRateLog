@@ -2,6 +2,7 @@ package com.re_kid.lis.accuracychecker;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +13,13 @@ public class DatePickerDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        DatePickerDialog datePicker = new DatePickerDialog(getActivity());
+        String dateprm = requireArguments().getString("Date");
+        Context context = requireContext();
+        DatePickerDialog.OnDateSetListener listener = (DatePickerDialog.OnDateSetListener)getActivity();
+        int year = Integer.parseInt(dateprm != null ? dateprm.substring(0, 4) : "2000");
+        int month = Integer.parseInt(dateprm != null ? dateprm.substring(5, 7) : "01");
+        int day = Integer.parseInt(dateprm != null ? dateprm.substring(8, 10) : "01");
+        DatePickerDialog datePicker = new DatePickerDialog(context, listener, year, month -1, day);
         return datePicker;
     }
 }
