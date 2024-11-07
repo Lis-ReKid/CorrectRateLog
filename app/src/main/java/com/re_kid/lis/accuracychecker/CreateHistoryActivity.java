@@ -89,6 +89,9 @@ public class CreateHistoryActivity extends AppCompatActivity implements DatePick
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
+        // 要リファクタ
+        // Dateオブジェクト使いたい→onCreate()参照してね
+        // format()は遅いらしい
         tvLearnedDate.setText(String.format("%d/%02d/%02d", year, month + 1, dayOfMonth));
     }
 
