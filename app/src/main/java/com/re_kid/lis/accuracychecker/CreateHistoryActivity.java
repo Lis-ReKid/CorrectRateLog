@@ -88,10 +88,6 @@ public class CreateHistoryActivity extends AppCompatActivity implements DatePick
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        System.out.println("onDataSet() called.");
-        System.out.println("year : " + year);
-        System.out.println("month : " + month);
-        System.out.println("dayOfMonth : " + dayOfMonth);
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
         tvLearnedDate.setText(String.format("%d/%02d/%02d", year, month + 1, dayOfMonth));
     }
