@@ -92,7 +92,7 @@ public class CreateHistoryActivity extends AppCompatActivity implements DatePick
         // 要リファクタ
         // Dateオブジェクト使いたい→onCreate()参照してね
         // format()は遅いらしい
-        tvLearnedDate.setText(String.format("%d/%02d/%02d", year, month + 1, dayOfMonth));
+        tvLearnedDate.setText(String.format(Locale.getDefault(), "%d/%02d/%02d", year, month + 1, dayOfMonth));
     }
 
     private class CreateHistoryListener implements View.OnClickListener {
