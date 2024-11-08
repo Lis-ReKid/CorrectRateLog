@@ -3,6 +3,7 @@ package com.re_kid.lis.accuracychecker;
 import static java.lang.Long.parseLong;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class CreateHistoryActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class CreateHistoryActivity extends AppCompatActivity
+        implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private DatabaseHelper _helper;
 
     @Override
@@ -95,6 +98,12 @@ public class CreateHistoryActivity extends AppCompatActivity implements DatePick
         tvLearnedDate.setText(String.format(Locale.getDefault(), "%d/%02d/%02d", year, month + 1, dayOfMonth));
     }
 
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
+        tvLearnedTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute));
+    }
+
     private class CreateHistoryListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -112,7 +121,8 @@ public class CreateHistoryActivity extends AppCompatActivity implements DatePick
             } else if(vId == R.id.tv_learned_time) {
                 TimePickerDialogFragment timePicker = new TimePickerDialogFragment();
                 Bundle args = new Bundle();
-                args.putString("Time", findViewById(R.id.tv_learned_time).toString());
+                TextView temp = (TextView)v;
+                args.putString("Time", temp.getText().toString());
                 timePicker.setArguments(args);
                 timePicker.show(getSupportFragmentManager(), "timePicker");
             }
