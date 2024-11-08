@@ -13,12 +13,12 @@ public class DatePickerDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        String dateprm = requireArguments().getString("Date");
+        String datePrm = requireArguments().getString("Date");
         Context context = requireContext();
         DatePickerDialog.OnDateSetListener listener = (DatePickerDialog.OnDateSetListener)getActivity();
-        int year = Integer.parseInt(dateprm != null ? dateprm.substring(0, 4) : "2000");
-        int month = Integer.parseInt(dateprm != null ? dateprm.substring(5, 7) : "01");
-        int day = Integer.parseInt(dateprm != null ? dateprm.substring(8, 10) : "01");
+        int year = Integer.parseInt(datePrm != null ? datePrm.substring(0, 4) : "2000");
+        int month = Integer.parseInt(datePrm != null ? datePrm.substring(5, 7) : "01");
+        int day = Integer.parseInt(datePrm != null ? datePrm.substring(8, 10) : "01");
         DatePickerDialog datePicker = new DatePickerDialog(context, listener, year, month -1, day);
         return datePicker;
     }
