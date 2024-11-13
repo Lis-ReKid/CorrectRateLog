@@ -1,4 +1,4 @@
-package com.re_kid.lis.accuracychecker;
+package com.re_kid.lis.accuracychecker.dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
