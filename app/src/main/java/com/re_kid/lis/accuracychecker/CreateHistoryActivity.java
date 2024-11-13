@@ -65,6 +65,8 @@ public class CreateHistoryActivity extends AppCompatActivity
         // 入力内容を取得
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
         String strLearnedDate = tvLearnedDate.getText().toString();
+        TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
+        String strLearnedTime = tvLearnedTime.getText().toString();
         EditText etAccurateNumber = findViewById(R.id.et_accurate_number);
         String strAccurateNumber = etAccurateNumber.getText().toString();
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
@@ -80,7 +82,7 @@ public class CreateHistoryActivity extends AppCompatActivity
                 "(history_datetime, accurate_number, entire_number, accuracy_rate)" +
                 "VALUES(?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindString(1, strLearnedDate);
+        stmt.bindString(1, strLearnedDate + " " + strLearnedTime);
         stmt.bindLong(2, parseLong(strAccurateNumber));
         stmt.bindLong(3, parseLong(strEntireNumber));
         stmt.bindDouble(4, accuracyRate);
