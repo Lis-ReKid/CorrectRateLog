@@ -40,7 +40,7 @@
             android:layout_width="43dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
-            android:text="@string/accuracy_unit"
+            android:text="@string/tv_accuracy_unit"
             android:textSize="48sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_accuracy_rate"
             app:layout_constraintEnd_toEndOf="parent"
