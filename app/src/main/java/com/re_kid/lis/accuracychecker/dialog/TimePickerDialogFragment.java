@@ -18,7 +18,6 @@ public class TimePickerDialogFragment extends DialogFragment {
         TimePickerDialog.OnTimeSetListener listener = (TimePickerDialog.OnTimeSetListener)getActivity();
         int hourOfDay = Integer.parseInt(timePrm != null ? timePrm.substring(0, 2) : "00");
         int minute = Integer.parseInt(timePrm != null ? timePrm.substring(3, 5) : "00");
-        TimePickerDialog timePicker = new TimePickerDialog(context, listener, hourOfDay, minute, true);
-        return timePicker;
+        return new TimePickerDialog(context, listener, hourOfDay, minute, true);
     }
 }
