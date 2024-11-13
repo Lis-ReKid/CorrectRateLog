@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.SimpleCursorAdapter.ViewBinder;
+import android.widget.TextView;
+
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +52,7 @@ public class HistoryListFragment extends Fragment {
         String[] from = {"history_datetime", "accuracy_rate", "accurate_number", "entire_number"};
         int[] to = {R.id.tvHistoryDateTimeRow, R.id.tv_accuracy_rate_row, R.id.tv_accuracy_number_row, R.id.tv_entire_number_row};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row, cursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        adapter.setViewBinder(new CustomViewBinder());
         lvHistory.setAdapter(adapter);
     }
 
@@ -55,5 +60,18 @@ public class HistoryListFragment extends Fragment {
     public void onDestroy() {
         _helper.close();
         super.onDestroy();
+    }
+
+    private class CustomViewBinder implements ViewBinder {
+        @Override
+        public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+            boolean result = false;
+            if (view.getId() == R.id.tv_accuracy_rate_row) {
+                String origin = cursor.getString(columnIndex);
+                ((TextView) view).setText(String.format(Locale.getDefault(), "%.1f", Double.parseDouble(origin) * 100));
+                result = true;
+            }
+            return result;
+        }
     }
 }
