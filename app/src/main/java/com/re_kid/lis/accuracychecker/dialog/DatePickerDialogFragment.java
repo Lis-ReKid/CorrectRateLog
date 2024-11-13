@@ -1,4 +1,4 @@
-package com.re_kid.lis.accuracychecker;
+package com.re_kid.lis.accuracychecker.dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -19,7 +19,6 @@ public class DatePickerDialogFragment extends DialogFragment {
         int year = Integer.parseInt(datePrm != null ? datePrm.substring(0, 4) : "2000");
         int month = Integer.parseInt(datePrm != null ? datePrm.substring(5, 7) : "01");
         int day = Integer.parseInt(datePrm != null ? datePrm.substring(8, 10) : "01");
-        DatePickerDialog datePicker = new DatePickerDialog(context, listener, year, month -1, day);
-        return datePicker;
+        return new DatePickerDialog(context, listener, year, month -1, day);
     }
 }
