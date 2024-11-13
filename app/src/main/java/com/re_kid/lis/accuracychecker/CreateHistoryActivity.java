@@ -95,7 +95,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         // 要リファクタ
         // Dateオブジェクト使いたい→onCreate()参照してね
         // format()は遅いらしい
-        tvLearnedDate.setText(String.format(Locale.getDefault(), "%d/%02d/%02d", year, month + 1, dayOfMonth));
+        tvLearnedDate.setText(String.format(Locale.getDefault(), "%4d/%02d/%02d", year, month + 1, dayOfMonth));
     }
 
     @Override
