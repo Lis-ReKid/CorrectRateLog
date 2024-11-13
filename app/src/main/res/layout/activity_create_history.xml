@@ -34,13 +34,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_learned_date"
+        android:id="@+id/tv_learned_date_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/tv_learned_date"
-        app:layout_constraintBaseline_toBaselineOf="@+id/et_learned_date"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_history_header" />
 
     <TextView
         android:id="@+id/tv_accurate_number"
@@ -61,19 +62,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/et_learned_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="date"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toEndOf="@+id/tv_learned_date"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_history_header"
-        tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-    <EditText
         android:id="@+id/et_accurate_number"
         android:layout_width="48dp"
         android:layout_height="wrap_content"
@@ -85,7 +73,7 @@
         android:minHeight="48dp"
         android:textColorHint="#546E7A"
         app:layout_constraintStart_toEndOf="@+id/tv_accurate_number"
-        app:layout_constraintTop_toBottomOf="@+id/et_learned_date"
+        app:layout_constraintTop_toBottomOf="@+id/tv_learned_date"
         tools:ignore="Autofill,DuplicateSpeakableTextCheck" />
 
     <EditText
@@ -134,5 +122,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_entire_number"
         tools:ignore="VisualLintButtonSize" />
+
+    <TextView
+        android:id="@+id/tv_learned_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_learned_date_label"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_history_header" />
+
+    <TextView
+        android:id="@+id/tv_learned_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_learned_date"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_history_header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

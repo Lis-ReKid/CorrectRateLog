@@ -10,7 +10,7 @@
     <string name="tv_accuracy_unit">%</string>
     <!-- 履歴登録回り-->
     <string name="create_history_header">勉強履歴新規登録</string>
-    <string name="tv_learned_date">勉強日</string>
+    <string name="tv_learned_date">勉強日時</string>
     <string name="tv_accurate_number">正答数</string>
     <string name="tv_entire_number">問題数</string>
     <string name="tv_quiz_number_hint">0</string>
