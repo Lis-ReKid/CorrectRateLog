@@ -71,6 +71,7 @@ public class HistoryListFragment extends Fragment {
                 ((TextView) view).setText(String.format(Locale.getDefault(), "%.1f", Double.parseDouble(origin) * 100));
                 result = true;
             }
+            // TO DO タイトル部分なんかやる
             return result;
         }
     }
