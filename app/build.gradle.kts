@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.re_kid.lis.accuracychecker"
+    namespace = "com.re_kid.lis.correctratelog"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.re_kid.lis.accuracychecker"
+        applicationId = "com.re_kid.lis.correctratelog"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
