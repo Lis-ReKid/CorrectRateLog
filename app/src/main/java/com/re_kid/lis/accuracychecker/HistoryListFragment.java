@@ -49,8 +49,8 @@ public class HistoryListFragment extends Fragment {
         SQLiteDatabase db = _helper.getWritableDatabase();
         String sql = "SELECT * FROM Histories ORDER BY _id DESC";
         Cursor cursor = db.rawQuery(sql, null);
-        String[] from = {"history_datetime", "accuracy_rate", "accurate_number", "entire_number"};
-        int[] to = {R.id.tvHistoryDateTimeRow, R.id.tv_accuracy_rate_row, R.id.tv_accuracy_number_row, R.id.tv_entire_number_row};
+        String[] from = {"_id", "history_datetime", "accuracy_rate", "accurate_number", "entire_number"};
+        int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvHistoryDateTimeRow, R.id.tv_accuracy_rate_row, R.id.tv_accuracy_number_row, R.id.tv_entire_number_row};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row, cursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         adapter.setViewBinder(new CustomViewBinder());
         lvHistory.setAdapter(adapter);
@@ -66,12 +66,21 @@ public class HistoryListFragment extends Fragment {
         @Override
         public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
             boolean result = false;
+            // 正答率整形
             if (view.getId() == R.id.tv_accuracy_rate_row) {
                 String origin = cursor.getString(columnIndex);
                 ((TextView) view).setText(String.format(Locale.getDefault(), "%.1f", Double.parseDouble(origin) * 100));
                 result = true;
             }
-            // TO DO タイトル部分なんかやる
+            // 履歴タイトル整形
+            if (view.getId() == R.id.tv_hist_tag_row_temp) {
+                // StringBuilderの方が良いか？要検討
+                String origin = cursor.getString(columnIndex);
+                String strNoTag = getString(R.string.no_tag_history);
+                String text = strNoTag + origin;
+                ((TextView) view).setText(text);
+                result = true;
+            }
             return result;
         }
     }
