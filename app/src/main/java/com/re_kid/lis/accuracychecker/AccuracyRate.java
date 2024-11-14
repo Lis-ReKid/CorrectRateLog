@@ -4,6 +4,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class AccuracyRate {
+    private final int accurateNum;
+    private final int entireNum;
+    public AccuracyRate(int accurateNum, int entireNum) {
+        this.accurateNum = accurateNum;
+        this.entireNum = entireNum;
+    }
     /**
      *
      * @param dividend 割られる数
