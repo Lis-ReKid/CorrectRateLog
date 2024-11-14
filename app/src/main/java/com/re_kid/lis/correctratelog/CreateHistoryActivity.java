@@ -1,4 +1,4 @@
-package com.re_kid.lis.accuracychecker;
+package com.re_kid.lis.correctratelog;
 
 import static java.lang.Long.parseLong;
 
@@ -20,8 +20,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.re_kid.lis.accuracychecker.dialog.DatePickerDialogFragment;
-import com.re_kid.lis.accuracychecker.dialog.TimePickerDialogFragment;
+import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
+import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

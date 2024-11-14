@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AccuracyChecker"
+rootProject.name = "CorrectRateLog"
 include(":app")

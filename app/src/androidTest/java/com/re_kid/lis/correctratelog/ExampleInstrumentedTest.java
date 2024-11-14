@@ -1,4 +1,4 @@
-package com.re_kid.lis.accuracychecker;
+package com.re_kid.lis.correctratelog;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.re_kid.lis.accuracychecker", appContext.getPackageName());
+        assertEquals("com.re_kid.lis.correctratelog", appContext.getPackageName());
     }
 }

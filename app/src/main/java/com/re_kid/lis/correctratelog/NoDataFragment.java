@@ -1,4 +1,4 @@
-package com.re_kid.lis.accuracychecker;
+package com.re_kid.lis.correctratelog;
 
 import android.content.Intent;
 import android.os.Bundle;

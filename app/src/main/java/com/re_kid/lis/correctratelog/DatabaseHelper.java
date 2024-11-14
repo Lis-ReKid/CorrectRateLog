@@ -1,4 +1,4 @@
-package com.re_kid.lis.accuracychecker;
+package com.re_kid.lis.correctratelog;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "accuracychecker.db";
+    private static final String DATABASE_NAME = "correctratelog.db";
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_HISTORIES = "CREATE TABLE Histories ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
