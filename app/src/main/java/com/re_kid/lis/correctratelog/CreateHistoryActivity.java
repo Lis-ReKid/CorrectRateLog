@@ -82,7 +82,7 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // SQLを作成
         String sqlInsert = "INSERT INTO Histories " +
-                "(history_datetime, accurate_number, entire_number, accuracy_rate)" +
+                "(history_datetime, correct_number, entire_number, correct_rate)" +
                 "VALUES(?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
         stmt.bindString(1, strLearnedDate + " " + strLearnedTime);
