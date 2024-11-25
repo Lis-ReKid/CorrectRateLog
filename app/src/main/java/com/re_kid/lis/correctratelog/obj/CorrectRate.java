@@ -1,4 +1,4 @@
-package com.re_kid.lis.correctratelog;
+package com.re_kid.lis.correctratelog.obj;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

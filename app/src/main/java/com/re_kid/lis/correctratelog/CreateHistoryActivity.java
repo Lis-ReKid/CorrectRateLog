@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
+import com.re_kid.lis.correctratelog.obj.CorrectRate;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
