@@ -6,7 +6,8 @@ import java.math.RoundingMode;
 public class CorrectRate {
     private final int correctNum;
     private final int entireNum;
-    public CorrectRate(int correctNum, int entireNum) {
+    private final double correctRate;
+    public CorrectRate(final int correctNum, final int entireNum) {
         // 正答数0未満でエラー
         if (correctNum < 0) throw new IllegalArgumentException("正答数は0以上の数値を指定してください。");
         // 問題数1未満でエラー
@@ -16,6 +17,12 @@ public class CorrectRate {
 
         this.correctNum = correctNum;
         this.entireNum = entireNum;
+
+        // 正答率を初期化
+        // 小数点以下3桁のdouble型
+        BigDecimal decDividend = new BigDecimal(correctNum);
+        BigDecimal decDivisor = new BigDecimal(entireNum);
+        this.correctRate =  decDividend.divide(decDivisor, 3, RoundingMode.HALF_UP).doubleValue();
     }
     /**
      *
