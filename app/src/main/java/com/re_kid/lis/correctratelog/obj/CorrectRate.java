@@ -7,6 +7,13 @@ public class CorrectRate {
     private final int correctNum;
     private final int entireNum;
     public CorrectRate(int correctNum, int entireNum) {
+        // 正答数0未満でエラー
+        if (correctNum < 0) throw new IllegalArgumentException("正答数は0以上の数値を指定してください。");
+        // 問題数1未満でエラー
+        if (entireNum < 1) throw new IllegalArgumentException("問題数は1以上の数値を指定してください。");
+        // 正答数>問題数でエラー
+        if (correctNum > entireNum) throw new IllegalArgumentException("正答数が問題数を超えています。");
+
         this.correctNum = correctNum;
         this.entireNum = entireNum;
     }
