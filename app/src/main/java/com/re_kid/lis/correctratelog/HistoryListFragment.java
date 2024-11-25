@@ -50,7 +50,7 @@ public class HistoryListFragment extends Fragment {
         String sql = "SELECT * FROM Histories ORDER BY _id DESC";
         Cursor cursor = db.rawQuery(sql, null);
         String[] from = {"_id", "history_datetime", "correct_rate", "correct_number", "entire_number"};
-        int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvHistoryDateTimeRow, R.id.tv_accuracy_rate_row, R.id.tv_accuracy_number_row, R.id.tv_entire_number_row};
+        int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvHistoryDateTimeRow, R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row, cursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         adapter.setViewBinder(new CustomViewBinder());
         lvHistory.setAdapter(adapter);
@@ -67,7 +67,7 @@ public class HistoryListFragment extends Fragment {
         public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
             boolean result = false;
             // 正答率整形
-            if (view.getId() == R.id.tv_accuracy_rate_row) {
+            if (view.getId() == R.id.tv_correct_rate_row) {
                 String origin = cursor.getString(columnIndex);
                 ((TextView) view).setText(String.format(Locale.getDefault(), "%.1f", Double.parseDouble(origin) * 100));
                 result = true;

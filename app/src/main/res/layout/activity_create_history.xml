@@ -44,12 +44,12 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_create_history_header" />
 
     <TextView
-        android:id="@+id/tv_accurate_number"
+        android:id="@+id/tv_correct_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/tv_accurate_number"
-        app:layout_constraintBaseline_toBaselineOf="@+id/et_accurate_number"
+        android:text="@string/tv_correct_number"
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_correct_number"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -62,7 +62,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/et_accurate_number"
+        android:id="@+id/et_correct_number"
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -72,7 +72,7 @@
         android:inputType="number"
         android:minHeight="48dp"
         android:textColorHint="#546E7A"
-        app:layout_constraintStart_toEndOf="@+id/tv_accurate_number"
+        app:layout_constraintStart_toEndOf="@+id/tv_correct_number"
         app:layout_constraintTop_toBottomOf="@+id/tv_learned_date"
         tools:ignore="Autofill,DuplicateSpeakableTextCheck" />
 
@@ -88,17 +88,17 @@
         android:minHeight="48dp"
         android:textColorHint="#546E7A"
         app:layout_constraintStart_toEndOf="@+id/tv_entire_number"
-        app:layout_constraintTop_toBottomOf="@+id/et_accurate_number"
+        app:layout_constraintTop_toBottomOf="@+id/et_correct_number"
         tools:ignore="Autofill" />
 
     <TextView
-        android:id="@+id/tv_accurate_unit"
+        android:id="@+id/tv_correct_rate_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/tv_quiz_unit"
-        app:layout_constraintBaseline_toBaselineOf="@+id/et_accurate_number"
-        app:layout_constraintStart_toEndOf="@+id/et_accurate_number" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/et_correct_number"
+        app:layout_constraintStart_toEndOf="@+id/et_correct_number" />
 
     <TextView
         android:id="@+id/tv_entire_unit"

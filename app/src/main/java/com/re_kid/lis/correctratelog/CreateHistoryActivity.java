@@ -70,13 +70,13 @@ public class CreateHistoryActivity extends AppCompatActivity
         String strLearnedDate = tvLearnedDate.getText().toString();
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
         String strLearnedTime = tvLearnedTime.getText().toString();
-        EditText etAccurateNumber = findViewById(R.id.et_accurate_number);
+        EditText etAccurateNumber = findViewById(R.id.et_correct_number);
         String strAccurateNumber = etAccurateNumber.getText().toString();
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         String strEntireNumber = etEntireNumber.getText().toString();
 
         // 正答率の算出
-        double accuracyRate = AccuracyRate.calcRate(strAccurateNumber, strEntireNumber);
+        double correctRate = CorrectRate.calcRate(strAccurateNumber, strEntireNumber);
 
         SQLiteDatabase db = _helper.getWritableDatabase();
 
@@ -88,7 +88,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         stmt.bindString(1, strLearnedDate + " " + strLearnedTime);
         stmt.bindLong(2, parseLong(strAccurateNumber));
         stmt.bindLong(3, parseLong(strEntireNumber));
-        stmt.bindDouble(4, accuracyRate);
+        stmt.bindDouble(4, correctRate);
 
         // SQLを実行
         stmt.executeInsert();

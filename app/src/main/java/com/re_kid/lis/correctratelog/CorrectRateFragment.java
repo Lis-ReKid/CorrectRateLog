@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AccuracyRateFragment#newInstance} factory method to
+ * Use the {@link CorrectRateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccuracyRateFragment extends Fragment {
+public class CorrectRateFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +27,7 @@ public class AccuracyRateFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AccuracyRateFragment() {
+    public CorrectRateFragment() {
         // Required empty public constructor
     }
 
@@ -40,8 +40,8 @@ public class AccuracyRateFragment extends Fragment {
      * @return A new instance of fragment AccuracyRateFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AccuracyRateFragment newInstance(String param1, String param2) {
-        AccuracyRateFragment fragment = new AccuracyRateFragment();
+    public static CorrectRateFragment newInstance(String param1, String param2) {
+        CorrectRateFragment fragment = new CorrectRateFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,7 +61,7 @@ public class AccuracyRateFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView tvAccuracyRate = view.findViewById(R.id.tv_accuracy_rate);
+        TextView tvAccuracyRate = view.findViewById(R.id.tv_correct_rate);
         tvAccuracyRate.setText("0");
     }
 
@@ -69,6 +69,6 @@ public class AccuracyRateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_accuracy_rate, container, false);
+        return inflater.inflate(R.layout.fragment_corrrect_rate, container, false);
     }
 }

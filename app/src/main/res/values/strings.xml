@@ -6,13 +6,13 @@
     <string name="app_name">正答率チェッカー</string>
     <string name="no_data_msg">データがありません。\n勉強履歴を登録しましょう！</string>
     <string name="btn_show_history_create_view">勉強履歴を登録する</string>
-    <string name="accuracy_title">正答率</string>
-    <string name="tv_accuracy_unit">%</string>
+    <string name="correct_rate_title">正答率</string>
+    <string name="tv_correct_rate_unit">%</string>
     <string name="no_tag_history">タグ未登録の履歴</string>
     <!-- 履歴登録回り-->
     <string name="create_history_header">勉強履歴新規登録</string>
     <string name="tv_learned_date">勉強日時</string>
-    <string name="tv_accurate_number">正答数</string>
+    <string name="tv_correct_number">正答数</string>
     <string name="tv_entire_number">問題数</string>
     <string name="tv_quiz_number_hint">0</string>
     <string name="tv_quiz_unit">問</string>

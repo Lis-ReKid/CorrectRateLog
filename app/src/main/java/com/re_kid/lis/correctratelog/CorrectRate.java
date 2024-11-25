@@ -3,11 +3,11 @@ package com.re_kid.lis.correctratelog;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class AccuracyRate {
-    private final int accurateNum;
+public class CorrectRate {
+    private final int correctNum;
     private final int entireNum;
-    public AccuracyRate(int accurateNum, int entireNum) {
-        this.accurateNum = accurateNum;
+    public CorrectRate(int correctNum, int entireNum) {
+        this.correctNum = correctNum;
         this.entireNum = entireNum;
     }
     /**
