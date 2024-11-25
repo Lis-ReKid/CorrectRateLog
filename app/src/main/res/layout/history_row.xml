@@ -27,11 +27,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_correct_unit_row"
+        app:layout_constraintEnd_toStartOf="@+id/tv_correct_rate_unit_row"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_correct_unit_row"
+        android:id="@+id/tv_correct_rate_unit_row"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -75,5 +75,5 @@
         android:text="@string/tv_quiz_unit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_correct_unit_row" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_correct_rate_unit_row" />
 </androidx.constraintlayout.widget.ConstraintLayout>

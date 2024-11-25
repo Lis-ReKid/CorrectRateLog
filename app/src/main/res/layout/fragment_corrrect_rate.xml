@@ -29,14 +29,14 @@
             android:layout_height="wrap_content"
             android:textSize="60sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_correct_unit"
+            app:layout_constraintEnd_toStartOf="@+id/tv_correct_rate_unit"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAccuracyTitle" />
 
         <TextView
-            android:id="@+id/tv_correct_unit"
+            android:id="@+id/tv_correct_rate_unit"
             android:layout_width="43dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
