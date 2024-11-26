@@ -17,8 +17,6 @@ public class CorrectRate {
         // 正答数>問題数でエラー
         if (intCorrect > intEntire) throw new IllegalArgumentException("正答数が問題数を超えています。");
 
-        this.correctNum = correctNum;
-        this.entireNum = entireNum;
         this.correctNum = intCorrect;
         this.entireNum = intEntire;
 
@@ -28,15 +26,12 @@ public class CorrectRate {
         BigDecimal decDivisor = new BigDecimal(intEntire);
         this.correctRate =  decDividend.divide(decDivisor, 3, RoundingMode.HALF_UP).doubleValue();
     }
+
     /**
-     *
-     * @param dividend 割られる数
-     * @param divisor 割る数
+     * double型で正答率を返します。
      * @return 率（小数点以下３桁）
      */
-    public static double calcRate(String dividend, String divisor) {
-        BigDecimal decDividend = new BigDecimal(dividend);
-        BigDecimal decDivisor = new BigDecimal(divisor);
-        return decDividend.divide(decDivisor, 3, RoundingMode.HALF_UP).doubleValue();
+    public double getCorrectRate() {
+        return correctRate;
     }
 }
