@@ -16,7 +16,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 
-import java.util.Locale;
+import com.re_kid.lis.correctratelog.obj.CorrectRate;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,8 +68,8 @@ public class HistoryListFragment extends Fragment {
             boolean result = false;
             // 正答率整形
             if (view.getId() == R.id.tv_correct_rate_row) {
-                String origin = cursor.getString(columnIndex);
-                ((TextView) view).setText(String.format(Locale.getDefault(), "%.1f", Double.parseDouble(origin) * 100));
+                CorrectRate cr = new CorrectRate(cursor.getDouble(columnIndex));
+                ((TextView) view).setText(cr.toString());
                 result = true;
             }
             // 履歴タイトル整形
