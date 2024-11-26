@@ -25,6 +25,10 @@ public class CorrectRate {
         this.correctRate =  decDividend.divide(decDivisor, 3, RoundingMode.HALF_UP).doubleValue();
     }
 
+    public CorrectRate(final double correctRate) {
+        this.correctRate = correctRate;
+    }
+
     /**
      * double型で正答率を返します。
      * @return 率（小数点以下３桁）
