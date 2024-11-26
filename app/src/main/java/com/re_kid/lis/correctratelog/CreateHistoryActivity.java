@@ -87,7 +87,7 @@ public class CreateHistoryActivity extends AppCompatActivity
                 "VALUES(?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
         stmt.bindString(1, strLearnedDate + " " + strLearnedTime);
-        stmt.bindLong(2, parseLong(strAccurateNumber));
+        stmt.bindLong(2, parseLong(strCorrectNumber));
         stmt.bindLong(3, parseLong(strEntireNumber));
         stmt.bindDouble(4, correctRate);
 
