@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Locale;
 
 public class CorrectRate {
     private final double correctRate;
@@ -56,7 +57,6 @@ public class CorrectRate {
     @NonNull
     @Override
     public String toString() {
-        final String strRate = String.valueOf(this.correctRate);
-        return strRate + "%%";
+        return String.format(Locale.getDefault(), "%.1f", this.correctRate * 100);
     }
 }
