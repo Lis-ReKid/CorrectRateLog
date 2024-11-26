@@ -76,8 +76,9 @@ public class CreateHistoryActivity extends AppCompatActivity
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         String strEntireNumber = etEntireNumber.getText().toString();
 
-        // 正答率の算出
-        double correctRate = CorrectRate.calcRate(strAccurateNumber, strEntireNumber);
+        // 正答率を取得
+        CorrectRate cr = new CorrectRate(strCorrectNumber, strEntireNumber);
+        double doubleCr = cr.getCorrectRate();
 
         SQLiteDatabase db = _helper.getWritableDatabase();
 
@@ -89,7 +90,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         stmt.bindString(1, strLearnedDate + " " + strLearnedTime);
         stmt.bindLong(2, parseLong(strCorrectNumber));
         stmt.bindLong(3, parseLong(strEntireNumber));
-        stmt.bindDouble(4, correctRate);
+        stmt.bindDouble(4, doubleCr);
 
         // SQLを実行
         stmt.executeInsert();
