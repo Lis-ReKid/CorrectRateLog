@@ -71,8 +71,8 @@ public class CreateHistoryActivity extends AppCompatActivity
         String strLearnedDate = tvLearnedDate.getText().toString();
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
         String strLearnedTime = tvLearnedTime.getText().toString();
-        EditText etAccurateNumber = findViewById(R.id.et_correct_number);
-        String strAccurateNumber = etAccurateNumber.getText().toString();
+        EditText etCorrectNumber = findViewById(R.id.et_correct_number);
+        String strCorrectNumber = etCorrectNumber.getText().toString();
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         String strEntireNumber = etEntireNumber.getText().toString();
 
