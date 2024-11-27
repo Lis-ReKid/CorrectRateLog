@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class CorrectRateFragment extends Fragment {
     public CorrectRateFragment() {
-        // Required empty public constructor
+        super(R.layout.fragment_corrrect_rate);
     }
 
     @Override
