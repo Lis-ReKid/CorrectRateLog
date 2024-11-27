@@ -12,7 +12,7 @@
         android:layout_gravity="center_vertical">
 
         <TextView
-            android:id="@+id/tvAccuracyTitle"
+            android:id="@+id/tvCorrectRateTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/correct_rate_title"
@@ -33,7 +33,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAccuracyTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCorrectRateTitle" />
 
         <TextView
             android:id="@+id/tv_correct_rate_unit"
