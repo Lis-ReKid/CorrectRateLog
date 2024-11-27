@@ -16,7 +16,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 
-import java.util.Locale;
+import com.re_kid.lis.correctratelog.obj.CorrectRate;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,8 +49,8 @@ public class HistoryListFragment extends Fragment {
         SQLiteDatabase db = _helper.getWritableDatabase();
         String sql = "SELECT * FROM Histories ORDER BY _id DESC";
         Cursor cursor = db.rawQuery(sql, null);
-        String[] from = {"_id", "history_datetime", "accuracy_rate", "accurate_number", "entire_number"};
-        int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvHistoryDateTimeRow, R.id.tv_accuracy_rate_row, R.id.tv_accuracy_number_row, R.id.tv_entire_number_row};
+        String[] from = {"_id", "history_datetime", "correct_rate", "correct_number", "entire_number"};
+        int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvHistoryDateTimeRow, R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row, cursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         adapter.setViewBinder(new CustomViewBinder());
         lvHistory.setAdapter(adapter);
@@ -67,9 +67,9 @@ public class HistoryListFragment extends Fragment {
         public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
             boolean result = false;
             // 正答率整形
-            if (view.getId() == R.id.tv_accuracy_rate_row) {
-                String origin = cursor.getString(columnIndex);
-                ((TextView) view).setText(String.format(Locale.getDefault(), "%.1f", Double.parseDouble(origin) * 100));
+            if (view.getId() == R.id.tv_correct_rate_row) {
+                CorrectRate cr = new CorrectRate(cursor.getDouble(columnIndex));
+                ((TextView) view).setText(cr.toString());
                 result = true;
             }
             // 履歴タイトル整形

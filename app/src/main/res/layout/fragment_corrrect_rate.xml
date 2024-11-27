@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AccuracyRateFragment">
+    tools:context=".CorrectRateFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,37 +15,37 @@
             android:id="@+id/tvAccuracyTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/accuracy_title"
+            android:text="@string/correct_rate_title"
             android:textSize="34sp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_accuracy_rate"
+            app:layout_constraintBottom_toTopOf="@+id/tv_correct_rate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/tv_accuracy_rate"
+            android:id="@+id/tv_correct_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="60sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_accuracy_unit"
+            app:layout_constraintEnd_toStartOf="@+id/tv_correct_rate_unit"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAccuracyTitle" />
 
         <TextView
-            android:id="@+id/tv_accuracy_unit"
+            android:id="@+id/tv_correct_rate_unit"
             android:layout_width="43dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
-            android:text="@string/tv_accuracy_unit"
+            android:text="@string/tv_correct_rate_unit"
             android:textSize="48sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_accuracy_rate"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_correct_rate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_accuracy_rate" />
+            app:layout_constraintStart_toEndOf="@+id/tv_correct_rate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

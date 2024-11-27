@@ -12,9 +12,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_HISTORIES = "CREATE TABLE Histories ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "history_datetime TEXT NOT NULL, "
-            + "accurate_number INTEGER NOT NULL, "
+            + "correct_number INTEGER NOT NULL, "
             + "entire_number INTEGER NOT NULL, "
-            + "accuracy_rate REAL NOT NULL)";
+            + "correct_rate REAL NOT NULL)";
     private static final String CREATE_TAGS = "CREATE TABLE Tags("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "tag_name TEXT NOT NULL, "

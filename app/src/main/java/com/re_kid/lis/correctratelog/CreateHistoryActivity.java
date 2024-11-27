@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
+import com.re_kid.lis.correctratelog.obj.CorrectRate;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -70,25 +71,26 @@ public class CreateHistoryActivity extends AppCompatActivity
         String strLearnedDate = tvLearnedDate.getText().toString();
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
         String strLearnedTime = tvLearnedTime.getText().toString();
-        EditText etAccurateNumber = findViewById(R.id.et_accurate_number);
-        String strAccurateNumber = etAccurateNumber.getText().toString();
+        EditText etCorrectNumber = findViewById(R.id.et_correct_number);
+        String strCorrectNumber = etCorrectNumber.getText().toString();
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         String strEntireNumber = etEntireNumber.getText().toString();
 
-        // 正答率の算出
-        double accuracyRate = AccuracyRate.calcRate(strAccurateNumber, strEntireNumber);
+        // 正答率を取得
+        CorrectRate cr = new CorrectRate(strCorrectNumber, strEntireNumber);
+        double doubleCr = cr.getCorrectRate();
 
         SQLiteDatabase db = _helper.getWritableDatabase();
 
         // SQLを作成
         String sqlInsert = "INSERT INTO Histories " +
-                "(history_datetime, accurate_number, entire_number, accuracy_rate)" +
+                "(history_datetime, correct_number, entire_number, correct_rate)" +
                 "VALUES(?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
         stmt.bindString(1, strLearnedDate + " " + strLearnedTime);
-        stmt.bindLong(2, parseLong(strAccurateNumber));
+        stmt.bindLong(2, parseLong(strCorrectNumber));
         stmt.bindLong(3, parseLong(strEntireNumber));
-        stmt.bindDouble(4, accuracyRate);
+        stmt.bindDouble(4, doubleCr);
 
         // SQLを実行
         stmt.executeInsert();
