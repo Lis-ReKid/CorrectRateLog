@@ -1,0 +1,36 @@
+package com.re_kid.lis.correctratelog.obj;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
+public class LearnedDateTime {
+    private final String learnedDate;
+    private final String learnedTime;
+
+    public LearnedDateTime(final String learnedDate, final String learnedTime) {
+        this.learnedDate = learnedDate;
+        this.learnedTime = learnedTime;
+    }
+
+    public static LearnedDateTime now() {
+        // 現在の日時を取得してString化
+        final LocalDateTime nowDateTime = LocalDateTime.now();
+        final Locale locale = Locale.getDefault();
+        final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd", locale);
+        final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm", locale);
+        final String learnedDate = dateFormat.format(nowDateTime);
+        final String learnedTime = timeFormat.format(nowDateTime);
+
+        // 現在の日時で初期化したオブジェクトを返す
+        return new LearnedDateTime(learnedDate, learnedTime);
+    }
+
+    public String getLearnedDate() {
+        return learnedDate;
+    }
+
+    public String getLearnedTime() {
+        return learnedTime;
+    }
+}
