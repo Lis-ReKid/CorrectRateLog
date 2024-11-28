@@ -23,6 +23,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
+import com.re_kid.lis.correctratelog.obj.LearnedDateTime;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,14 +48,11 @@ public class CreateHistoryActivity extends AppCompatActivity
         _helper = new DatabaseHelper(CreateHistoryActivity.this);
 
         // 日時の初期値入力
-        final Locale locale = Locale.getDefault();
-        final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", locale);
-        final DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
-        final Date nowDateTime = new Date(System.currentTimeMillis());
+        LearnedDateTime nowDateTime = LearnedDateTime.now();
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
-        tvLearnedDate.setText(dateFormat.format(nowDateTime));
-        tvLearnedTime.setText(timeFormat.format(nowDateTime));
+        tvLearnedDate.setText(nowDateTime.getLearnedDate());
+        tvLearnedTime.setText(nowDateTime.getLearnedTime());
 
         // イベントリスナ登録
         CreateHistoryListener listener = new CreateHistoryListener();
