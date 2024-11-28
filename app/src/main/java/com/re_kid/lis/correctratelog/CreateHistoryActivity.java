@@ -25,9 +25,6 @@ import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.LearnedDateTime;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 public class CreateHistoryActivity extends AppCompatActivity
@@ -64,32 +61,31 @@ public class CreateHistoryActivity extends AppCompatActivity
     }
 
     public void onCreateBtnClick(View view) {
-        // 入力内容を取得
+        // viewを取得
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
-        String strLearnedDate = tvLearnedDate.getText().toString();
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
-        String strLearnedTime = tvLearnedTime.getText().toString();
         EditText etCorrectNumber = findViewById(R.id.et_correct_number);
-        String strCorrectNumber = etCorrectNumber.getText().toString();
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
-        String strEntireNumber = etEntireNumber.getText().toString();
-
+        // 入力内容を取得
+        String learnedDate = tvLearnedDate.getText().toString();
+        String learnedTime = tvLearnedTime.getText().toString();
+        String correctNumber = etCorrectNumber.getText().toString();
+        String entireNumber = etEntireNumber.getText().toString();
         // 正答率を取得
-        CorrectRate cr = new CorrectRate(strCorrectNumber, strEntireNumber);
+        CorrectRate cr = new CorrectRate(correctNumber, entireNumber);
         double doubleCr = cr.getCorrectRate();
 
+        // DB登録処理
         SQLiteDatabase db = _helper.getWritableDatabase();
-
         // SQLを作成
         String sqlInsert = "INSERT INTO Histories " +
                 "(history_datetime, correct_number, entire_number, correct_rate)" +
                 "VALUES(?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindString(1, strLearnedDate + " " + strLearnedTime);
-        stmt.bindLong(2, parseLong(strCorrectNumber));
-        stmt.bindLong(3, parseLong(strEntireNumber));
+        stmt.bindString(1, learnedDate + " " + learnedTime);
+        stmt.bindLong(2, parseLong(correctNumber));
+        stmt.bindLong(3, parseLong(entireNumber));
         stmt.bindDouble(4, doubleCr);
-
         // SQLを実行
         stmt.executeInsert();
     }
