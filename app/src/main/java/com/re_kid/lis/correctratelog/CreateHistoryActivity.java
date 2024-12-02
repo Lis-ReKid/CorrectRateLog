@@ -61,7 +61,8 @@ public class CreateHistoryActivity extends AppCompatActivity
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class); // リロードしたいアクティビティ
+                // MainActivityを作り直してクローズ
+                Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
