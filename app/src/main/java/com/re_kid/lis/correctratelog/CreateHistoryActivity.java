@@ -65,6 +65,7 @@ public class CreateHistoryActivity extends AppCompatActivity
                 Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                _helper.close();
                 finish();
             }
         };
