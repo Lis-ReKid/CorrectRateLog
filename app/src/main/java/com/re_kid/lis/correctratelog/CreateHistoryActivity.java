@@ -99,7 +99,6 @@ public class CreateHistoryActivity extends AppCompatActivity
         String entireNumber = etEntireNumber.getText().toString();
         // 正答率を取得
         CorrectRate cr = new CorrectRate(correctNumber, entireNumber);
-        double doubleCr = cr.getCorrectRate();
 
         // DB登録処理
         SQLiteDatabase db = _helper.getWritableDatabase();
@@ -111,7 +110,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         stmt.bindString(1, learnedDate + " " + learnedTime);
         stmt.bindLong(2, parseLong(correctNumber));
         stmt.bindLong(3, parseLong(entireNumber));
-        stmt.bindDouble(4, doubleCr);
+        stmt.bindDouble(4, cr.getCorrectRate());
         // SQLを実行
         stmt.executeInsert();
     }
