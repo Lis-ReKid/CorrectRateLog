@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -55,8 +54,6 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // イベントリスナ登録
         CreateHistoryListener listener = new CreateHistoryListener();
-        Button btn_back = findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(listener);
         tvLearnedDate.setOnClickListener(listener);
         tvLearnedTime.setOnClickListener(listener);
 
@@ -121,11 +118,7 @@ public class CreateHistoryActivity extends AppCompatActivity
     private class CreateHistoryListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            int vId = v.getId();
-            if (vId == R.id.btn_back) {
-                _helper.close();
-                finish();
-            } else if(vId == R.id.tv_learned_date) {
+            int vId = v.getId();if(vId == R.id.tv_learned_date) {
                 DatePickerDialogFragment datePicker = new DatePickerDialogFragment();
                 Bundle args = new Bundle();
                 TextView temp = (TextView)v;
