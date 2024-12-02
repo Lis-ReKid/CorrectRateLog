@@ -5,21 +5,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class LearnedDateTime {
-    private final String learnedDate;
+    private final LearnedDate learnedDate;
     private final String learnedTime;
 
-    public LearnedDateTime(final String learnedDate, final String learnedTime) {
+    public LearnedDateTime(final LearnedDate learnedDate, final String learnedTime) {
         this.learnedDate = learnedDate;
         this.learnedTime = learnedTime;
     }
 
     public static LearnedDateTime now() {
-        // 現在の日時を取得してString化
+        // 現在の日時を取得してインスタンス化
         final LocalDateTime nowDateTime = LocalDateTime.now();
         final Locale locale = Locale.getDefault();
         final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd", locale);
         final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm", locale);
-        final String learnedDate = dateFormat.format(nowDateTime);
+        final LearnedDate learnedDate = new LearnedDate(dateFormat.format(nowDateTime));
         final String learnedTime = timeFormat.format(nowDateTime);
 
         // 現在の日時で初期化したオブジェクトを返す
@@ -27,7 +27,7 @@ public class LearnedDateTime {
     }
 
     public String getLearnedDate() {
-        return learnedDate;
+        return learnedDate.toString();
     }
 
     public String getLearnedTime() {

@@ -23,6 +23,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
+import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedDateTime;
 
 import java.util.Locale;
@@ -93,10 +94,8 @@ public class CreateHistoryActivity extends AppCompatActivity
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
-        // 要リファクタ
-        // Dateオブジェクト使いたい→onCreate()参照してね
-        // format()は遅いらしい
-        tvLearnedDate.setText(String.format(Locale.getDefault(), "%4d/%02d/%02d", year, month + 1, dayOfMonth));
+        LearnedDate date = LearnedDate.of(year, month + 1, dayOfMonth);
+        tvLearnedDate.setText(date.toString());
     }
 
     @Override
