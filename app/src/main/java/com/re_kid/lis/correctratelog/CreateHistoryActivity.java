@@ -23,11 +23,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import com.re_kid.lis.correctratelog.obj.LearnedDate;
+import com.re_kid.lis.correctratelog.obj.LearnedDateTime;
+import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
 public class CreateHistoryActivity extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -47,14 +45,11 @@ public class CreateHistoryActivity extends AppCompatActivity
         _helper = new DatabaseHelper(CreateHistoryActivity.this);
 
         // 日時の初期値入力
-        final Locale locale = Locale.getDefault();
-        final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", locale);
-        final DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
-        final Date nowDateTime = new Date(System.currentTimeMillis());
+        LearnedDateTime nowDateTime = LearnedDateTime.now();
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
-        tvLearnedDate.setText(dateFormat.format(nowDateTime));
-        tvLearnedTime.setText(timeFormat.format(nowDateTime));
+        tvLearnedDate.setText(nowDateTime.getLearnedDate());
+        tvLearnedTime.setText(nowDateTime.getLearnedTime());
 
         // イベントリスナ登録
         CreateHistoryListener listener = new CreateHistoryListener();
@@ -66,32 +61,31 @@ public class CreateHistoryActivity extends AppCompatActivity
     }
 
     public void onCreateBtnClick(View view) {
-        // 入力内容を取得
+        // viewを取得
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
-        String strLearnedDate = tvLearnedDate.getText().toString();
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
-        String strLearnedTime = tvLearnedTime.getText().toString();
         EditText etCorrectNumber = findViewById(R.id.et_correct_number);
-        String strCorrectNumber = etCorrectNumber.getText().toString();
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
-        String strEntireNumber = etEntireNumber.getText().toString();
-
+        // 入力内容を取得
+        String learnedDate = tvLearnedDate.getText().toString();
+        String learnedTime = tvLearnedTime.getText().toString();
+        String correctNumber = etCorrectNumber.getText().toString();
+        String entireNumber = etEntireNumber.getText().toString();
         // 正答率を取得
-        CorrectRate cr = new CorrectRate(strCorrectNumber, strEntireNumber);
+        CorrectRate cr = new CorrectRate(correctNumber, entireNumber);
         double doubleCr = cr.getCorrectRate();
 
+        // DB登録処理
         SQLiteDatabase db = _helper.getWritableDatabase();
-
         // SQLを作成
         String sqlInsert = "INSERT INTO Histories " +
                 "(history_datetime, correct_number, entire_number, correct_rate)" +
                 "VALUES(?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindString(1, strLearnedDate + " " + strLearnedTime);
-        stmt.bindLong(2, parseLong(strCorrectNumber));
-        stmt.bindLong(3, parseLong(strEntireNumber));
+        stmt.bindString(1, learnedDate + " " + learnedTime);
+        stmt.bindLong(2, parseLong(correctNumber));
+        stmt.bindLong(3, parseLong(entireNumber));
         stmt.bindDouble(4, doubleCr);
-
         // SQLを実行
         stmt.executeInsert();
     }
@@ -99,16 +93,15 @@ public class CreateHistoryActivity extends AppCompatActivity
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
-        // 要リファクタ
-        // Dateオブジェクト使いたい→onCreate()参照してね
-        // format()は遅いらしい
-        tvLearnedDate.setText(String.format(Locale.getDefault(), "%4d/%02d/%02d", year, month + 1, dayOfMonth));
+        LearnedDate date = LearnedDate.of(year, month + 1, dayOfMonth);
+        tvLearnedDate.setText(date.toString());
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
-        tvLearnedTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute));
+        LearnedTime time = LearnedTime.of(hourOfDay, minute);
+        tvLearnedTime.setText(time.toString());
     }
 
     private class CreateHistoryListener implements View.OnClickListener {
