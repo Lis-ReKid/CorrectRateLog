@@ -120,7 +120,8 @@ public class CreateHistoryActivity extends AppCompatActivity
     private class CreateHistoryListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            int vId = v.getId();if(vId == R.id.tv_learned_date) {
+            int vId = v.getId();
+            if(vId == R.id.tv_learned_date) {
                 DatePickerDialogFragment datePicker = new DatePickerDialogFragment();
                 Bundle args = new Bundle();
                 TextView temp = (TextView)v;
