@@ -4,17 +4,18 @@ import static java.lang.Long.parseLong;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -53,10 +54,22 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // イベントリスナ登録
         CreateHistoryListener listener = new CreateHistoryListener();
-        Button btn_back = findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(listener);
         tvLearnedDate.setOnClickListener(listener);
         tvLearnedTime.setOnClickListener(listener);
+
+        // バックボタン押下時処理
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // MainActivityを作り直してフィニッシュ
+                Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                _helper.close();
+                finish();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(callback);
 
     }
 
@@ -108,10 +121,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         @Override
         public void onClick(View v) {
             int vId = v.getId();
-            if (vId == R.id.btn_back) {
-                _helper.close();
-                finish();
-            } else if(vId == R.id.tv_learned_date) {
+            if(vId == R.id.tv_learned_date) {
                 DatePickerDialogFragment datePicker = new DatePickerDialogFragment();
                 Bundle args = new Bundle();
                 TextView temp = (TextView)v;
