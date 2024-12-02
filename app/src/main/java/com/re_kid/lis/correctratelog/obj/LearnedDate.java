@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 public class LearnedDate {
     private final String learnedDate;
 
-    public LearnedDate(String learnedDate) {
+    public LearnedDate(final String learnedDate) {
         // 桁数チェック
-        String regex = "\\d{4}/\\d{2}/\\d{2}";
+        final String regex = "\\d{4}/\\d{2}/\\d{2}";
         if (!Pattern.matches(regex, learnedDate)) {throw new IllegalArgumentException("日付が不正な値です。");}
 
         this.learnedDate = learnedDate;
@@ -23,9 +23,9 @@ public class LearnedDate {
      * @param dayOfMonth 日
      * @return LearnedDateインスタンス
      */
-    public static LearnedDate of(int year, int month, int dayOfMonth) {
+    public static LearnedDate of(final int year, final int month, final int dayOfMonth) {
         StringBuilder sb = new StringBuilder();
-        Locale locale = Locale.getDefault();
+        final Locale locale = Locale.getDefault();
         sb.append(String.format(locale, "%04d", year));
         sb.append("/");
         sb.append(String.format(locale, "%02d", month));

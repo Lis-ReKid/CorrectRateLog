@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class LearnedTime {
     final private String learnedTime;
 
-    public LearnedTime(String learnedTime) {
+    public LearnedTime(final String learnedTime) {
         // 桁数チェック
         String regex = "\\d{2}:\\d{2}";
         if (!Pattern.matches(regex, learnedTime)) {throw new IllegalArgumentException("時間が不正な値です。");}
@@ -22,9 +22,9 @@ public class LearnedTime {
      * @param minute 分
      * @return LearnedTimeインスタンス
      */
-    public static LearnedTime of(int hourOfDay, int minute) {
+    public static LearnedTime of(final int hourOfDay, final int minute) {
         StringBuilder sb = new StringBuilder();
-        Locale locale = Locale.getDefault();
+        final Locale locale = Locale.getDefault();
         sb.append(String.format(locale, "%02d", hourOfDay));
         sb.append(":");
         sb.append(String.format(locale, "%02d", minute));
