@@ -16,7 +16,7 @@ public class LearnedDate {
      * @param year 西暦
      * @param month 月
      * @param dayOfMonth 日
-     * @return 初期化したLearnedDateインスタンスを取得
+     * @return LearnedDateインスタンス
      */
     public static LearnedDate of(int year, int month, int dayOfMonth) {
         StringBuilder sb = new StringBuilder();

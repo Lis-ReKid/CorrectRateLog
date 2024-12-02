@@ -25,8 +25,7 @@ import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedDateTime;
-
-import java.util.Locale;
+import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
 public class CreateHistoryActivity extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -101,7 +100,8 @@ public class CreateHistoryActivity extends AppCompatActivity
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
-        tvLearnedTime.setText(String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute));
+        LearnedTime time = LearnedTime.of(hourOfDay, minute);
+        tvLearnedTime.setText(time.toString());
     }
 
     private class CreateHistoryListener implements View.OnClickListener {
