@@ -3,11 +3,16 @@ package com.re_kid.lis.correctratelog.obj;
 import androidx.annotation.NonNull;
 
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class LearnedDate {
     private final String learnedDate;
 
     public LearnedDate(String learnedDate) {
+        // 桁数チェック
+        String regex = "\\d{4}/\\d{2}/\\d{2}";
+        if (!Pattern.matches(regex, learnedDate)) {throw new IllegalArgumentException("日付が不正な値です。");}
+
         this.learnedDate = learnedDate;
     }
 
