@@ -61,7 +61,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                // MainActivityを作り直してクローズ
+                // MainActivityを作り直してフィニッシュ
                 Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
