@@ -52,10 +52,23 @@ public class CreateHistoryActivity extends AppCompatActivity
         tvLearnedDate.setText(nowDateTime.getLearnedDate());
         tvLearnedTime.setText(nowDateTime.getLearnedTime());
 
-        // イベントリスナ登録
-        CreateHistoryListener listener = new CreateHistoryListener();
-        tvLearnedDate.setOnClickListener(listener);
-        tvLearnedTime.setOnClickListener(listener);
+        // 日付ボタン押下時処理
+        tvLearnedDate.setOnClickListener(v -> {
+            DatePickerDialogFragment datePicker = new DatePickerDialogFragment();
+            Bundle args = new Bundle();
+            args.putString("Date", tvLearnedDate.getText().toString());
+            datePicker.setArguments(args);
+            datePicker.show(getSupportFragmentManager(), "datePicker");
+        });
+
+        // 時間ボタン押下時処理
+        tvLearnedTime.setOnClickListener(v -> {
+            TimePickerDialogFragment timePicker = new TimePickerDialogFragment();
+            Bundle args = new Bundle();
+            args.putString("Time", tvLearnedTime.getText().toString());
+            timePicker.setArguments(args);
+            timePicker.show(getSupportFragmentManager(), "timePicker");
+        });
 
         // バックボタン押下時処理
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
@@ -115,28 +128,6 @@ public class CreateHistoryActivity extends AppCompatActivity
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
         LearnedTime time = LearnedTime.of(hourOfDay, minute);
         tvLearnedTime.setText(time.toString());
-    }
-
-    private class CreateHistoryListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            int vId = v.getId();
-            if(vId == R.id.tv_learned_date) {
-                DatePickerDialogFragment datePicker = new DatePickerDialogFragment();
-                Bundle args = new Bundle();
-                TextView temp = (TextView)v;
-                args.putString("Date", temp.getText().toString());
-                datePicker.setArguments(args);
-                datePicker.show(getSupportFragmentManager(), "datePicker");
-            } else if(vId == R.id.tv_learned_time) {
-                TimePickerDialogFragment timePicker = new TimePickerDialogFragment();
-                Bundle args = new Bundle();
-                TextView temp = (TextView)v;
-                args.putString("Time", temp.getText().toString());
-                timePicker.setArguments(args);
-                timePicker.show(getSupportFragmentManager(), "timePicker");
-            }
-        }
     }
 
     @Override
