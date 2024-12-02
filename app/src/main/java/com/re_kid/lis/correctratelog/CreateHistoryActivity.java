@@ -4,6 +4,7 @@ import static java.lang.Long.parseLong;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -57,6 +59,18 @@ public class CreateHistoryActivity extends AppCompatActivity
         btn_back.setOnClickListener(listener);
         tvLearnedDate.setOnClickListener(listener);
         tvLearnedTime.setOnClickListener(listener);
+
+        // バックボタン押下時処理
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class); // リロードしたいアクティビティ
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(callback);
 
     }
 
