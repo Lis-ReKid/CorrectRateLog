@@ -6,9 +6,9 @@ import java.util.Locale;
 
 public class LearnedDateTime {
     private final LearnedDate learnedDate;
-    private final String learnedTime;
+    private final LearnedTime learnedTime;
 
-    public LearnedDateTime(final LearnedDate learnedDate, final String learnedTime) {
+    public LearnedDateTime(final LearnedDate learnedDate, final LearnedTime learnedTime) {
         this.learnedDate = learnedDate;
         this.learnedTime = learnedTime;
     }
@@ -20,7 +20,7 @@ public class LearnedDateTime {
         final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd", locale);
         final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm", locale);
         final LearnedDate learnedDate = new LearnedDate(dateFormat.format(nowDateTime));
-        final String learnedTime = timeFormat.format(nowDateTime);
+        final LearnedTime learnedTime = new LearnedTime(timeFormat.format(nowDateTime));
 
         // 現在の日時で初期化したオブジェクトを返す
         return new LearnedDateTime(learnedDate, learnedTime);
@@ -31,6 +31,6 @@ public class LearnedDateTime {
     }
 
     public String getLearnedTime() {
-        return learnedTime;
+        return learnedTime.toString();
     }
 }
