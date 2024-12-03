@@ -20,9 +20,9 @@ public class CorrectRate {
 
         // 正答率を初期化
         // 小数点以下3桁のdouble型
-        BigDecimal decDividend = new BigDecimal(intCorrect);
-        BigDecimal decDivisor = new BigDecimal(intEntire);
-        this.correctRate =  decDividend.divide(decDivisor, 3, RoundingMode.HALF_UP).doubleValue();
+        BigDecimal bdCorrectNum = new BigDecimal(correctNum);
+        BigDecimal bdEntireNum = new BigDecimal(entireNum);
+        this.correctRate =  bdCorrectNum.divide(bdEntireNum, 3, RoundingMode.HALF_UP).doubleValue();
     }
 
     public CorrectRate(final double correctRate) {
