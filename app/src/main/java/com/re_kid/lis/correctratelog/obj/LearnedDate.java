@@ -2,18 +2,29 @@ package com.re_kid.lis.correctratelog.obj;
 
 import androidx.annotation.NonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 public class LearnedDate {
-    private final String learnedDate;
+    private final LocalDate learnedDate;
+    private final Locale _LOCALE =  Locale.getDefault();
+    private final DateTimeFormatter _FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd", _LOCALE);
 
-    public LearnedDate(final String learnedDate) {
-        // 桁数チェック
-        final String regex = "\\d{4}/\\d{2}/\\d{2}";
-        if (!Pattern.matches(regex, learnedDate)) {throw new IllegalArgumentException("日付が不正な値です。");}
+    private LearnedDate(final String learnedDate) {
+        this.learnedDate = LocalDate.parse(learnedDate, _FORMATTER);
+    }
+    private LearnedDate(final int year, final int month, final int dayOfMonth) {
+        this.learnedDate = LocalDate.of(year, month, dayOfMonth);
+    }
 
-        this.learnedDate = learnedDate;
+    /**
+     * 指定の年月日で初期化したLearnedDateインスタンスを取得
+     * @param learnedDate 年月日(yyyy/MM/dd)
+     * @return LearnedDateインスタンス
+     */
+    public static LearnedDate parse(final String learnedDate) {
+        return new LearnedDate(learnedDate);
     }
 
     /**
@@ -24,19 +35,12 @@ public class LearnedDate {
      * @return LearnedDateインスタンス
      */
     public static LearnedDate of(final int year, final int month, final int dayOfMonth) {
-        StringBuilder sb = new StringBuilder();
-        final Locale locale = Locale.getDefault();
-        sb.append(String.format(locale, "%04d", year));
-        sb.append("/");
-        sb.append(String.format(locale, "%02d", month));
-        sb.append("/");
-        sb.append(String.format(locale, "%02d", dayOfMonth));
-        return new LearnedDate(sb.toString());
+        return new LearnedDate(year, month, dayOfMonth);
     }
 
     @NonNull
     @Override
     public String toString() {
-        return this.learnedDate;
+        return learnedDate.format(_FORMATTER);
     }
 }
