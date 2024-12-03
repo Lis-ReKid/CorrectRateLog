@@ -1,7 +1,5 @@
 package com.re_kid.lis.correctratelog;
 
-import static java.lang.Long.parseLong;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -95,8 +93,8 @@ public class CreateHistoryActivity extends AppCompatActivity
         // 入力内容を取得
         String learnedDate = tvLearnedDate.getText().toString();
         String learnedTime = tvLearnedTime.getText().toString();
-        String correctNumber = etCorrectNumber.getText().toString();
-        String entireNumber = etEntireNumber.getText().toString();
+        int correctNumber = Integer.parseInt(etCorrectNumber.getText().toString());
+        int entireNumber = Integer.parseInt(etEntireNumber.getText().toString());
         // 正答率を取得
         CorrectRate cr = new CorrectRate(correctNumber, entireNumber);
 
@@ -108,8 +106,8 @@ public class CreateHistoryActivity extends AppCompatActivity
                 "VALUES(?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
         stmt.bindString(1, learnedDate + " " + learnedTime);
-        stmt.bindLong(2, parseLong(correctNumber));
-        stmt.bindLong(3, parseLong(entireNumber));
+        stmt.bindLong(2, correctNumber);
+        stmt.bindLong(3, entireNumber);
         stmt.bindDouble(4, cr.getCorrectRate());
         // SQLを実行
         stmt.executeInsert();
