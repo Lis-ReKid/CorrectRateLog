@@ -37,10 +37,6 @@ public class CorrectRate {
         return correctRate;
     }
 
-    /**
-     * Returns a string representation of the object. In general, the
-     * @return a string representation of the object.
-     */
     @NonNull
     @Override
     public String toString() {
