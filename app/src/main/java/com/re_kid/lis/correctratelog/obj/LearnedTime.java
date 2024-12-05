@@ -2,18 +2,30 @@ package com.re_kid.lis.correctratelog.obj;
 
 import androidx.annotation.NonNull;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 public class LearnedTime {
-    final private String learnedTime;
+    private final LocalTime learnedTime;
+    private final Locale _LOCALE = Locale.getDefault();
+    private final DateTimeFormatter _FORMATTER = DateTimeFormatter.ofPattern("HH:mm", _LOCALE);
 
-    public LearnedTime(final String learnedTime) {
+    private LearnedTime(final String learnedTime) {
         // 桁数チェック
-        String regex = "\\d{2}:\\d{2}";
-        if (!Pattern.matches(regex, learnedTime)) {throw new IllegalArgumentException("時間が不正な値です。");}
+        this.learnedTime = LocalTime.parse(learnedTime, _FORMATTER);
+    }
+    private LearnedTime(final int hourOfDay, final int minute) {
+        this.learnedTime = LocalTime.of(hourOfDay, minute);
+    }
 
-        this.learnedTime = learnedTime;
+    /**
+     * 指定の時間で初期化したLearnedDateインスタンスを取得
+     * @param learnedTime 時間（HH:mm）
+     * @return LearnedTimeインスタンス
+     */
+    public static LearnedTime parse(final String learnedTime) {
+        return new LearnedTime(learnedTime);
     }
 
     /**
@@ -23,16 +35,11 @@ public class LearnedTime {
      * @return LearnedTimeインスタンス
      */
     public static LearnedTime of(final int hourOfDay, final int minute) {
-        StringBuilder sb = new StringBuilder();
-        final Locale locale = Locale.getDefault();
-        sb.append(String.format(locale, "%02d", hourOfDay));
-        sb.append(":");
-        sb.append(String.format(locale, "%02d", minute));
-        return new LearnedTime(sb.toString());
+        return new LearnedTime(hourOfDay, minute);
     }
     @NonNull
     @Override
     public String toString() {
-        return this.learnedTime;
+        return learnedTime.format(_FORMATTER);
     }
 }
