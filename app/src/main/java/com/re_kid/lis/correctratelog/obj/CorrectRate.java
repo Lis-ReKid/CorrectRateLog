@@ -8,21 +8,19 @@ import java.util.Locale;
 
 public class CorrectRate {
     private final double correctRate;
-    public CorrectRate(final String correctNum, final String entireNum) {
-        final int intCorrect = Integer.parseInt(correctNum);
-        final int intEntire = Integer.parseInt(entireNum);
+    public CorrectRate(final int correctNum, final int entireNum) {
         // 正答数0未満でエラー
-        if (intCorrect < 0) throw new IllegalArgumentException("正答数は0以上の数値を指定してください。");
+        if (correctNum < 0) throw new IllegalArgumentException("正答数は0以上の数値を指定してください。");
         // 問題数1未満でエラー
-        if (intEntire < 1) throw new IllegalArgumentException("問題数は1以上の数値を指定してください。");
+        if (entireNum < 1) throw new IllegalArgumentException("問題数は1以上の数値を指定してください。");
         // 正答数>問題数でエラー
-        if (intCorrect > intEntire) throw new IllegalArgumentException("正答数が問題数を超えています。");
+        if (correctNum > entireNum) throw new IllegalArgumentException("正答数が問題数を超えています。");
 
         // 正答率を初期化
         // 小数点以下3桁のdouble型
-        BigDecimal decDividend = new BigDecimal(intCorrect);
-        BigDecimal decDivisor = new BigDecimal(intEntire);
-        this.correctRate =  decDividend.divide(decDivisor, 3, RoundingMode.HALF_UP).doubleValue();
+        BigDecimal bdCorrectNum = new BigDecimal(correctNum);
+        BigDecimal bdEntireNum = new BigDecimal(entireNum);
+        this.correctRate =  bdCorrectNum.divide(bdEntireNum, 3, RoundingMode.HALF_UP).doubleValue();
     }
 
     public CorrectRate(final double correctRate) {
@@ -37,13 +35,9 @@ public class CorrectRate {
         return correctRate;
     }
 
-    /**
-     * Returns a string representation of the object. In general, the
-     * @return a string representation of the object.
-     */
     @NonNull
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "%.1f", this.correctRate * 100);
+        return String.format(Locale.getDefault(), "%.1f", correctRate * 100);
     }
 }

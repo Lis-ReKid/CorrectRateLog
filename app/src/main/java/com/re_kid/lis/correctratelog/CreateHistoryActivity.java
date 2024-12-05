@@ -1,7 +1,5 @@
 package com.re_kid.lis.correctratelog;
 
-import static java.lang.Long.parseLong;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -25,7 +23,6 @@ import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
-import com.re_kid.lis.correctratelog.obj.LearnedDateTime;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
 public class CreateHistoryActivity extends AppCompatActivity
@@ -46,11 +43,11 @@ public class CreateHistoryActivity extends AppCompatActivity
         _helper = new DatabaseHelper(CreateHistoryActivity.this);
 
         // 日時の初期値入力
-        LearnedDateTime nowDateTime = LearnedDateTime.now();
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
-        tvLearnedDate.setText(nowDateTime.getLearnedDate());
-        tvLearnedTime.setText(nowDateTime.getLearnedTime());
+        tvLearnedDate.setText(LearnedDate.now().toString());
+        tvLearnedTime.setText(LearnedTime.now().toString());
+
 
         // 日付ボタン押下時処理
         tvLearnedDate.setOnClickListener(v -> {
@@ -95,8 +92,8 @@ public class CreateHistoryActivity extends AppCompatActivity
         // 入力内容を取得
         String learnedDate = tvLearnedDate.getText().toString();
         String learnedTime = tvLearnedTime.getText().toString();
-        String correctNumber = etCorrectNumber.getText().toString();
-        String entireNumber = etEntireNumber.getText().toString();
+        int correctNumber = Integer.parseInt(etCorrectNumber.getText().toString());
+        int entireNumber = Integer.parseInt(etEntireNumber.getText().toString());
         // 正答率を取得
         CorrectRate cr = new CorrectRate(correctNumber, entireNumber);
 
@@ -108,8 +105,8 @@ public class CreateHistoryActivity extends AppCompatActivity
                 "VALUES(?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
         stmt.bindString(1, learnedDate + " " + learnedTime);
-        stmt.bindLong(2, parseLong(correctNumber));
-        stmt.bindLong(3, parseLong(entireNumber));
+        stmt.bindLong(2, correctNumber);
+        stmt.bindLong(3, entireNumber);
         stmt.bindDouble(4, cr.getCorrectRate());
         // SQLを実行
         stmt.executeInsert();
