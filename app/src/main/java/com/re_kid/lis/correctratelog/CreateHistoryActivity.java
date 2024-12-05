@@ -23,7 +23,6 @@ import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
-import com.re_kid.lis.correctratelog.obj.LearnedDateTime;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
 public class CreateHistoryActivity extends AppCompatActivity
@@ -44,11 +43,11 @@ public class CreateHistoryActivity extends AppCompatActivity
         _helper = new DatabaseHelper(CreateHistoryActivity.this);
 
         // 日時の初期値入力
-        LearnedDateTime nowDateTime = LearnedDateTime.now();
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
-        tvLearnedDate.setText(nowDateTime.getLearnedDate());
-        tvLearnedTime.setText(nowDateTime.getLearnedTime());
+        tvLearnedDate.setText(LearnedDate.now().toString());
+        tvLearnedTime.setText(LearnedTime.now().toString());
+
 
         // 日付ボタン押下時処理
         tvLearnedDate.setOnClickListener(v -> {
