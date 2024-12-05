@@ -20,7 +20,7 @@ public class LearnedDateTime {
         final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd", locale);
         final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm", locale);
         final LearnedDate learnedDate = LearnedDate.parse(dateFormat.format(nowDateTime));
-        final LearnedTime learnedTime = new LearnedTime(timeFormat.format(nowDateTime));
+        final LearnedTime learnedTime = LearnedTime.parse(timeFormat.format(nowDateTime));
 
         // 現在の日時で初期化したオブジェクトを返す
         return new LearnedDateTime(learnedDate, learnedTime);
