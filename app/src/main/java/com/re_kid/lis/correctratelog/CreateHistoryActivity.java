@@ -3,8 +3,6 @@ package com.re_kid.lis.correctratelog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -22,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.CreateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
+import com.re_kid.lis.correctratelog.model.HistoriesModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
@@ -93,25 +92,18 @@ public class CreateHistoryActivity extends AppCompatActivity
         // 入力内容を取得
         String learnedDate = tvLearnedDate.getText().toString();
         String learnedTime = tvLearnedTime.getText().toString();
-        int correctNumber = Integer.parseInt(etCorrectNumber.getText().toString());
+        int correctNum = Integer.parseInt(etCorrectNumber.getText().toString());
         int entireNumber = Integer.parseInt(etEntireNumber.getText().toString());
         // 正答率を取得
-        CorrectRate cr = new CorrectRate(correctNumber, entireNumber);
+        CorrectRate cr = new CorrectRate(correctNum, entireNumber);
 
-        // DB登録処理
-        SQLiteDatabase db = _helper.getWritableDatabase();
-        // SQLを作成
-        String sqlInsert = "INSERT INTO Histories " +
-                "(learned_date, learned_time, correct_number, entire_number, correct_rate)" +
-                "VALUES(?, ?, ?, ?, ?)";
-        SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindString(1, learnedDate);
-        stmt.bindString(2, learnedTime);
-        stmt.bindLong(3, correctNumber);
-        stmt.bindLong(4, entireNumber);
-        stmt.bindDouble(5, cr.getCorrectRate());
-        // SQLを実行
-        stmt.executeInsert();
+        // DB登録
+        try(HistoriesModel model = new HistoriesModel(CreateHistoryActivity.this)) {
+            model.createHistory(learnedDate, learnedTime, correctNum, entireNumber, cr.getCorrectRate());
+        } catch (Exception e) {
+            e.printStackTrace();
+            // TO DO 何かしらの処理
+        }
 
         // ダイアログを表示
         CreateHistoryConfirmDialogFragment dialogFragment = new CreateHistoryConfirmDialogFragment();
