@@ -9,6 +9,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
@@ -97,8 +98,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         try(HistoriesModel model = new HistoriesModel(CreateHistoryActivity.this)) {
             model.createHistory(learnedDate, learnedTime, correctNum, entireNumber, cr.getCorrectRate());
         } catch (Exception e) {
-            e.printStackTrace();
-            // TO DO 何かしらの処理
+            Toast.makeText(this, R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
         }
 
         // ダイアログを表示
