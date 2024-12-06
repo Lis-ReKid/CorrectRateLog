@@ -1,14 +1,11 @@
 package com.re_kid.lis.correctratelog.model;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 import com.re_kid.lis.correctratelog.DatabaseHelper;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class HistoriesModel implements AutoCloseable {
     DatabaseHelper _helper;
@@ -35,8 +32,10 @@ public class HistoriesModel implements AutoCloseable {
         // SQLを実行
         stmt.executeInsert();
     }
-    public Map<String, String> getHistories (List<String> columns) {
-        return new HashMap<>();
+    public Cursor getHistories () {
+        SQLiteDatabase db = _helper.getWritableDatabase();
+        String sql = "SELECT * FROM Histories ORDER BY _id DESC";
+        return db.rawQuery(sql, null);
     }
 
     @Override

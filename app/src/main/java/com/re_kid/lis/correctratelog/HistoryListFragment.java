@@ -1,7 +1,6 @@
 package com.re_kid.lis.correctratelog;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,9 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.re_kid.lis.correctratelog.model.HistoriesModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 
 /**
@@ -46,14 +47,19 @@ public class HistoryListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ListView lvHistory = view.findViewById(R.id.lvHistory);
-        SQLiteDatabase db = _helper.getWritableDatabase();
-        String sql = "SELECT * FROM Histories ORDER BY _id DESC";
-        Cursor cursor = db.rawQuery(sql, null);
-        String[] from = {"_id", "learned_date", "learned_time", "correct_rate", "correct_number", "entire_number"};
-        int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvLearnedDateRow, R.id.tvLearnedTimeRow, R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row, cursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-        adapter.setViewBinder(new CustomViewBinder());
-        lvHistory.setAdapter(adapter);
+        try(HistoriesModel model = new HistoriesModel(this.getContext())){
+            Cursor cursor = model.getHistories();
+            String[] from = {"_id", "learned_date", "learned_time", "correct_rate", "correct_number",
+                    "entire_number"};
+            int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvLearnedDateRow, R.id.tvLearnedTimeRow,
+                    R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row,
+                    cursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+            adapter.setViewBinder(new CustomViewBinder());
+            lvHistory.setAdapter(adapter);
+        } catch (Exception e) {
+            Toast.makeText(this.getContext(), R.string.get_histories_failed_msg, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
