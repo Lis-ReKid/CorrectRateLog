@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HistoriesModel {
+public class HistoriesModel implements AutoCloseable {
     DatabaseHelper _helper;
 
     public HistoriesModel(Context context) {
@@ -21,5 +21,10 @@ public class HistoriesModel {
     }
     public Map<String, String> getHistories (List<String> columns) {
         return new HashMap<>();
+    }
+
+    @Override
+    public void close() throws Exception {
+        _helper.close();
     }
 }
