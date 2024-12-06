@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.re_kid.lis.correctratelog.CreateHistoryActivity;
+import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
 
 public class CreateHistoryConfirmDialogFragment extends DialogFragment {
@@ -20,14 +21,23 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.dialog_create_title);
         builder.setPositiveButton(R.string.dialog_create_positive, new CreateDialogButtonClickListener());
+        builder.setNeutralButton(R.string.dialog_Create_neutral, new CreateDialogButtonClickListener());
         return builder.create();
     }
     public class CreateDialogButtonClickListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
+            // 続けて登録
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // 入力フォームをリフレッシュ
                 Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+            // ホームに戻る
+            else if(which == DialogInterface.BUTTON_NEUTRAL) {
+                // ホーム画面をリフレッシュして遷移
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
