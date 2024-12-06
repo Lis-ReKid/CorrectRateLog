@@ -103,7 +103,7 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // ダイアログを表示
         CreateHistoryConfirmDialogFragment dialogFragment = new CreateHistoryConfirmDialogFragment();
-        dialogFragment.show(getSupportFragmentManager(), "CreateHistoryconfirmDialogFragment");
+        dialogFragment.show(getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
     }
 
     @Override
