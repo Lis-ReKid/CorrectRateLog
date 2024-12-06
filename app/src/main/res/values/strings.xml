@@ -2,6 +2,7 @@
     <!-- General -->
     <string name="btn_back">前の画面に戻る</string>
     <string name="tv_slash">/</string>
+    <string name="btn_close">閉じる</string>
     <!-- ホーム画面回り -->
     <string name="app_name">正答率チェッカー</string>
     <string name="no_data_msg">データがありません。\n勉強履歴を登録しましょう！</string>
@@ -17,4 +18,6 @@
     <string name="tv_quiz_number_hint">0</string>
     <string name="tv_quiz_unit">問</string>
     <string name="btn_create_history">履歴を登録する</string>
+    <string name="dialog_create_title">登録完了！</string>
+    <string name="dialog_create_positive">続けて登録</string>
 </resources>
