@@ -27,7 +27,6 @@ import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
 public class CreateHistoryActivity extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-    private DatabaseHelper _helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +38,6 @@ public class CreateHistoryActivity extends AppCompatActivity
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        _helper = new DatabaseHelper(CreateHistoryActivity.this);
 
         // 日時の初期値入力
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
@@ -75,7 +72,6 @@ public class CreateHistoryActivity extends AppCompatActivity
                 Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                _helper.close();
                 finish();
             }
         };
@@ -126,7 +122,6 @@ public class CreateHistoryActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        _helper.close();
         super.onDestroy();
     }
 }
