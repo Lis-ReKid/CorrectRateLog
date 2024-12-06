@@ -101,13 +101,14 @@ public class CreateHistoryActivity extends AppCompatActivity
         SQLiteDatabase db = _helper.getWritableDatabase();
         // SQLを作成
         String sqlInsert = "INSERT INTO Histories " +
-                "(history_datetime, correct_number, entire_number, correct_rate)" +
-                "VALUES(?, ?, ?, ?)";
+                "(learned_date, learned_time, correct_number, entire_number, correct_rate)" +
+                "VALUES(?, ?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindString(1, learnedDate + " " + learnedTime);
-        stmt.bindLong(2, correctNumber);
-        stmt.bindLong(3, entireNumber);
-        stmt.bindDouble(4, cr.getCorrectRate());
+        stmt.bindString(1, learnedDate);
+        stmt.bindString(2, learnedTime);
+        stmt.bindLong(3, correctNumber);
+        stmt.bindLong(4, entireNumber);
+        stmt.bindDouble(5, cr.getCorrectRate());
         // SQLを実行
         stmt.executeInsert();
     }

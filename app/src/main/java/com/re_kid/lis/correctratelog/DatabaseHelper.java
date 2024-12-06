@@ -11,7 +11,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_HISTORIES = "CREATE TABLE Histories ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + "history_datetime TEXT NOT NULL, "
+            + "learned_date TEXT NOT NULL, "
+            + "learned_time TEXT NOT NULL, "
             + "correct_number INTEGER NOT NULL, "
             + "entire_number INTEGER NOT NULL, "
             + "correct_rate REAL NOT NULL)";

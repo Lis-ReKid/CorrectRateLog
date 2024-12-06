@@ -49,8 +49,8 @@ public class HistoryListFragment extends Fragment {
         SQLiteDatabase db = _helper.getWritableDatabase();
         String sql = "SELECT * FROM Histories ORDER BY _id DESC";
         Cursor cursor = db.rawQuery(sql, null);
-        String[] from = {"_id", "history_datetime", "correct_rate", "correct_number", "entire_number"};
-        int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvHistoryDateTimeRow, R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
+        String[] from = {"_id", "learned_date", "learned_time", "correct_rate", "correct_number", "entire_number"};
+        int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvLearnedDateRow, R.id.tvLearnedTimeRow, R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row, cursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         adapter.setViewBinder(new CustomViewBinder());
         lvHistory.setAdapter(adapter);
