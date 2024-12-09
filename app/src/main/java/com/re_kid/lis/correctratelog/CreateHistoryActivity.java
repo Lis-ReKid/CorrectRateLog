@@ -23,6 +23,7 @@ import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
+import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
@@ -96,7 +97,9 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // DB登録
         try(HistoryModel model = new HistoryModel(CreateHistoryActivity.this)) {
-            model.createHistory(learnedDate, learnedTime, correctNum, entireNumber, cr.getCorrectRate());
+            History history = new History(LearnedDate.parse(learnedDate), LearnedTime.parse(learnedTime),
+                    correctNum, entireNumber, cr);
+            model.createHistory(history);
         } catch (Exception e) {
             Toast.makeText(this, R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
         }
