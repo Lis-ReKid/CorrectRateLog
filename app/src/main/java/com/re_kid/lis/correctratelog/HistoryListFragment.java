@@ -1,5 +1,6 @@
 package com.re_kid.lis.correctratelog;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -45,6 +46,11 @@ public class HistoryListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        view.findViewById(R.id.btn_create).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
+            startActivity(intent);
+        });
 
         ListView lvHistory = view.findViewById(R.id.lvHistory);
         try(HistoryModel model = new HistoryModel(this.getContext())){
