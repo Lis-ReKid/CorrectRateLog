@@ -48,7 +48,7 @@ public class HistoryListFragment extends Fragment {
 
         ListView lvHistory = view.findViewById(R.id.lvHistory);
         try(HistoryModel model = new HistoryModel(this.getContext())){
-            Cursor cursor = model.getHistories();
+            Cursor cursor = model.selectAll();
             String[] from = {"_id", "learned_date", "learned_time", "correct_rate", "correct_number",
                     "entire_number"};
             int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvLearnedDateRow, R.id.tvLearnedTimeRow,

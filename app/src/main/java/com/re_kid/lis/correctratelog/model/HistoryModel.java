@@ -29,7 +29,7 @@ public class HistoryModel implements AutoCloseable {
         // SQLを実行
         stmt.executeInsert();
     }
-    public Cursor getHistories () {
+    public Cursor selectAll() {
         SQLiteDatabase db = _helper.getWritableDatabase();
         String sql = "SELECT * FROM Histories ORDER BY _id DESC";
         return db.rawQuery(sql, null);
