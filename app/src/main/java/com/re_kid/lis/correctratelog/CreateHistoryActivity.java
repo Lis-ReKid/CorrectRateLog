@@ -91,14 +91,14 @@ public class CreateHistoryActivity extends AppCompatActivity
         String learnedDate = tvLearnedDate.getText().toString();
         String learnedTime = tvLearnedTime.getText().toString();
         int correctNum = Integer.parseInt(etCorrectNumber.getText().toString());
-        int entireNumber = Integer.parseInt(etEntireNumber.getText().toString());
+        int entireNum = Integer.parseInt(etEntireNumber.getText().toString());
         // 正答率を取得
-        CorrectRate cr = new CorrectRate(correctNum, entireNumber);
+        CorrectRate cr = new CorrectRate(correctNum, entireNum);
 
         // DB登録
         try(HistoryModel model = new HistoryModel(CreateHistoryActivity.this)) {
             History history = new History(LearnedDate.parse(learnedDate), LearnedTime.parse(learnedTime),
-                    correctNum, entireNumber, cr);
+                    correctNum, entireNum, cr);
             model.createHistory(history);
         } catch (Exception e) {
             Toast.makeText(this, R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
