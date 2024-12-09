@@ -31,14 +31,12 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // 入力フォームをリフレッシュ
                 Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
             // ホームに戻る
             else if(which == DialogInterface.BUTTON_NEUTRAL) {
                 // ホーム画面をリフレッシュして遷移
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         }
