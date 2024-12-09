@@ -3,14 +3,13 @@ package com.re_kid.lis.correctratelog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
@@ -22,13 +21,14 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.CreateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
+import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
+import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
 public class CreateHistoryActivity extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-    private DatabaseHelper _helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,6 @@ public class CreateHistoryActivity extends AppCompatActivity
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        _helper = new DatabaseHelper(CreateHistoryActivity.this);
 
         // 日時の初期値入力
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
@@ -74,9 +72,7 @@ public class CreateHistoryActivity extends AppCompatActivity
             public void handleOnBackPressed() {
                 // MainActivityを作り直してフィニッシュ
                 Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                _helper.close();
                 finish();
             }
         };
@@ -93,29 +89,23 @@ public class CreateHistoryActivity extends AppCompatActivity
         // 入力内容を取得
         String learnedDate = tvLearnedDate.getText().toString();
         String learnedTime = tvLearnedTime.getText().toString();
-        int correctNumber = Integer.parseInt(etCorrectNumber.getText().toString());
-        int entireNumber = Integer.parseInt(etEntireNumber.getText().toString());
+        int correctNum = Integer.parseInt(etCorrectNumber.getText().toString());
+        int entireNum = Integer.parseInt(etEntireNumber.getText().toString());
         // 正答率を取得
-        CorrectRate cr = new CorrectRate(correctNumber, entireNumber);
+        CorrectRate cr = new CorrectRate(correctNum, entireNum);
 
-        // DB登録処理
-        SQLiteDatabase db = _helper.getWritableDatabase();
-        // SQLを作成
-        String sqlInsert = "INSERT INTO Histories " +
-                "(learned_date, learned_time, correct_number, entire_number, correct_rate)" +
-                "VALUES(?, ?, ?, ?, ?)";
-        SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindString(1, learnedDate);
-        stmt.bindString(2, learnedTime);
-        stmt.bindLong(3, correctNumber);
-        stmt.bindLong(4, entireNumber);
-        stmt.bindDouble(5, cr.getCorrectRate());
-        // SQLを実行
-        stmt.executeInsert();
+        // DB登録
+        try(HistoryModel model = new HistoryModel(CreateHistoryActivity.this)) {
+            History history = new History(LearnedDate.parse(learnedDate), LearnedTime.parse(learnedTime),
+                    correctNum, entireNum, cr);
+            model.createHistory(history);
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
+        }
 
         // ダイアログを表示
         CreateHistoryConfirmDialogFragment dialogFragment = new CreateHistoryConfirmDialogFragment();
-        dialogFragment.show(getSupportFragmentManager(), "CreateHistoryconfirmDialogFragment");
+        dialogFragment.show(getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
     }
 
     @Override
@@ -134,7 +124,6 @@ public class CreateHistoryActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        _helper.close();
         super.onDestroy();
     }
 }
