@@ -16,7 +16,7 @@ import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.re_kid.lis.correctratelog.model.HistoriesModel;
+import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 
 /**
@@ -47,7 +47,7 @@ public class HistoryListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ListView lvHistory = view.findViewById(R.id.lvHistory);
-        try(HistoriesModel model = new HistoriesModel(this.getContext())){
+        try(HistoryModel model = new HistoryModel(this.getContext())){
             Cursor cursor = model.getHistories();
             String[] from = {"_id", "learned_date", "learned_time", "correct_rate", "correct_number",
                     "entire_number"};

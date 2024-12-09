@@ -21,7 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.CreateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
-import com.re_kid.lis.correctratelog.model.HistoriesModel;
+import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
@@ -95,7 +95,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         CorrectRate cr = new CorrectRate(correctNum, entireNumber);
 
         // DB登録
-        try(HistoriesModel model = new HistoriesModel(CreateHistoryActivity.this)) {
+        try(HistoryModel model = new HistoryModel(CreateHistoryActivity.this)) {
             model.createHistory(learnedDate, learnedTime, correctNum, entireNumber, cr.getCorrectRate());
         } catch (Exception e) {
             Toast.makeText(this, R.string.create_failed_msg, Toast.LENGTH_SHORT).show();

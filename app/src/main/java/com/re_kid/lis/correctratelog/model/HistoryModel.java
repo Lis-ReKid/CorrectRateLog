@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteStatement;
 
 import com.re_kid.lis.correctratelog.DatabaseHelper;
 
-public class HistoriesModel implements AutoCloseable {
+public class HistoryModel implements AutoCloseable {
     DatabaseHelper _helper;
 
-    public HistoriesModel(Context context) {
+    public HistoryModel(Context context) {
         _helper = new DatabaseHelper(context);
     }
     public void createHistory(final String learnedDate,
