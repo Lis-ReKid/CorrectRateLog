@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
+import com.re_kid.lis.correctratelog.obj.History;
+
+import java.util.List;
 
 public class CorrectRateFragment extends Fragment {
     private Cursor historiesCursor;
@@ -41,7 +44,8 @@ public class CorrectRateFragment extends Fragment {
 
         // 正答率を取得して表示
         TextView tvAccuracyRate = view.findViewById(R.id.tv_correct_rate);
-        CorrectRate correctRate = CorrectRate.getTotalCorrectRate(historiesCursor);
+        List<History> histories = History.getHistories(historiesCursor);
+        CorrectRate correctRate = CorrectRate.getTotalCorrectRate(histories);
         tvAccuracyRate.setText(correctRate.toString());
     }
 
