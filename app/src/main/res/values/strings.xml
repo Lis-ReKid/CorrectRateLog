@@ -8,7 +8,6 @@
     <string name="no_data_msg">データがありません。\n勉強履歴を登録しましょう！</string>
     <string name="btn_show_history_create_view">勉強履歴を登録する</string>
     <string name="correct_rate_title">正答率</string>
-    <string name="tv_correct_rate_unit">%</string>
     <string name="no_tag_history">タグ未登録の履歴</string>
     <string name="get_histories_failed_msg">履歴の取得に失敗しました。</string>
     <!-- 履歴登録回り-->

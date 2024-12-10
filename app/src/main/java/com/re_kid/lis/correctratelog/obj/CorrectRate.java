@@ -49,6 +49,6 @@ public class CorrectRate {
     @NonNull
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "%.1f", correctRate * 100);
+        return String.format(Locale.getDefault(), "%.1f%%", correctRate * 100);
     }
 }
