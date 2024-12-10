@@ -1,5 +1,7 @@
 package com.re_kid.lis.correctratelog.obj;
 
+import android.database.Cursor;
+
 import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
@@ -33,6 +35,10 @@ public class CorrectRate {
      */
     public double getCorrectRate() {
         return correctRate;
+    }
+
+    public static CorrectRate getTotalCorrectRate(Cursor histories) {
+        return new CorrectRate(0.00);
     }
 
     @NonNull
