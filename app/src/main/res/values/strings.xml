@@ -19,6 +19,7 @@
     <string name="tv_quiz_number_hint">0</string>
     <string name="tv_quiz_unit">問</string>
     <string name="btn_create_history">履歴を登録する</string>
+    <string name="btn_create">登録</string>
     <string name="dialog_create_title">登録完了！</string>
     <string name="dialog_create_positive">続けて登録</string>
     <string name="dialog_create_neutral">ホームに戻る</string>
