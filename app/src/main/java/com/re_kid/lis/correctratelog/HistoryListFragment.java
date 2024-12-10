@@ -25,7 +25,6 @@ import com.re_kid.lis.correctratelog.obj.CorrectRate;
  *
  */
 public class HistoryListFragment extends Fragment {
-    private DatabaseHelper _helper;
     public HistoryListFragment() {
         super(R.layout.fragment_history_list);
     }
@@ -33,7 +32,6 @@ public class HistoryListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _helper = new DatabaseHelper(getActivity());
     }
 
     @Override
@@ -70,7 +68,6 @@ public class HistoryListFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        _helper.close();
         super.onDestroy();
     }
 
