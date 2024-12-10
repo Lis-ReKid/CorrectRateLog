@@ -46,7 +46,7 @@ public class History {
      * @param cursor HistoriesのCursorオブジェクト
      * @return HistoryのList
      */
-    public static List<History> getHistories(Cursor cursor) {
+    static List<History> getHistories(Cursor cursor) {
         List<History> list = new ArrayList<>();
         while(cursor.moveToNext()) {
             // 列の内容を取得
