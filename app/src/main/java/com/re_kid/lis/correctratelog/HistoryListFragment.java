@@ -53,6 +53,7 @@ public class HistoryListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // 登録画面遷移ボタンリスナ登録
         view.findViewById(R.id.btn_create).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
             startActivity(intent);
