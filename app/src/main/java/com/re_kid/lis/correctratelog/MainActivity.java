@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.top_fragment_container, NoDataFragment.class, null);
             } else {
                 transaction.replace(R.id.top_fragment_container, CorrectRateFragment.newInstance(cursor), null);
-                transaction.replace(R.id.bottom_fragment_container, HistoryListFragment.class, null);
+                transaction.replace(R.id.bottom_fragment_container, HistoryListFragment.newInstance(cursor), null);
             }
             transaction.commit();
         } catch (Exception e) {

@@ -15,9 +15,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 
 /**
@@ -25,6 +23,7 @@ import com.re_kid.lis.correctratelog.obj.CorrectRate;
  *
  */
 public class HistoryListFragment extends Fragment {
+    private Cursor historiesCursor;
     public HistoryListFragment() {
         super(R.layout.fragment_history_list);
     }
@@ -32,6 +31,15 @@ public class HistoryListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public static HistoryListFragment newInstance(Cursor cursor) {
+        HistoryListFragment fragment = new HistoryListFragment();
+        fragment.setCursor(cursor);
+        return fragment;
+    }
+    private void setCursor(Cursor cursor) {
+        this.historiesCursor = cursor;
     }
 
     @Override
@@ -50,20 +58,16 @@ public class HistoryListFragment extends Fragment {
             startActivity(intent);
         });
 
+        // 履歴リストを生成
         ListView lvHistory = view.findViewById(R.id.lvHistory);
-        try(HistoryModel model = new HistoryModel(this.getContext())){
-            Cursor cursor = model.selectAll();
-            String[] from = {"_id", "learned_date", "learned_time", "correct_rate", "correct_number",
-                    "entire_number"};
-            int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvLearnedDateRow, R.id.tvLearnedTimeRow,
-                    R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row,
-                    cursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
-            adapter.setViewBinder(new CustomViewBinder());
-            lvHistory.setAdapter(adapter);
-        } catch (Exception e) {
-            Toast.makeText(this.getContext(), R.string.get_histories_failed_msg, Toast.LENGTH_SHORT).show();
-        }
+        String[] from = {"_id", "learned_date", "learned_time", "correct_rate", "correct_number",
+                "entire_number"};
+        int[] to = {R.id.tv_hist_tag_row_temp, R.id.tvLearnedDateRow, R.id.tvLearnedTimeRow,
+                R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row,
+                historiesCursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        adapter.setViewBinder(new CustomViewBinder());
+        lvHistory.setAdapter(adapter);
     }
 
     @Override
