@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Locale;
 
 public class CorrectRate {
@@ -33,6 +34,16 @@ public class CorrectRate {
      */
     public double getCorrectRate() {
         return correctRate;
+    }
+
+    public static CorrectRate getTotalCorrectRate(List<History> histories) {
+        int totalCorrectNum = 0;
+        int totalEntireNum = 0;
+        for (History history : histories) {
+            totalCorrectNum += history.getCorrectNum();
+            totalEntireNum += history.getEntireNum();
+        }
+        return new CorrectRate(totalCorrectNum, totalEntireNum);
     }
 
     @NonNull
