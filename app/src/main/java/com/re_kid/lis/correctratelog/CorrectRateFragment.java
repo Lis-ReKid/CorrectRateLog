@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.re_kid.lis.correctratelog.obj.CorrectRate;
+
 public class CorrectRateFragment extends Fragment {
-    private Cursor histories;
+    private Cursor historiesCursor;
     public CorrectRateFragment() {
         super(R.layout.fragment_corrrect_rate);
     }
@@ -25,7 +27,7 @@ public class CorrectRateFragment extends Fragment {
     }
 
     private void setCursor(Cursor cursor) {
-        this.histories = cursor;
+        this.historiesCursor = cursor;
     }
 
     @Override
@@ -37,7 +39,8 @@ public class CorrectRateFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView tvAccuracyRate = view.findViewById(R.id.tv_correct_rate);
-        tvAccuracyRate.setText("0");
+        CorrectRate correctRate = CorrectRate.getTotalCorrectRate(historiesCursor);
+        tvAccuracyRate.setText(correctRate.toString());
     }
 
     @Override
