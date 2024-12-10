@@ -54,10 +54,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/tv_quiz_number_hint"
         android:inputType="number"
         android:minHeight="48dp"
-        android:textColorHint="#546E7A"
         app:layout_constraintStart_toEndOf="@+id/tv_correct_number"
         app:layout_constraintTop_toBottomOf="@+id/tv_learned_date"
         tools:ignore="Autofill,DuplicateSpeakableTextCheck" />
@@ -69,10 +67,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/tv_quiz_number_hint"
         android:inputType="number"
         android:minHeight="48dp"
-        android:textColorHint="#546E7A"
         app:layout_constraintStart_toEndOf="@+id/tv_entire_number"
         app:layout_constraintTop_toBottomOf="@+id/et_correct_number"
         tools:ignore="Autofill" />

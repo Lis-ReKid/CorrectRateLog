@@ -16,7 +16,6 @@
     <string name="tv_learned_date">勉強日時</string>
     <string name="tv_correct_number">正答数</string>
     <string name="tv_entire_number">問題数</string>
-    <string name="tv_quiz_number_hint">0</string>
     <string name="tv_quiz_unit">問</string>
     <string name="btn_create_history">履歴を登録する</string>
     <string name="btn_create">登録</string>
