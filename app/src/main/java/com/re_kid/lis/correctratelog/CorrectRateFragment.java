@@ -1,5 +1,6 @@
 package com.re_kid.lis.correctratelog;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +13,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class CorrectRateFragment extends Fragment {
+    private Cursor histories;
     public CorrectRateFragment() {
         super(R.layout.fragment_corrrect_rate);
+    }
+
+    public static CorrectRateFragment newInstance(Cursor cursor) {
+        CorrectRateFragment fragment = new CorrectRateFragment();
+        fragment.setCursor(cursor);
+        return fragment;
+    }
+
+    private void setCursor(Cursor cursor) {
+        this.histories = cursor;
     }
 
     @Override

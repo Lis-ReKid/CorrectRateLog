@@ -1,5 +1,6 @@
 package com.re_kid.lis.correctratelog;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -27,14 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
         // フラグメントの取得
         try(HistoryModel model = new HistoryModel(MainActivity.this)) {
-            int count = model.selectAll().getCount();
+            Cursor cursor = model.selectAll();
+            int count = cursor.getCount();
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.setReorderingAllowed(true);
             if (count == 0) {
                 transaction.replace(R.id.top_fragment_container, NoDataFragment.class, null);
             } else {
-                transaction.replace(R.id.top_fragment_container, CorrectRateFragment.class, null);
+                transaction.replace(R.id.top_fragment_container, CorrectRateFragment.newInstance(cursor), null);
                 transaction.replace(R.id.bottom_fragment_container, HistoryListFragment.class, null);
             }
             transaction.commit();
