@@ -38,6 +38,8 @@ public class CorrectRateFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // 正答率を取得して表示
         TextView tvAccuracyRate = view.findViewById(R.id.tv_correct_rate);
         CorrectRate correctRate = CorrectRate.getTotalCorrectRate(historiesCursor);
         tvAccuracyRate.setText(correctRate.toString());
