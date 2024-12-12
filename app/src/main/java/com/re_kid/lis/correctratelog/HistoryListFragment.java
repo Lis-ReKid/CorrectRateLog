@@ -2,6 +2,7 @@ package com.re_kid.lis.correctratelog;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 
+import com.re_kid.lis.correctratelog.dialog.HistoryDetailDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 
 /**
@@ -69,6 +71,20 @@ public class HistoryListFragment extends Fragment {
                 historiesCursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         adapter.setViewBinder(new CustomViewBinder());
         lvHistory.setAdapter(adapter);
+
+        // 履歴リストにイベントリスナを登録
+        lvHistory.setOnItemClickListener(((parent, view1, position, id) -> {
+            // リストの内容を取得
+            SQLiteCursor parentText = (SQLiteCursor)parent.getItemAtPosition(position);
+            double correctRate = parentText.getDouble(parentText.getColumnIndex("correct_rate"));
+
+            // ダイアログを取得
+            HistoryDetailDialogFragment detailDialog = new HistoryDetailDialogFragment();
+            Bundle args = new Bundle();
+            args.putDouble("correctRate", correctRate);
+            detailDialog.setArguments(args);
+            detailDialog.show(getActivity().getSupportFragmentManager(), "DetailDialog");
+        }));
     }
 
     @Override
