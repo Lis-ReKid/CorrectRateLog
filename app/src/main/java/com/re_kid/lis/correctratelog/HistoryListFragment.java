@@ -78,6 +78,8 @@ public class HistoryListFragment extends Fragment {
             SQLiteCursor parentText = (SQLiteCursor)parent.getItemAtPosition(position);
             String date = parentText.getString(parentText.getColumnIndex("learned_date"));
             String time = parentText.getString(parentText.getColumnIndex("learned_time"));
+            int correctNum = parentText.getInt(parentText.getColumnIndex("correct_number"));
+            int entireNum = parentText.getInt(parentText.getColumnIndex("entire_number"));
             double correctRate = parentText.getDouble(parentText.getColumnIndex("correct_rate"));
 
             // ダイアログを取得
@@ -85,6 +87,8 @@ public class HistoryListFragment extends Fragment {
             Bundle args = new Bundle();
             args.putString("date", date);
             args.putString("time", time);
+            args.putInt("correctNum", correctNum);
+            args.putInt("entireNum", entireNum);
             args.putDouble("correctRate", correctRate);
             detailDialog.setArguments(args);
             detailDialog.show(getActivity().getSupportFragmentManager(), "DetailDialog");

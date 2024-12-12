@@ -21,13 +21,14 @@ public class HistoryDetailDialogFragment extends DialogFragment {
 //        int id = requireArguments().getInt("id");
         LearnedDate date = LearnedDate.parse(requireArguments().getString("date"));
         LearnedTime time = LearnedTime.parse(requireArguments().getString("time"));
-//        int correctNum = requireArguments().getInt("correctNum");
-//        int entireNum = requireArguments().getInt("entireNum");
+        int correctNum = requireArguments().getInt("correctNum");
+        int entireNum = requireArguments().getInt("entireNum");
         CorrectRate correctRate = new CorrectRate(requireArguments().getDouble("correctRate"));
         // 詳細メッセージを作成
         StringBuilder detailMsg = new StringBuilder();
         detailMsg.append(getText(R.string.tv_learned_date) + " : " + date + " " + time + "\n");
-        detailMsg.append(getText(R.string.correct_rate_title) + " : " + correctRate + "\n");
+        detailMsg.append(getText(R.string.correct_rate_title) + " : " + correctRate + " ");
+        detailMsg.append("(" + correctNum + "/" + entireNum + ")");
 
         // ダイアログをビルド
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
