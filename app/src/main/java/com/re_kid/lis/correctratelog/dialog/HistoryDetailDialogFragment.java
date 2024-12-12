@@ -26,15 +26,14 @@ public class HistoryDetailDialogFragment extends DialogFragment {
         int entireNum = requireArguments().getInt("entireNum");
         CorrectRate correctRate = new CorrectRate(requireArguments().getDouble("correctRate"));
         // 詳細メッセージを作成
-        StringBuilder detailMsg = new StringBuilder();
-        detailMsg.append(getText(R.string.tv_learned_date) + " : " + date + " " + time + "\n");
-        detailMsg.append(getText(R.string.correct_rate_title) + " : " + correctRate + " ");
-        detailMsg.append("(" + correctNum + "/" + entireNum + ")");
+        String detailMsg = getText(R.string.tv_learned_date) + " : " + date + " " + time + "\n" +
+                getText(R.string.correct_rate_title) + " : " + correctRate + " " +
+                "(" + correctNum + "/" + entireNum + ")";
 
         // ダイアログをビルド
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.dialog_history_detail_title);
-        builder.setMessage(detailMsg.toString());
+        builder.setMessage(detailMsg);
         builder.setNegativeButton(R.string.btn_delete, new HistoryDetailDialogButtonClickListener());
 
         return builder.create();
