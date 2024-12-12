@@ -32,9 +32,11 @@ public class HistoryDetailDialogFragment extends DialogFragment {
 
         // ダイアログをビルド
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        HistoryDetailDialogButtonClickListener listener = new HistoryDetailDialogButtonClickListener();
         builder.setTitle(R.string.dialog_history_detail_title);
         builder.setMessage(detailMsg);
-        builder.setNegativeButton(R.string.btn_delete, new HistoryDetailDialogButtonClickListener());
+        builder.setNegativeButton(R.string.btn_delete, listener);
+        builder.setNeutralButton(R.string.btn_close, listener);
 
         return builder.create();
     }
@@ -48,6 +50,10 @@ public class HistoryDetailDialogFragment extends DialogFragment {
                 // 削除確認ダイアログを表示
                 new DeleteHistoryConfirmDialogFragment().show(
                         getActivity().getSupportFragmentManager(), "deleteHistoryConfirmDialog");
+            }
+            // 閉じるボタン押下時処理
+            else if (which == DialogInterface.BUTTON_NEUTRAL) {
+                System.out.println("Close button pushed.");
             }
         }
     }
