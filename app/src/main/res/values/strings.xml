@@ -23,4 +23,6 @@
     <string name="dialog_create_positive">続けて登録</string>
     <string name="dialog_create_neutral">ホームに戻る</string>
     <string name="create_failed_msg">登録に失敗しました。</string>
+    <!-- 削除回り -->
+    <string name="btn_delete">削除</string>
 </resources>

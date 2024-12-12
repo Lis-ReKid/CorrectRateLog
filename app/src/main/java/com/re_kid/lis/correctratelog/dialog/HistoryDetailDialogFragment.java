@@ -2,6 +2,7 @@ package com.re_kid.lis.correctratelog.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,19 @@ public class HistoryDetailDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.dialog_history_detail_title);
         builder.setMessage(detailMsg.toString());
+        builder.setNegativeButton(R.string.btn_delete, new HistoryDetailDialogButtonClickListener());
 
         return builder.create();
+    }
+
+    private class HistoryDetailDialogButtonClickListener implements DialogInterface.OnClickListener {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            // 削除ボタン押下時処理
+            if(which == DialogInterface.BUTTON_NEGATIVE) {
+                System.out.println("Delete button pushed.");
+                // 削除確認ダイアログを表示
+            }
+        }
     }
 }
