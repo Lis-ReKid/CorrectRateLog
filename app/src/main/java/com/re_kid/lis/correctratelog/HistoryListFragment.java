@@ -76,11 +76,15 @@ public class HistoryListFragment extends Fragment {
         lvHistory.setOnItemClickListener(((parent, view1, position, id) -> {
             // リストの内容を取得
             SQLiteCursor parentText = (SQLiteCursor)parent.getItemAtPosition(position);
+            String date = parentText.getString(parentText.getColumnIndex("learned_date"));
+            String time = parentText.getString(parentText.getColumnIndex("learned_time"));
             double correctRate = parentText.getDouble(parentText.getColumnIndex("correct_rate"));
 
             // ダイアログを取得
             HistoryDetailDialogFragment detailDialog = new HistoryDetailDialogFragment();
             Bundle args = new Bundle();
+            args.putString("date", date);
+            args.putString("time", time);
             args.putDouble("correctRate", correctRate);
             detailDialog.setArguments(args);
             detailDialog.show(getActivity().getSupportFragmentManager(), "DetailDialog");
