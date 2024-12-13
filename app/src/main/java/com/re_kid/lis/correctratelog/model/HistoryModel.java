@@ -35,6 +35,14 @@ public class HistoryModel implements AutoCloseable {
         return db.rawQuery(sql, null);
     }
 
+    public void delete(int id) {
+        SQLiteDatabase db = _helper.getWritableDatabase();
+        String sqlDelete = "DELETE FROM Histories WHERE _id = ?";
+        SQLiteStatement stmt = db.compileStatement(sqlDelete);
+        stmt.bindLong(1, id);
+        stmt.executeUpdateDelete();
+    }
+
     @Override
     public void close() throws Exception {
         _helper.close();

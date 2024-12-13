@@ -36,7 +36,7 @@ public class HistoryListFragment extends Fragment {
     }
 
     public static HistoryListFragment newInstance(Cursor cursor) {
-        HistoryListFragment fragment = new HistoryListFragment();
+        var fragment = new HistoryListFragment();
         fragment.setCursor(cursor);
         return fragment;
     }
@@ -67,7 +67,7 @@ public class HistoryListFragment extends Fragment {
                 "entire_number"};
         int[] to = {R.id.tv_history_id, R.id.tv_hist_tag_row_temp, R.id.tvLearnedDateRow, R.id.tvLearnedTimeRow,
                 R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row,
+        var adapter = new SimpleCursorAdapter(getActivity(), R.layout.history_row,
                 historiesCursor, from, to, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
         adapter.setViewBinder(new CustomViewBinder());
         lvHistory.setAdapter(adapter);
@@ -76,15 +76,17 @@ public class HistoryListFragment extends Fragment {
         lvHistory.setOnItemClickListener(((parent, view1, position, id) -> {
             // リストの内容を取得
             SQLiteCursor parentText = (SQLiteCursor)parent.getItemAtPosition(position);
-            String date = parentText.getString(parentText.getColumnIndex("learned_date"));
-            String time = parentText.getString(parentText.getColumnIndex("learned_time"));
-            int correctNum = parentText.getInt(parentText.getColumnIndex("correct_number"));
-            int entireNum = parentText.getInt(parentText.getColumnIndex("entire_number"));
-            double correctRate = parentText.getDouble(parentText.getColumnIndex("correct_rate"));
+            var historyId = parentText.getInt(parentText.getColumnIndex("_id"));
+            var date = parentText.getString(parentText.getColumnIndex("learned_date"));
+            var time = parentText.getString(parentText.getColumnIndex("learned_time"));
+            var correctNum = parentText.getInt(parentText.getColumnIndex("correct_number"));
+            var entireNum = parentText.getInt(parentText.getColumnIndex("entire_number"));
+            var correctRate = parentText.getDouble(parentText.getColumnIndex("correct_rate"));
 
             // ダイアログを取得
-            HistoryDetailDialogFragment detailDialog = new HistoryDetailDialogFragment();
-            Bundle args = new Bundle();
+            var detailDialog = new HistoryDetailDialogFragment();
+            var args = new Bundle();
+            args.putInt("id", historyId);
             args.putString("date", date);
             args.putString("time", time);
             args.putInt("correctNum", correctNum);
@@ -106,16 +108,13 @@ public class HistoryListFragment extends Fragment {
             boolean result = false;
             // 正答率整形
             if (view.getId() == R.id.tv_correct_rate_row) {
-                CorrectRate cr = new CorrectRate(cursor.getDouble(columnIndex));
+                var cr = new CorrectRate(cursor.getDouble(columnIndex));
                 ((TextView) view).setText(cr.toString());
                 result = true;
             }
             // 履歴タイトル整形
             if (view.getId() == R.id.tv_hist_tag_row_temp) {
-                // StringBuilderの方が良いか？要検討
-                String origin = cursor.getString(columnIndex);
-                String strNoTag = getString(R.string.no_tag_history);
-                String text = strNoTag + origin;
+                var text = getText(R.string.no_tag_history) + cursor.getString(columnIndex);
                 ((TextView) view).setText(text);
                 result = true;
             }

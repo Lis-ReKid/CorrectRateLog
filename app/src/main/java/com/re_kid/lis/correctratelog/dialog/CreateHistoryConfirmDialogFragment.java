@@ -19,9 +19,10 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        CreateDialogButtonClickListener listener = new CreateDialogButtonClickListener();
         builder.setTitle(R.string.dialog_create_title);
-        builder.setPositiveButton(R.string.dialog_create_positive, new CreateDialogButtonClickListener());
-        builder.setNeutralButton(R.string.dialog_create_neutral, new CreateDialogButtonClickListener());
+        builder.setPositiveButton(R.string.dialog_create_positive, listener);
+        builder.setNeutralButton(R.string.dialog_create_neutral, listener);
         return builder.create();
     }
     public class CreateDialogButtonClickListener implements DialogInterface.OnClickListener {
