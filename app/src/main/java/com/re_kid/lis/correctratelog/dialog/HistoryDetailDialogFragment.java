@@ -15,11 +15,12 @@ import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
 public class HistoryDetailDialogFragment extends DialogFragment {
+    private int _id;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // 引数を取得
-//        int id = requireArguments().getInt("id");
+        _id = requireArguments().getInt("id");
         LearnedDate date = LearnedDate.parse(requireArguments().getString("date"));
         LearnedTime time = LearnedTime.parse(requireArguments().getString("time"));
         int correctNum = requireArguments().getInt("correctNum");
@@ -48,8 +49,11 @@ public class HistoryDetailDialogFragment extends DialogFragment {
             if(which == DialogInterface.BUTTON_NEGATIVE) {
                 System.out.println("Delete button pushed.");
                 // 削除確認ダイアログを表示
-                new DeleteHistoryConfirmDialogFragment().show(
-                        getActivity().getSupportFragmentManager(), "deleteHistoryConfirmDialog");
+                DeleteHistoryConfirmDialogFragment deleteHistoryConfirmDialog = new DeleteHistoryConfirmDialogFragment();
+                Bundle args = new Bundle();
+                args.putInt("id", _id);
+                deleteHistoryConfirmDialog.setArguments(args);
+                deleteHistoryConfirmDialog.show(getActivity().getSupportFragmentManager(), "deleteHistoryConfirmDialog");
             }
             // 閉じるボタン押下時処理
             else if (which == DialogInterface.BUTTON_NEUTRAL) {

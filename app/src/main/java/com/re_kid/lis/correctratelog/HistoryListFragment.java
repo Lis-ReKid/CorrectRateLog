@@ -76,6 +76,7 @@ public class HistoryListFragment extends Fragment {
         lvHistory.setOnItemClickListener(((parent, view1, position, id) -> {
             // リストの内容を取得
             SQLiteCursor parentText = (SQLiteCursor)parent.getItemAtPosition(position);
+            int historyId = parentText.getInt(parentText.getColumnIndex("_id"));
             String date = parentText.getString(parentText.getColumnIndex("learned_date"));
             String time = parentText.getString(parentText.getColumnIndex("learned_time"));
             int correctNum = parentText.getInt(parentText.getColumnIndex("correct_number"));
@@ -85,6 +86,7 @@ public class HistoryListFragment extends Fragment {
             // ダイアログを取得
             HistoryDetailDialogFragment detailDialog = new HistoryDetailDialogFragment();
             Bundle args = new Bundle();
+            args.putInt("id", historyId);
             args.putString("date", date);
             args.putString("time", time);
             args.putInt("correctNum", correctNum);
