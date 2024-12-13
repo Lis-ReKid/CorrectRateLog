@@ -3,7 +3,6 @@ package com.re_kid.lis.correctratelog.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 
@@ -43,11 +41,8 @@ public class DeleteHistoryConfirmDialogFragment extends DialogFragment {
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), getText(R.string.toast_delete_failed), Toast.LENGTH_LONG).show();
                 }
-                // 画面をリフレッシュ
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(getActivity(), getText(R.string.toast_delete_complete), Toast.LENGTH_LONG).show();
-
+                new DeleteHistoryCompleteDialogFragment().show(
+                        getActivity().getSupportFragmentManager(), "deleteCompleteDialog");
             }
             // 削除をキャンセル
             else if(which == DialogInterface.BUTTON_NEGATIVE) {
