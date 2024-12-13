@@ -114,9 +114,7 @@ public class HistoryListFragment extends Fragment {
             }
             // 履歴タイトル整形
             if (view.getId() == R.id.tv_hist_tag_row_temp) {
-                String origin = cursor.getString(columnIndex);
-                String strNoTag = getString(R.string.no_tag_history);
-                String text = strNoTag + origin;
+                String text = getText(R.string.no_tag_history) + cursor.getString(columnIndex);
                 ((TextView) view).setText(text);
                 result = true;
             }
