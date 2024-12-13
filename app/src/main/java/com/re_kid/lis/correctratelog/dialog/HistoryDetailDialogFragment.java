@@ -54,10 +54,6 @@ public class HistoryDetailDialogFragment extends DialogFragment {
                 deleteHistoryConfirmDialog.setArguments(args);
                 deleteHistoryConfirmDialog.show(getActivity().getSupportFragmentManager(), "deleteHistoryConfirmDialog");
             }
-            // 閉じるボタン押下時処理
-            else if (which == DialogInterface.BUTTON_NEUTRAL) {
-                System.out.println("Close button pushed.");
-            }
         }
     }
 }
