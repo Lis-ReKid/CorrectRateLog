@@ -17,7 +17,7 @@ public class DeleteHistoryCompleteDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        var builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(getText(R.string.toast_delete_complete));
         // 閉じるボタン
         builder.setNeutralButton(R.string.btn_close, (dialog, which) -> {
