@@ -22,8 +22,8 @@ public class DeleteHistoryConfirmDialogFragment extends DialogFragment {
         // IDを取得
         _id = requireArguments().getInt("id");
         // ダイアログ作成とリスナ登録
-        DeleteHistoryConfirmDialogButtonClickListener listener = new DeleteHistoryConfirmDialogButtonClickListener();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        var listener = new DeleteHistoryConfirmDialogButtonClickListener();
+        var builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.dialog_delete_confirm_msg);
         builder.setPositiveButton(R.string.btn_delete, listener);
         builder.setNegativeButton(R.string.btn_cancel, listener);
@@ -36,7 +36,7 @@ public class DeleteHistoryConfirmDialogFragment extends DialogFragment {
             // 削除ボタンを押下
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // 削除を実行
-                try(HistoryModel model = new HistoryModel(getActivity())) {
+                try(var model = new HistoryModel(getActivity())) {
                     model.delete(_id);
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), getText(R.string.toast_delete_failed), Toast.LENGTH_LONG).show();
