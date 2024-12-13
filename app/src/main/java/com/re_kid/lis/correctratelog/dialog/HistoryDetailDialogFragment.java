@@ -21,19 +21,19 @@ public class HistoryDetailDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // 引数を取得
         _id = requireArguments().getInt("id");
-        LearnedDate date = LearnedDate.parse(requireArguments().getString("date"));
-        LearnedTime time = LearnedTime.parse(requireArguments().getString("time"));
-        int correctNum = requireArguments().getInt("correctNum");
-        int entireNum = requireArguments().getInt("entireNum");
-        CorrectRate correctRate = new CorrectRate(requireArguments().getDouble("correctRate"));
+        var date = LearnedDate.parse(requireArguments().getString("date"));
+        var time = LearnedTime.parse(requireArguments().getString("time"));
+        var correctNum = requireArguments().getInt("correctNum");
+        var entireNum = requireArguments().getInt("entireNum");
+        var correctRate = new CorrectRate(requireArguments().getDouble("correctRate"));
         // 詳細メッセージを作成
-        String detailMsg = getText(R.string.tv_learned_date) + " : " + date + " " + time + "\n" +
+        var detailMsg = getText(R.string.tv_learned_date) + " : " + date + " " + time + "\n" +
                 getText(R.string.correct_rate_title) + " : " + correctRate + " " +
                 "(" + correctNum + "/" + entireNum + ")";
 
         // ダイアログをビルド
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        HistoryDetailDialogButtonClickListener listener = new HistoryDetailDialogButtonClickListener();
+        var builder = new AlertDialog.Builder(getActivity());
+        var listener = new HistoryDetailDialogButtonClickListener();
         builder.setTitle(R.string.dialog_history_detail_title);
         builder.setMessage(detailMsg);
         builder.setNegativeButton(R.string.btn_delete, listener);
