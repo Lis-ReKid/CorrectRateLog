@@ -47,7 +47,6 @@ public class HistoryDetailDialogFragment extends DialogFragment {
         public void onClick(DialogInterface dialog, int which) {
             // 削除ボタン押下時処理
             if(which == DialogInterface.BUTTON_NEGATIVE) {
-                System.out.println("Delete button pushed.");
                 // 削除確認ダイアログを表示
                 DeleteHistoryConfirmDialogFragment deleteHistoryConfirmDialog = new DeleteHistoryConfirmDialogFragment();
                 Bundle args = new Bundle();
