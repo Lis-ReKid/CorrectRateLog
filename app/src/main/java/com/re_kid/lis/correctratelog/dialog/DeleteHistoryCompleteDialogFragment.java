@@ -20,8 +20,8 @@ public class DeleteHistoryCompleteDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(getText(R.string.toast_delete_complete));
         // 閉じるボタン
-        builder.setNeutralButton(R.string.btn_close, (dialog, which1) -> {
-            if (which1 == DialogInterface.BUTTON_NEUTRAL) {
+        builder.setNeutralButton(R.string.btn_close, (dialog, which) -> {
+            if (which == DialogInterface.BUTTON_NEUTRAL) {
                 // 画面をリフレッシュ
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
