@@ -112,7 +112,6 @@ public class HistoryListFragment extends Fragment {
             }
             // 履歴タイトル整形
             if (view.getId() == R.id.tv_hist_tag_row_temp) {
-                // StringBuilderの方が良いか？要検討
                 String origin = cursor.getString(columnIndex);
                 String strNoTag = getString(R.string.no_tag_history);
                 String text = strNoTag + origin;
