@@ -4,6 +4,7 @@
     <string name="tv_slash">/</string>
     <string name="btn_close">閉じる</string>
     <string name="btn_cancel">キャンセル</string>
+    <string name="toast_canceled">キャンセルしました。</string>
     <!-- ホーム画面回り -->
     <string name="app_name">正答率チェッカー</string>
     <string name="no_data_msg">データがありません。\n学習履歴を登録しましょう！</string>
@@ -27,4 +28,6 @@
     <!-- 削除回り -->
     <string name="btn_delete">削除</string>
     <string name="dialog_delete_confirm_msg">本当に削除しますか？</string>
+    <string name="toast_delete_complete">削除しました。</string>
+    <string name="toast_delete_failed">削除に失敗しました。</string>
 </resources>

@@ -41,18 +41,18 @@ public class DeleteHistoryConfirmDialogFragment extends DialogFragment {
                 try(HistoryModel model = new HistoryModel(getActivity())) {
                     model.delete(_id);
                 } catch (Exception e) {
-                    Toast.makeText(getActivity(), "削除に失敗しました。", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getText(R.string.toast_delete_failed), Toast.LENGTH_LONG).show();
                 }
                 // 画面をリフレッシュ
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
-                Toast.makeText(getActivity(), "削除しました。", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getText(R.string.toast_delete_complete), Toast.LENGTH_LONG).show();
 
             }
             // 削除をキャンセル
             else if(which == DialogInterface.BUTTON_NEGATIVE) {
                 // トースト表示
-                Toast.makeText(getActivity(), "キャンセルしました。", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getText(R.string.toast_canceled), Toast.LENGTH_LONG).show();
             }
         }
     }
