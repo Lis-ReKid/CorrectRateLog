@@ -50,19 +50,19 @@ public class History {
         List<History> list = new ArrayList<>();
         while(cursor.moveToNext()) {
             // 列の内容を取得
-            int dateIndex = cursor.getColumnIndex("learned_date");
-            String date = cursor.getString(dateIndex);
-            int timeIndex = cursor.getColumnIndex("learned_time");
-            String time = cursor.getString(timeIndex);
-            int correctNumIndex = cursor.getColumnIndex("correct_number");
-            int correctNum = cursor.getInt(correctNumIndex);
-            int entireNumIndex = cursor.getColumnIndex("entire_number");
-            int entireNum = cursor.getInt(entireNumIndex);
-            int correctRateIndex = cursor.getColumnIndex("correct_rate");
-            double correctRate = cursor.getDouble(correctRateIndex);
+            var dateIndex = cursor.getColumnIndex("learned_date");
+            var date = cursor.getString(dateIndex);
+            var timeIndex = cursor.getColumnIndex("learned_time");
+            var time = cursor.getString(timeIndex);
+            var correctNumIndex = cursor.getColumnIndex("correct_number");
+            var correctNum = cursor.getInt(correctNumIndex);
+            var entireNumIndex = cursor.getColumnIndex("entire_number");
+            var entireNum = cursor.getInt(entireNumIndex);
+            var correctRateIndex = cursor.getColumnIndex("correct_rate");
+            var correctRate = cursor.getDouble(correctRateIndex);
 
             // Historyオブジェクトを生成してListに格納
-            History history = new History(LearnedDate.parse(date),
+            var history = new History(LearnedDate.parse(date),
                     LearnedTime.parse(time),
                     correctNum,
                     entireNum,

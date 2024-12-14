@@ -44,8 +44,8 @@ public class LearnedDate {
      * @return LearnedDateインスタンス
      */
     public static LearnedDate now() {
-        final LocalDateTime nowDateTime = LocalDateTime.now();
-        return new LearnedDate(_FORMATTER.format(nowDateTime));
+        final var nowDate = LocalDateTime.now();
+        return new LearnedDate(_FORMATTER.format(nowDate));
     }
 
     @NonNull
