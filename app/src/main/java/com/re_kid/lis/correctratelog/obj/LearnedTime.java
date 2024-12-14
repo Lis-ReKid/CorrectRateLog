@@ -43,8 +43,8 @@ public class LearnedTime {
      * @return LearnedTimeインスタンス
      */
     public static LearnedTime now() {
-        final LocalDateTime nowDateTime = LocalDateTime.now();
-        return new LearnedTime(_FORMATTER.format(nowDateTime));
+        final var nowTime = LocalDateTime.now();
+        return new LearnedTime(_FORMATTER.format(nowTime));
     }
     @NonNull
     @Override

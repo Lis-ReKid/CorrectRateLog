@@ -18,8 +18,8 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        CreateDialogButtonClickListener listener = new CreateDialogButtonClickListener();
+        var builder = new AlertDialog.Builder(getActivity());
+        var listener = new CreateDialogButtonClickListener();
         builder.setTitle(R.string.dialog_create_title);
         builder.setPositiveButton(R.string.dialog_create_positive, listener);
         builder.setNeutralButton(R.string.dialog_create_neutral, listener);
@@ -31,13 +31,13 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
             // 続けて登録
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // 入力フォームをリフレッシュ
-                Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
+                var intent = new Intent(getActivity(), CreateHistoryActivity.class);
                 startActivity(intent);
             }
             // ホームに戻る
             else if(which == DialogInterface.BUTTON_NEUTRAL) {
                 // ホーム画面をリフレッシュして遷移
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                var intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
         }

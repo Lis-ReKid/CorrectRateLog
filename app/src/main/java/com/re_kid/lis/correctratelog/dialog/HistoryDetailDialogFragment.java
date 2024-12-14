@@ -48,8 +48,8 @@ public class HistoryDetailDialogFragment extends DialogFragment {
             // 削除ボタン押下時処理
             if(which == DialogInterface.BUTTON_NEGATIVE) {
                 // 削除確認ダイアログを表示
-                DeleteHistoryConfirmDialogFragment deleteHistoryConfirmDialog = new DeleteHistoryConfirmDialogFragment();
-                Bundle args = new Bundle();
+                var deleteHistoryConfirmDialog = new DeleteHistoryConfirmDialogFragment();
+                var args = new Bundle();
                 args.putInt("id", _id);
                 deleteHistoryConfirmDialog.setArguments(args);
                 deleteHistoryConfirmDialog.show(getActivity().getSupportFragmentManager(), "deleteHistoryConfirmDialog");

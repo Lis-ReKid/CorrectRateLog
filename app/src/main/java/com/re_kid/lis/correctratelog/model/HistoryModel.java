@@ -17,7 +17,7 @@ public class HistoryModel implements AutoCloseable {
     public void createHistory(final History history) {
         SQLiteDatabase db = _helper.getWritableDatabase();
         // SQLを作成
-        String sqlInsert = "INSERT INTO Histories " +
+        var sqlInsert = "INSERT INTO Histories " +
                 "(learned_date, learned_time, correct_number, entire_number, correct_rate)" +
                 "VALUES(?, ?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
@@ -31,13 +31,13 @@ public class HistoryModel implements AutoCloseable {
     }
     public Cursor selectAll() {
         SQLiteDatabase db = _helper.getWritableDatabase();
-        String sql = "SELECT * FROM Histories ORDER BY _id DESC";
+        var sql = "SELECT * FROM Histories ORDER BY _id DESC";
         return db.rawQuery(sql, null);
     }
 
     public void delete(int id) {
         SQLiteDatabase db = _helper.getWritableDatabase();
-        String sqlDelete = "DELETE FROM Histories WHERE _id = ?";
+        var sqlDelete = "DELETE FROM Histories WHERE _id = ?";
         SQLiteStatement stmt = db.compileStatement(sqlDelete);
         stmt.bindLong(1, id);
         stmt.executeUpdateDelete();

@@ -37,8 +37,8 @@ public class CorrectRate {
     }
 
     public static CorrectRate getTotalCorrectRate(List<History> histories) {
-        int totalCorrectNum = 0;
-        int totalEntireNum = 0;
+        var totalCorrectNum = 0;
+        var totalEntireNum = 0;
         for (History history : histories) {
             totalCorrectNum += history.getCorrectNum();
             totalEntireNum += history.getEntireNum();

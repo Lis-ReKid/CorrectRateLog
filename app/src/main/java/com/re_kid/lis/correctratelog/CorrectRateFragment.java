@@ -24,7 +24,7 @@ public class CorrectRateFragment extends Fragment {
     }
 
     public static CorrectRateFragment newInstance(Cursor cursor) {
-        CorrectRateFragment fragment = new CorrectRateFragment();
+        var fragment = new CorrectRateFragment();
         fragment.setCursor(cursor);
         return fragment;
     }
@@ -45,7 +45,7 @@ public class CorrectRateFragment extends Fragment {
         // 正答率を取得して表示
         TextView tvAccuracyRate = view.findViewById(R.id.tv_correct_rate);
         List<History> histories = History.getHistories(historiesCursor);
-        CorrectRate correctRate = CorrectRate.getTotalCorrectRate(histories);
+        var correctRate = CorrectRate.getTotalCorrectRate(histories);
         tvAccuracyRate.setText(correctRate.toString());
     }
 
