@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.re_kid.lis.correctratelog.dialog.HistoryDetailDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
+import com.re_kid.lis.correctratelog.obj.History;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,24 +77,12 @@ public class HistoryListFragment extends Fragment {
         lvHistory.setOnItemClickListener(((parent, view1, position, id) -> {
             // リストの内容を取得
             SQLiteCursor parentText = (SQLiteCursor)parent.getItemAtPosition(position);
-            var historyId = parentText.getInt(parentText.getColumnIndex("_id"));
-            var date = parentText.getString(parentText.getColumnIndex("learned_date"));
-            var time = parentText.getString(parentText.getColumnIndex("learned_time"));
-            var correctNum = parentText.getInt(parentText.getColumnIndex("correct_number"));
-            var entireNum = parentText.getInt(parentText.getColumnIndex("entire_number"));
-            var correctRate = parentText.getDouble(parentText.getColumnIndex("correct_rate"));
-
             // ダイアログを取得
             var detailDialog = new HistoryDetailDialogFragment();
-            var args = new Bundle();
-            args.putInt("id", historyId);
-            args.putString("date", date);
-            args.putString("time", time);
-            args.putInt("correctNum", correctNum);
-            args.putInt("entireNum", entireNum);
-            args.putDouble("correctRate", correctRate);
+            var args = History.getBundle(parentText);
+            System.out.println(args);
             detailDialog.setArguments(args);
-            detailDialog.show(getActivity().getSupportFragmentManager(), "DetailDialog");
+            detailDialog.show(getChildFragmentManager(), "DetailDialog");
         }));
     }
 

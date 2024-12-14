@@ -84,10 +84,10 @@ public class History {
         var idIndex = cursor.getColumnIndex("_id");
         bundle.putInt("id", cursor.getInt(idIndex));
         bundle.putString("date", history.getLearnedDate().toString());
-        bundle.putString("date", history.getLearnedDate().toString());
+        bundle.putString("time", history.getLearnedTime().toString());
         bundle.putInt("correctNum", history.getCorrectNum());
         bundle.putInt("entireNum", history.getEntireNum());
-        bundle.putDouble("CorrectRate", history.getCorrectRate().getCorrectRate());
+        bundle.putDouble("correctRate", history.getCorrectRate().getCorrectRate());
         return bundle;
     }
 }
