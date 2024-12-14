@@ -50,8 +50,8 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // 日付ボタン押下時処理
         tvLearnedDate.setOnClickListener(v -> {
-            DatePickerDialogFragment datePicker = new DatePickerDialogFragment();
-            Bundle args = new Bundle();
+            var datePicker = new DatePickerDialogFragment();
+            var args = new Bundle();
             args.putString("Date", tvLearnedDate.getText().toString());
             datePicker.setArguments(args);
             datePicker.show(getSupportFragmentManager(), "datePicker");
@@ -59,8 +59,8 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // 時間ボタン押下時処理
         tvLearnedTime.setOnClickListener(v -> {
-            TimePickerDialogFragment timePicker = new TimePickerDialogFragment();
-            Bundle args = new Bundle();
+            var timePicker = new TimePickerDialogFragment();
+            var args = new Bundle();
             args.putString("Time", tvLearnedTime.getText().toString());
             timePicker.setArguments(args);
             timePicker.show(getSupportFragmentManager(), "timePicker");
@@ -71,7 +71,7 @@ public class CreateHistoryActivity extends AppCompatActivity
             @Override
             public void handleOnBackPressed() {
                 // MainActivityを作り直してフィニッシュ
-                Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
+                var intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -87,16 +87,16 @@ public class CreateHistoryActivity extends AppCompatActivity
         EditText etCorrectNumber = findViewById(R.id.et_correct_number);
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         // 入力内容を取得
-        String learnedDate = tvLearnedDate.getText().toString();
-        String learnedTime = tvLearnedTime.getText().toString();
-        int correctNum = Integer.parseInt(etCorrectNumber.getText().toString());
-        int entireNum = Integer.parseInt(etEntireNumber.getText().toString());
+        var learnedDate = tvLearnedDate.getText().toString();
+        var learnedTime = tvLearnedTime.getText().toString();
+        var correctNum = Integer.parseInt(etCorrectNumber.getText().toString());
+        var entireNum = Integer.parseInt(etEntireNumber.getText().toString());
         // 正答率を取得
-        CorrectRate cr = new CorrectRate(correctNum, entireNum);
+        var cr = new CorrectRate(correctNum, entireNum);
 
         // DB登録
-        try(HistoryModel model = new HistoryModel(CreateHistoryActivity.this)) {
-            History history = new History(LearnedDate.parse(learnedDate), LearnedTime.parse(learnedTime),
+        try(var model = new HistoryModel(CreateHistoryActivity.this)) {
+            var history = new History(LearnedDate.parse(learnedDate), LearnedTime.parse(learnedTime),
                     correctNum, entireNum, cr);
             model.createHistory(history);
         } catch (Exception e) {
@@ -104,21 +104,21 @@ public class CreateHistoryActivity extends AppCompatActivity
         }
 
         // ダイアログを表示
-        CreateHistoryConfirmDialogFragment dialogFragment = new CreateHistoryConfirmDialogFragment();
+        var dialogFragment = new CreateHistoryConfirmDialogFragment();
         dialogFragment.show(getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
-        LearnedDate date = LearnedDate.of(year, month + 1, dayOfMonth);
+        var date = LearnedDate.of(year, month + 1, dayOfMonth);
         tvLearnedDate.setText(date.toString());
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
-        LearnedTime time = LearnedTime.of(hourOfDay, minute);
+        var time = LearnedTime.of(hourOfDay, minute);
         tvLearnedTime.setText(time.toString());
     }
 
