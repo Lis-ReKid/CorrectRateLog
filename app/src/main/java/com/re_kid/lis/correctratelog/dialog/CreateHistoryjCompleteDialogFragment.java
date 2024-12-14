@@ -20,9 +20,9 @@ public class CreateHistoryjCompleteDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new CreateDialogButtonClickListener();
-        builder.setTitle(R.string.dialog_create_title);
-        builder.setPositiveButton(R.string.dialog_create_positive, listener);
-        builder.setNeutralButton(R.string.dialog_create_neutral, listener);
+        builder.setTitle(R.string.dialog_create_complete_title);
+        builder.setPositiveButton(R.string.dialog_create_complete_positive, listener);
+        builder.setNeutralButton(R.string.dialog_create_complete_neutral, listener);
         return builder.create();
     }
     public class CreateDialogButtonClickListener implements DialogInterface.OnClickListener {
