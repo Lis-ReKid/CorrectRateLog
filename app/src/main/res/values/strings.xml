@@ -21,9 +21,7 @@
     <string name="tv_quiz_unit">問</string>
     <string name="btn_create_history">履歴を登録する</string>
     <string name="btn_create">登録</string>
-    <string name="dialog_create_title">登録完了！</string>
-    <string name="dialog_create_positive">続けて登録</string>
-    <string name="dialog_create_neutral">ホームに戻る</string>
+    <string name="dialog_create_confirm_title">以下の内容で登録しますか？</string>
     <string name="dialog_create_complete_title">登録完了！</string>
     <string name="dialog_create_complete_positive">続けて登録</string>
     <string name="dialog_create_complete_neutral">ホームに戻る</string>

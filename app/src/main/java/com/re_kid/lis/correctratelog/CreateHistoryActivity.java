@@ -18,7 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.re_kid.lis.correctratelog.dialog.CreateHistoryjCompleteDialogFragment;
+import com.re_kid.lis.correctratelog.dialog.CreateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
@@ -103,8 +103,8 @@ public class CreateHistoryActivity extends AppCompatActivity
             Toast.makeText(this, R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
         }
 
-        // ダイアログを表示
-        var dialogFragment = new CreateHistoryjCompleteDialogFragment();
+        // 登録確認ダイアログを表示
+        var dialogFragment = new CreateHistoryConfirmDialogFragment();
         dialogFragment.show(getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
     }
 
