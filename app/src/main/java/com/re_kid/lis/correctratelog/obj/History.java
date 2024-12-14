@@ -77,4 +77,17 @@ public class History {
         }
         return list;
     }
+
+    public static Bundle getBundle(Cursor cursor) {
+        var bundle = new Bundle();
+        var history = History.parse(cursor);
+        var idIndex = cursor.getColumnIndex("_id");
+        bundle.putInt("id", cursor.getInt(idIndex));
+        bundle.putString("date", history.getLearnedDate().toString());
+        bundle.putString("date", history.getLearnedDate().toString());
+        bundle.putInt("correctNum", history.getCorrectNum());
+        bundle.putInt("entireNum", history.getEntireNum());
+        bundle.putDouble("CorrectRate", history.getCorrectRate().getCorrectRate());
+        return bundle;
+    }
 }
