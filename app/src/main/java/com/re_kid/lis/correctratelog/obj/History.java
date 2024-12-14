@@ -41,6 +41,23 @@ public class History {
         return correctRate;
     }
 
+    public static History parse(Cursor cursor) {
+        // 列の内容を取得
+        var dateIndex = cursor.getColumnIndex("learned_date");
+        var date = cursor.getString(dateIndex);
+        var timeIndex = cursor.getColumnIndex("learned_time");
+        var time = cursor.getString(timeIndex);
+        var correctNumIndex = cursor.getColumnIndex("correct_number");
+        var correctNum = cursor.getInt(correctNumIndex);
+        var entireNumIndex = cursor.getColumnIndex("entire_number");
+        var entireNum = cursor.getInt(entireNumIndex);
+        var correctRateIndex = cursor.getColumnIndex("correct_rate");
+        var correctRate = cursor.getDouble(correctRateIndex);
+
+        return new History(LearnedDate.parse(date), LearnedTime.parse(time),
+                correctNum, entireNum, new CorrectRate(correctRate));
+    }
+
     /**
      * Historiesテーブルから取得したCursorオブジェクトをListに変換
      * @param cursor HistoriesのCursorオブジェクト
@@ -49,25 +66,8 @@ public class History {
     public static List<History> getHistories(Cursor cursor) {
         List<History> list = new ArrayList<>();
         while(cursor.moveToNext()) {
-            // 列の内容を取得
-            var dateIndex = cursor.getColumnIndex("learned_date");
-            var date = cursor.getString(dateIndex);
-            var timeIndex = cursor.getColumnIndex("learned_time");
-            var time = cursor.getString(timeIndex);
-            var correctNumIndex = cursor.getColumnIndex("correct_number");
-            var correctNum = cursor.getInt(correctNumIndex);
-            var entireNumIndex = cursor.getColumnIndex("entire_number");
-            var entireNum = cursor.getInt(entireNumIndex);
-            var correctRateIndex = cursor.getColumnIndex("correct_rate");
-            var correctRate = cursor.getDouble(correctRateIndex);
-
             // Historyオブジェクトを生成してListに格納
-            var history = new History(LearnedDate.parse(date),
-                    LearnedTime.parse(time),
-                    correctNum,
-                    entireNum,
-                    new CorrectRate(correctRate));
-            list.add(history);
+            list.add(History.parse(cursor));
         }
         return list;
     }
