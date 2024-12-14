@@ -1,6 +1,7 @@
 package com.re_kid.lis.correctratelog.obj;
 
 import android.database.Cursor;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,12 @@ public class History {
         return correctRate;
     }
 
-    public static History parse(Cursor cursor) {
+    /**
+     * Historiesテーブルから取得したCursorをHistoryに変換
+     * @param cursor
+     * @return
+     */
+    private static History parse(Cursor cursor) {
         // 列の内容を取得
         var dateIndex = cursor.getColumnIndex("learned_date");
         var date = cursor.getString(dateIndex);
