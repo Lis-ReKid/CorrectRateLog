@@ -44,8 +44,8 @@ public class History {
 
     /**
      * Historiesテーブルから取得したCursorをHistoryに変換
-     * @param cursor
-     * @return
+     * @param cursor Historiesテーブルから取得したCursor
+     * @return Historyオブジェクト
      */
     private static History parse(Cursor cursor) {
         // 列の内容を取得
