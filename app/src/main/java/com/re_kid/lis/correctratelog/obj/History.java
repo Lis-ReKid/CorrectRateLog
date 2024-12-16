@@ -10,9 +10,8 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class History {
-    private final int id;
 public class History implements Parcelable {
+    private final int id;
     private final LearnedDate learnedDate;
     private final LearnedTime learnedTime;
     private final int correctNum;
