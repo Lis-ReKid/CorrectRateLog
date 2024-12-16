@@ -2,12 +2,17 @@ package com.re_kid.lis.correctratelog.obj;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class History {
     private final int id;
+public class History implements Parcelable {
     private final LearnedDate learnedDate;
     private final LearnedTime learnedTime;
     private final int correctNum;
@@ -93,5 +98,15 @@ public class History {
         bundle.putInt("entireNum", history.getEntireNum());
         bundle.putDouble("correctRate", history.getCorrectRate().getCorrectRate());
         return bundle;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+
     }
 }

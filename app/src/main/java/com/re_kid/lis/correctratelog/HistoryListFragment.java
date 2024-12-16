@@ -21,6 +21,8 @@ import com.re_kid.lis.correctratelog.dialog.HistoryDetailDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  *
@@ -79,8 +81,10 @@ public class HistoryListFragment extends Fragment {
             SQLiteCursor parentText = (SQLiteCursor)parent.getItemAtPosition(position);
             // ダイアログを取得
             var detailDialog = new HistoryDetailDialogFragment();
-            var args = History.getBundle(parentText);
-            System.out.println(args);
+            var args = new Bundle();
+            History history = History.parse(parentText);
+            // IDも渡す
+            args.putParcelable("history", history);
             detailDialog.setArguments(args);
             detailDialog.show(getChildFragmentManager(), "DetailDialog");
         }));
