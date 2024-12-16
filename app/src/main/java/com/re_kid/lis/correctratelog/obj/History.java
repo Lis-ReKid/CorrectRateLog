@@ -7,14 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class History {
+    private final int id;
     private final LearnedDate learnedDate;
     private final LearnedTime learnedTime;
     private final int correctNum;
     private final int entireNum;
     private final CorrectRate correctRate;
 
-    public History(LearnedDate learnedDate, LearnedTime learnedTime,
+    public History(int id, LearnedDate learnedDate, LearnedTime learnedTime,
                    int correctNum, int entireNum, CorrectRate correctRate) {
+        this.id = id;
         this.learnedDate = learnedDate;
         this.learnedTime = learnedTime;
         this.correctNum = correctNum;
@@ -49,6 +51,8 @@ public class History {
      */
     private static History parse(Cursor cursor) {
         // 列の内容を取得
+        var idIndex = cursor.getColumnIndex("_id");
+        var id = cursor.getInt(idIndex);
         var dateIndex = cursor.getColumnIndex("learned_date");
         var date = cursor.getString(dateIndex);
         var timeIndex = cursor.getColumnIndex("learned_time");
@@ -60,7 +64,7 @@ public class History {
         var correctRateIndex = cursor.getColumnIndex("correct_rate");
         var correctRate = cursor.getDouble(correctRateIndex);
 
-        return new History(LearnedDate.parse(date), LearnedTime.parse(time),
+        return new History(id, LearnedDate.parse(date), LearnedTime.parse(time),
                 correctNum, entireNum, new CorrectRate(correctRate));
     }
 

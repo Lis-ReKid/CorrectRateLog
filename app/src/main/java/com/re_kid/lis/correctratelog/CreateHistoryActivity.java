@@ -96,7 +96,7 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // DB登録
         try(var model = new HistoryModel(CreateHistoryActivity.this)) {
-            var history = new History(LearnedDate.parse(learnedDate), LearnedTime.parse(learnedTime),
+            var history = new History(0, LearnedDate.parse(learnedDate), LearnedTime.parse(learnedTime),
                     correctNum, entireNum, cr);
             model.createHistory(history);
         } catch (Exception e) {
