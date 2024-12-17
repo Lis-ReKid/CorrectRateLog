@@ -31,7 +31,9 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new CreateHistoryConfirmButtonClickListener();
         builder.setTitle(R.string.dialog_create_confirm_title);
-        builder.setMessage("入力内容を表示");
+        builder.setMessage(getText(R.string.tv_learned_date) + " : " + date + " " + time + "\n" +
+                getText(R.string.tv_correct_number) + " : " + correctNum + getText(R.string.tv_quiz_unit) + "\n" +
+                getText(R.string.tv_entire_number) + " : " + entireNum + getText(R.string.tv_quiz_unit));
         builder.setPositiveButton(R.string.btn_create, listener);
         builder.setNegativeButton(R.string.btn_cancel, listener);
         return builder.create();
