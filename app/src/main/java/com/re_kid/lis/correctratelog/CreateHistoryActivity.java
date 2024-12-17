@@ -9,7 +9,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
@@ -21,9 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.CreateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
-import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
-import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
@@ -94,17 +91,17 @@ public class CreateHistoryActivity extends AppCompatActivity
         // 正答率を取得
         var cr = new CorrectRate(correctNum, entireNum);
 
-        // DB登録
-        try(var model = new HistoryModel(CreateHistoryActivity.this)) {
-            var history = new History(LearnedDate.parse(learnedDate), LearnedTime.parse(learnedTime),
-                    correctNum, entireNum, cr);
-            model.createHistory(history);
-        } catch (Exception e) {
-            Toast.makeText(this, R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
-        }
+        // 入力内容を確認ダイアログに渡す
+        var bundle = new Bundle();
+        bundle.putString("date", learnedDate);
+        bundle.putString("time", learnedTime);
+        bundle.putInt("correctNum", correctNum);
+        bundle.putInt("entireNum", entireNum);
+        bundle.putDouble("correctRate", cr.getCorrectRate());
 
         // 登録確認ダイアログを表示
         var dialogFragment = new CreateHistoryConfirmDialogFragment();
+        dialogFragment.setArguments(bundle);
         dialogFragment.show(getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
     }
 
