@@ -1,5 +1,8 @@
 package com.re_kid.lis.correctratelog.obj;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import java.time.LocalDate;
@@ -7,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class LearnedDate {
+public class LearnedDate implements Parcelable {
     private final LocalDate learnedDate;
     private static final Locale _LOCALE =  Locale.getDefault();
     private static final DateTimeFormatter _FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd", _LOCALE);
@@ -17,6 +20,32 @@ public class LearnedDate {
     }
     private LearnedDate(final int year, final int month, final int dayOfMonth) {
         this.learnedDate = LocalDate.of(year, month, dayOfMonth);
+    }
+
+    protected LearnedDate(Parcel in) {
+        learnedDate = LocalDate.parse(in.readString(), _FORMATTER);
+    }
+
+    public static final Creator<LearnedDate> CREATOR = new Creator<>() {
+        @Override
+        public LearnedDate createFromParcel(Parcel in) {
+            return new LearnedDate(in);
+        }
+
+        @Override
+        public LearnedDate[] newArray(int size) {
+            return new LearnedDate[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(this.toString());
     }
 
     /**

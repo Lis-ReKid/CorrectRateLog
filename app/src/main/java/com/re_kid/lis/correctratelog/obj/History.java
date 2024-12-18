@@ -1,7 +1,6 @@
 package com.re_kid.lis.correctratelog.obj;
 
 import android.database.Cursor;
-import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -31,6 +30,42 @@ public class History implements Parcelable {
         this.correctNum = correctNum;
         this.entireNum = entireNum;
         this.correctRate = correctRate;
+    }
+
+    protected History(Parcel in) {
+        id = in.readInt();
+        learnedDate = in.readParcelable(LearnedDate.class.getClassLoader());
+        learnedTime = in.readParcelable(LearnedTime.class.getClassLoader());
+        correctNum = in.readInt();
+        entireNum = in.readInt();
+        correctRate = in.readParcelable(CorrectRate.class.getClassLoader());
+    }
+
+    public static final Creator<History> CREATOR = new Creator<>() {
+        @Override
+        public History createFromParcel(Parcel in) {
+            return new History(in);
+        }
+
+        @Override
+        public History[] newArray(int size) {
+            return new History[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeParcelable(learnedDate, PARCELABLE_WRITE_RETURN_VALUE);
+        dest.writeParcelable(learnedTime, PARCELABLE_WRITE_RETURN_VALUE);
+        dest.writeInt(correctNum);
+        dest.writeInt(entireNum);
+        dest.writeParcelable(correctRate, PARCELABLE_WRITE_RETURN_VALUE);
     }
 
     public LearnedDate getLearnedDate() {
@@ -89,28 +124,5 @@ public class History implements Parcelable {
             list.add(History.parse(cursor));
         }
         return list;
-    }
-
-    public static Bundle getBundle(Cursor cursor) {
-        var bundle = new Bundle();
-        var history = History.parse(cursor);
-        var idIndex = cursor.getColumnIndex("_id");
-        bundle.putInt("id", cursor.getInt(idIndex));
-        bundle.putString("date", history.getLearnedDate().toString());
-        bundle.putString("time", history.getLearnedTime().toString());
-        bundle.putInt("correctNum", history.getCorrectNum());
-        bundle.putInt("entireNum", history.getEntireNum());
-        bundle.putDouble("correctRate", history.getCorrectRate().getCorrectRate());
-        return bundle;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-
     }
 }
