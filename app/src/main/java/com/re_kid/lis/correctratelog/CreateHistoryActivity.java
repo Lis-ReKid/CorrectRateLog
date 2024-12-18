@@ -118,10 +118,10 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // 入力内容を確認ダイアログに渡す
         var bundle = new Bundle();
-        bundle.putString("date", textLearnedDate.toString());
-        bundle.putString("time", textLearnedTime.toString());
-        bundle.putInt("correctNum", Integer.parseInt(textCorrectNum.toString()));
-        bundle.putInt("entireNum", Integer.parseInt(textEntireNum.toString()));
+        bundle.putString("date", learnedDate.toString());
+        bundle.putString("time", learnedTime.toString());
+        bundle.putInt("correctNum", correctNum);
+        bundle.putInt("entireNum", entireNum);
         bundle.putDouble("correctRate", correctRate.getCorrectRate());
 
         // 登録確認ダイアログを表示
