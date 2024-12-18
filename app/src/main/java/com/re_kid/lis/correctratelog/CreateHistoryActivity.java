@@ -22,6 +22,7 @@ import com.re_kid.lis.correctratelog.dialog.CreateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
+import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
@@ -98,12 +99,16 @@ public class CreateHistoryActivity extends AppCompatActivity
             Toast.makeText(this, R.string.toast_not_entered_msg, Toast.LENGTH_SHORT).show();
             return;
         }
+        var learnedDate = LearnedDate.parse(textLearnedDate.toString());
+        var learnedTime = LearnedTime.parse(textLearnedTime.toString());
         var correctNum = Integer.parseInt(textCorrectNum.toString());
         var entireNum = Integer.parseInt(textEntireNum.toString());
         CorrectRate correctRate;
+        History history;
         // 正答率を取得
         try {
         correctRate = new CorrectRate(correctNum, entireNum);
+        history = new History(learnedDate, learnedTime, correctNum, entireNum, correctRate);
         } catch (IllegalArgumentException e) {
             var msg = e.getMessage();
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
