@@ -58,7 +58,7 @@ public class History implements Parcelable {
      * @param cursor Historiesテーブルから取得したCursor
      * @return Historyオブジェクト
      */
-    private static History parse(Cursor cursor) {
+    public static History parse(Cursor cursor) {
         // 列の内容を取得
         var idIndex = cursor.getColumnIndex("_id");
         var id = cursor.getInt(idIndex);

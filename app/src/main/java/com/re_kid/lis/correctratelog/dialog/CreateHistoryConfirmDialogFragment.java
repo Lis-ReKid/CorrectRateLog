@@ -27,7 +27,7 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
         var correctNum = requireArguments().getInt("correctNum");
         var entireNum = requireArguments().getInt("entireNum");
         var correctRate = requireArguments().getDouble("correctRate");
-        _history = new History(LearnedDate.parse(date), LearnedTime.parse(time), correctNum, entireNum, new CorrectRate(correctRate));
+        _history = new History(0, LearnedDate.parse(date), LearnedTime.parse(time), correctNum, entireNum, new CorrectRate(correctRate));
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new CreateHistoryConfirmButtonClickListener();
         builder.setTitle(R.string.dialog_create_confirm_title);
@@ -46,7 +46,7 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // DB登録
                 try(var model = new HistoryModel(getActivity())) {
-                    var history = new History(_history.getLearnedDate(), _history.getLearnedTime(),
+                    var history = new History(0, _history.getLearnedDate(), _history.getLearnedTime(),
                             _history.getCorrectNum(), _history.getEntireNum(), _history.getCorrectRate());
                     model.createHistory(history);
                 } catch (Exception e) {

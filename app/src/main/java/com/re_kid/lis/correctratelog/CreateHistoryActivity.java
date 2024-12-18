@@ -109,7 +109,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         // 不正値チェック
         try {
         correctRate = new CorrectRate(correctNum, entireNum);
-        history = new History(learnedDate, learnedTime, correctNum, entireNum, correctRate);
+        history = new History(0, learnedDate, learnedTime, correctNum, entireNum, correctRate);
         } catch (IllegalArgumentException e) {
             var msg = e.getMessage();
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
