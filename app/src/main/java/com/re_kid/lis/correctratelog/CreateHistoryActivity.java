@@ -106,6 +106,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         CorrectRate correctRate;
         History history;
         // 正答率を取得
+        // 不正値チェック
         try {
         correctRate = new CorrectRate(correctNum, entireNum);
         history = new History(learnedDate, learnedTime, correctNum, entireNum, correctRate);
