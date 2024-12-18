@@ -21,7 +21,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.CreateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
-import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
@@ -87,24 +86,47 @@ public class CreateHistoryActivity extends AppCompatActivity
         EditText etCorrectNumber = findViewById(R.id.et_correct_number);
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         // 入力内容を取得
-        var learnedDate = tvLearnedDate.getText().toString();
-        var learnedTime = tvLearnedTime.getText().toString();
-        var correctNum = Integer.parseInt(etCorrectNumber.getText().toString());
-        var entireNum = Integer.parseInt(etEntireNumber.getText().toString());
+        var textLearnedDate = tvLearnedDate.getText();
+        var textLearnedTime = tvLearnedTime.getText();
+        var textCorrectNum = etCorrectNumber.getText();
+        var textEntireNum = etEntireNumber.getText();
+        // 未入力チェック
+        if(textCorrectNum.toString().isEmpty()) {
+            Toast.makeText(this, R.string.toast_not_entered_msg, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(textEntireNum.toString().isEmpty()) {
+            Toast.makeText(this, R.string.toast_not_entered_msg, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        var learnedDate = LearnedDate.parse(textLearnedDate.toString());
+        var learnedTime = LearnedTime.parse(textLearnedTime.toString());
+        var correctNum = Integer.parseInt(textCorrectNum.toString());
+        var entireNum = Integer.parseInt(textEntireNum.toString());
+        CorrectRate correctRate;
+        History history;
         // 正答率を取得
-        var cr = new CorrectRate(correctNum, entireNum);
-
-        // DB登録
-        try(var model = new HistoryModel(CreateHistoryActivity.this)) {
-            var history = new History(0, LearnedDate.parse(learnedDate), LearnedTime.parse(learnedTime),
-                    correctNum, entireNum, cr);
-            model.createHistory(history);
-        } catch (Exception e) {
-            Toast.makeText(this, R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
+        // 不正値チェック
+        try {
+        correctRate = new CorrectRate(correctNum, entireNum);
+        history = new History(learnedDate, learnedTime, correctNum, entireNum, correctRate);
+        } catch (IllegalArgumentException e) {
+            var msg = e.getMessage();
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        // ダイアログを表示
+        // 入力内容を確認ダイアログに渡す
+        var bundle = new Bundle();
+        bundle.putString("date", learnedDate.toString());
+        bundle.putString("time", learnedTime.toString());
+        bundle.putInt("correctNum", correctNum);
+        bundle.putInt("entireNum", entireNum);
+        bundle.putDouble("correctRate", correctRate.getCorrectRate());
+
+        // 登録確認ダイアログを表示
         var dialogFragment = new CreateHistoryConfirmDialogFragment();
+        dialogFragment.setArguments(bundle);
         dialogFragment.show(getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
     }
 

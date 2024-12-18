@@ -17,10 +17,15 @@ public class History implements Parcelable {
     private final int correctNum;
     private final int entireNum;
     private final CorrectRate correctRate;
+    private final static int MAX = 9999;
 
     public History(int id, LearnedDate learnedDate, LearnedTime learnedTime,
                    int correctNum, int entireNum, CorrectRate correctRate) {
         this.id = id;
+        // 正答数・問題数が最大値を超えるとエラー
+        if (correctNum > MAX) throw new IllegalArgumentException("正答数は9999以下の数値を指定してください。");
+        if (entireNum > MAX) throw new IllegalArgumentException("問題数は9999以下の数値を指定してください。");
+
         this.learnedDate = learnedDate;
         this.learnedTime = learnedTime;
         this.correctNum = correctNum;
