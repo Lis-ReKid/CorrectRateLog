@@ -118,11 +118,7 @@ public class CreateHistoryActivity extends AppCompatActivity
 
         // 入力内容を確認ダイアログに渡す
         var bundle = new Bundle();
-        bundle.putString("date", learnedDate.toString());
-        bundle.putString("time", learnedTime.toString());
-        bundle.putInt("correctNum", correctNum);
-        bundle.putInt("entireNum", entireNum);
-        bundle.putDouble("correctRate", correctRate.getCorrectRate());
+        bundle.putParcelable("history", history);
 
         // 登録確認ダイアログを表示
         var dialogFragment = new CreateHistoryConfirmDialogFragment();

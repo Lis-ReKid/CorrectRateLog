@@ -12,28 +12,21 @@ import androidx.fragment.app.DialogFragment;
 
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
-import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
-import com.re_kid.lis.correctratelog.obj.LearnedDate;
-import com.re_kid.lis.correctratelog.obj.LearnedTime;
 
 public class CreateHistoryConfirmDialogFragment extends DialogFragment {
     private History _history;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        var date = requireArguments().getString("date");
-        var time = requireArguments().getString("time");
-        var correctNum = requireArguments().getInt("correctNum");
-        var entireNum = requireArguments().getInt("entireNum");
-        var correctRate = requireArguments().getDouble("correctRate");
-        _history = new History(0, LearnedDate.parse(date), LearnedTime.parse(time), correctNum, entireNum, new CorrectRate(correctRate));
+        _history = requireArguments().getParcelable("history");
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new CreateHistoryConfirmButtonClickListener();
         builder.setTitle(R.string.dialog_create_confirm_title);
-        builder.setMessage(getText(R.string.tv_learned_date) + " : " + date + " " + time + "\n" +
-                getText(R.string.tv_correct_number) + " : " + correctNum + getText(R.string.tv_quiz_unit) + "\n" +
-                getText(R.string.tv_entire_number) + " : " + entireNum + getText(R.string.tv_quiz_unit));
+        builder.setMessage(getText(R.string.tv_learned_date) + " : " + _history.getLearnedDate().toString() + " " +
+                _history.getLearnedTime().toString() + "\n" +
+                getText(R.string.tv_correct_number) + " : " + _history.getCorrectNum() + getText(R.string.tv_quiz_unit) + "\n" +
+                getText(R.string.tv_entire_number) + " : " + _history.getEntireNum() + getText(R.string.tv_quiz_unit));
         builder.setPositiveButton(R.string.btn_create, listener);
         builder.setNegativeButton(R.string.btn_cancel, listener);
         return builder.create();
