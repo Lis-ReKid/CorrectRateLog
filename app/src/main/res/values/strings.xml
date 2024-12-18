@@ -26,6 +26,7 @@
     <string name="dialog_create_complete_positive">続けて登録</string>
     <string name="dialog_create_complete_neutral">ホームに戻る</string>
     <string name="create_failed_msg">登録に失敗しました。</string>
+    <string name="toast_not_entered_msg">未入力の項目があります。</string>
     <!-- 削除回り -->
     <string name="btn_delete">削除</string>
     <string name="dialog_delete_confirm_msg">本当に削除しますか？</string>

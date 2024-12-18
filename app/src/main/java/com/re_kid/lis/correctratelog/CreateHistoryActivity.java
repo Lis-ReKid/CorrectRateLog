@@ -9,6 +9,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
@@ -84,19 +85,28 @@ public class CreateHistoryActivity extends AppCompatActivity
         EditText etCorrectNumber = findViewById(R.id.et_correct_number);
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         // 入力内容を取得
-        var learnedDate = tvLearnedDate.getText().toString();
-        var learnedTime = tvLearnedTime.getText().toString();
-        var correctNum = Integer.parseInt(etCorrectNumber.getText().toString());
-        var entireNum = Integer.parseInt(etEntireNumber.getText().toString());
+        var learnedDate = tvLearnedDate.getText();
+        var learnedTime = tvLearnedTime.getText();
+        var correctNum = etCorrectNumber.getText();
+        var entireNum = etEntireNumber.getText();
+        // 未入力チェック
+        if(correctNum.toString().isEmpty()) {
+            Toast.makeText(this, R.string.toast_not_entered_msg, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(entireNum.toString().isEmpty()) {
+            Toast.makeText(this, R.string.toast_not_entered_msg, Toast.LENGTH_SHORT).show();
+            return;
+        }
         // 正答率を取得
-        var cr = new CorrectRate(correctNum, entireNum);
+        var cr = new CorrectRate(Integer.parseInt(correctNum.toString()), Integer.parseInt(entireNum.toString()));
 
         // 入力内容を確認ダイアログに渡す
         var bundle = new Bundle();
-        bundle.putString("date", learnedDate);
-        bundle.putString("time", learnedTime);
-        bundle.putInt("correctNum", correctNum);
-        bundle.putInt("entireNum", entireNum);
+        bundle.putString("date", learnedDate.toString());
+        bundle.putString("time", learnedTime.toString());
+        bundle.putInt("correctNum", Integer.parseInt(correctNum.toString()));
+        bundle.putInt("entireNum", Integer.parseInt(entireNum.toString()));
         bundle.putDouble("correctRate", cr.getCorrectRate());
 
         // 登録確認ダイアログを表示
