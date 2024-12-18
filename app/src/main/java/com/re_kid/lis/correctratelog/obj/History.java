@@ -68,6 +68,10 @@ public class History implements Parcelable {
         dest.writeParcelable(correctRate, PARCELABLE_WRITE_RETURN_VALUE);
     }
 
+    public int getId() {
+        return id;
+    }
+
     public LearnedDate getLearnedDate() {
         return learnedDate;
     }
