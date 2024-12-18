@@ -10,26 +10,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.re_kid.lis.correctratelog.R;
-import com.re_kid.lis.correctratelog.obj.CorrectRate;
-import com.re_kid.lis.correctratelog.obj.LearnedDate;
-import com.re_kid.lis.correctratelog.obj.LearnedTime;
+import com.re_kid.lis.correctratelog.obj.History;
 
 public class HistoryDetailDialogFragment extends DialogFragment {
-    private int _id;
+    private History _history;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         // 引数を取得
-        _id = requireArguments().getInt("id");
-        var date = LearnedDate.parse(requireArguments().getString("date"));
-        var time = LearnedTime.parse(requireArguments().getString("time"));
-        var correctNum = requireArguments().getInt("correctNum");
-        var entireNum = requireArguments().getInt("entireNum");
-        var correctRate = new CorrectRate(requireArguments().getDouble("correctRate"));
+        _history = requireArguments().getParcelable("history");
         // 詳細メッセージを作成
-        var detailMsg = getText(R.string.tv_learned_date) + " : " + date + " " + time + "\n" +
-                getText(R.string.correct_rate_title) + " : " + correctRate + " " +
-                "(" + correctNum + "/" + entireNum + ")";
+        var detailMsg = getText(R.string.tv_learned_date) + " : " + _history.getLearnedDate().toString() + " " +
+                _history.getLearnedTime().toString() + "\n" +
+                getText(R.string.correct_rate_title) + " : " + _history.getCorrectRate().toString() + " " +
+                "(" + _history.getCorrectNum() + "/" + _history.getEntireNum() + ")";
 
         // ダイアログをビルド
         var builder = new AlertDialog.Builder(getActivity());
@@ -50,7 +44,7 @@ public class HistoryDetailDialogFragment extends DialogFragment {
                 // 削除確認ダイアログを表示
                 var deleteHistoryConfirmDialog = new DeleteHistoryConfirmDialogFragment();
                 var args = new Bundle();
-                args.putInt("id", _id);
+                args.putInt("id", _history.getId());
                 deleteHistoryConfirmDialog.setArguments(args);
                 deleteHistoryConfirmDialog.show(getActivity().getSupportFragmentManager(), "deleteHistoryConfirmDialog");
             }
