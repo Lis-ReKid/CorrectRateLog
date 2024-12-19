@@ -72,6 +72,7 @@ public class CreateHistoryActivity extends AppCompatActivity
                 // MainActivityを作り直してフィニッシュ
                 var intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
                 startActivity(intent);
+                getParent().finish();
                 finish();
             }
         };
