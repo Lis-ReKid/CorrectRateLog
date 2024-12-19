@@ -71,8 +71,8 @@ public class CreateHistoryActivity extends AppCompatActivity
             public void handleOnBackPressed() {
                 // MainActivityを作り直してフィニッシュ
                 var intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                getParent().finish();
                 finish();
             }
         };

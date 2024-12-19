@@ -31,14 +31,16 @@ public class CreateHistoryjCompleteDialogFragment extends DialogFragment {
             // 続けて登録
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // 入力フォームをリフレッシュ
-                var intent = new Intent(getActivity(), CreateHistoryActivity.class);
+                Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 getActivity().finish();
             }
             // ホームに戻る
             else if(which == DialogInterface.BUTTON_NEUTRAL) {
                 // ホーム画面をリフレッシュして遷移
-                var intent = new Intent(getActivity(), MainActivity.class);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 getActivity().finish();
             }
