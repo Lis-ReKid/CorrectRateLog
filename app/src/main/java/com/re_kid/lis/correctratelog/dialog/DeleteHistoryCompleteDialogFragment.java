@@ -24,6 +24,7 @@ public class DeleteHistoryCompleteDialogFragment extends DialogFragment {
     @Override
     public void onDestroyView() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         super.onDestroyView();
     }
