@@ -33,12 +33,14 @@ public class CreateHistoryjCompleteDialogFragment extends DialogFragment {
                 // 入力フォームをリフレッシュ
                 var intent = new Intent(getActivity(), CreateHistoryActivity.class);
                 startActivity(intent);
+                getParentFragment().onDestroy();
             }
             // ホームに戻る
             else if(which == DialogInterface.BUTTON_NEUTRAL) {
                 // ホーム画面をリフレッシュして遷移
                 var intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+                getParentFragment().onDestroy();
             }
         }
     }
