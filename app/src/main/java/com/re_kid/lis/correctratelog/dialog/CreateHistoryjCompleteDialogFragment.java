@@ -34,7 +34,6 @@ public class CreateHistoryjCompleteDialogFragment extends DialogFragment {
                 Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                getActivity().finish();
             }
             // ホームに戻る
             else if(which == DialogInterface.BUTTON_NEUTRAL) {
@@ -42,7 +41,6 @@ public class CreateHistoryjCompleteDialogFragment extends DialogFragment {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                getActivity().finish();
             }
         }
     }
