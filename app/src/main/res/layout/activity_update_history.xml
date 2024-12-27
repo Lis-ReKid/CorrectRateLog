@@ -92,7 +92,7 @@
         app:layout_constraintStart_toEndOf="@+id/et_entire_number" />
 
     <Button
-        android:id="@+id/btn_create_history"
+        android:id="@+id/btn_update_history"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
