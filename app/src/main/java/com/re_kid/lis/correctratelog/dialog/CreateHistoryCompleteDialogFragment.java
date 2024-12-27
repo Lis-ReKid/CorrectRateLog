@@ -14,7 +14,7 @@ import com.re_kid.lis.correctratelog.CreateHistoryActivity;
 import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
 
-public class CreateHistoryjCompleteDialogFragment extends DialogFragment {
+public class CreateHistoryCompleteDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
