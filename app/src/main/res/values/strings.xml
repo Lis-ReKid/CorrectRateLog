@@ -30,6 +30,7 @@
     <!-- 履歴更新回り -->
     <string name="update_history_header">学習履歴更新</string>
     <string name="btn_update_history">履歴を更新する</string>
+    <string name="btn_update">更新</string>
     <!-- 削除回り -->
     <string name="btn_delete">削除</string>
     <string name="dialog_delete_confirm_msg">本当に削除しますか？</string>

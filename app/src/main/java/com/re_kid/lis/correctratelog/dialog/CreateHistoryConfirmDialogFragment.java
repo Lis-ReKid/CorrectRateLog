@@ -46,7 +46,7 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
                     Toast.makeText(getActivity(), R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
                 }
                 // 登録完了ダイアログを表示
-                var dialogFragment = new CreateHistoryjCompleteDialogFragment();
+                var dialogFragment = new CreateHistoryCompleteDialogFragment();
                 dialogFragment.show(getActivity().getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
             }
         }
