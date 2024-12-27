@@ -46,6 +46,7 @@ public class HistoryDetailDialogFragment extends DialogFragment {
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // 更新画面に遷移
                 var intent = new Intent(getActivity(), UpdateHistoryActivity.class);
+                intent.putExtra("history", _history);
                 startActivity(intent);
             }
             // 削除ボタン押下時処理
