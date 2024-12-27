@@ -27,6 +27,9 @@
     <string name="dialog_create_complete_neutral">ホームに戻る</string>
     <string name="create_failed_msg">登録に失敗しました。</string>
     <string name="toast_not_entered_msg">未入力の項目があります。</string>
+    <!-- 履歴更新回り -->
+    <string name="update_history_header">学習履歴更新</string>
+    <string name="btn_update_history">履歴を更新する</string>
     <!-- 削除回り -->
     <string name="btn_delete">削除</string>
     <string name="dialog_delete_confirm_msg">本当に削除しますか？</string>
