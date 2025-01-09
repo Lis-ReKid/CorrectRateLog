@@ -35,6 +35,27 @@ public class HistoryModel implements AutoCloseable {
         return db.rawQuery(sql, null);
     }
 
+    public void update(History history) {
+        // sql作成
+        SQLiteDatabase db = _helper.getWritableDatabase();
+        var sql = "UPDATE Histories " +
+                "SET learned_date = ?, " +
+                "learned_time = ?, " +
+                "correct_number = ?, " +
+                "entire_number = ?, " +
+                "correct_rate = ? " +
+                " WHERE _id = ?";
+        SQLiteStatement stmt = db.compileStatement(sql);
+        // 各変数をバインド
+        stmt.bindString(1, history.getLearnedDate().toString());
+        stmt.bindString(2, history.getLearnedTime().toString());
+        stmt.bindLong(3, history.getCorrectNum());
+        stmt.bindLong(4, history.getEntireNum());
+        stmt.bindDouble(5, history.getCorrectRate().getCorrectRate());
+        stmt.bindLong(6, history.getId());
+        // 更新
+        stmt.executeUpdateDelete();
+    }
     public void delete(int id) {
         SQLiteDatabase db = _helper.getWritableDatabase();
         var sqlDelete = "DELETE FROM Histories WHERE _id = ?";
