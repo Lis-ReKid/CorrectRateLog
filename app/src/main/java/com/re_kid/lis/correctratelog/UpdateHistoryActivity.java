@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
-import com.re_kid.lis.correctratelog.model.HistoryModel;
+import com.re_kid.lis.correctratelog.dialog.UpdateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
@@ -117,12 +117,14 @@ public class UpdateHistoryActivity extends AppCompatActivity
                 Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
                 return;
             }
-            // DB登録
-            try(var model = new HistoryModel(UpdateHistoryActivity.this)) {
-                model.update(newHistory);
-            } catch (Exception e) {
-                Toast.makeText(UpdateHistoryActivity.this, R.string.update_failed_msg, Toast.LENGTH_SHORT).show();
-            }
+            // 入力内容を確認ダイアログに渡す
+            var bundle = new Bundle();
+            bundle.putParcelable("history", newHistory);
+            // 登録確認ダイアログを表示
+            var dialogFragment = new UpdateHistoryConfirmDialogFragment();
+            dialogFragment.setArguments(bundle);
+            dialogFragment.show(getSupportFragmentManager(), "UpdateHistoryConfirmDialogFragment");
+
         });
     }
 

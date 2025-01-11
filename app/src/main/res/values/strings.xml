@@ -32,6 +32,8 @@
     <string name="btn_update_history">履歴を更新する</string>
     <string name="btn_update">更新</string>
     <string name="update_failed_msg">登録内容の変更に失敗しました。</string>
+    <string name="dialog_update_confirm_title">以下の内容で更新しますか？</string>
+    <string name="dialog_update_complete_title">更新完了！</string>
     <!-- 削除回り -->
     <string name="btn_delete">削除</string>
     <string name="dialog_delete_confirm_msg">本当に削除しますか？</string>
