@@ -141,5 +141,4 @@ public class UpdateHistoryActivity extends AppCompatActivity
         var time = LearnedTime.of(hourOfDay, minute);
         tvLearnedTime.setText(time.toString());
     }
-
 }
