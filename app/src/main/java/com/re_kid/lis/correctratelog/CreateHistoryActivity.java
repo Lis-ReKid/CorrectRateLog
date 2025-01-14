@@ -46,7 +46,6 @@ public class CreateHistoryActivity extends AppCompatActivity
         tvLearnedDate.setText(LearnedDate.now().toString());
         tvLearnedTime.setText(LearnedTime.now().toString());
 
-
         // 日付ボタン押下時処理
         tvLearnedDate.setOnClickListener(v -> {
             var datePicker = new DatePickerDialogFragment();
