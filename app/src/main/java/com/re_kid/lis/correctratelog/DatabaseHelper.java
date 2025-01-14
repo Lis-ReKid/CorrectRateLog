@@ -11,11 +11,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_HISTORIES = "CREATE TABLE Histories ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "category_id INTEGER NOT NULL, "
             + "learned_date TEXT NOT NULL, "
             + "learned_time TEXT NOT NULL, "
             + "correct_number INTEGER NOT NULL, "
             + "entire_number INTEGER NOT NULL, "
             + "correct_rate REAL NOT NULL)";
+    private static final String CREATE_CATEGORY = "CREATE TABLE Categories("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + "category_name TEXT NOT NULL)";
     private static final String CREATE_TAGS = "CREATE TABLE Tags("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "tag_name TEXT NOT NULL, "
@@ -34,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_HISTORIES);
+        db.execSQL(CREATE_CATEGORY);
         db.execSQL(CREATE_TAGS);
         db.execSQL(CREATE_HIST_TAG);
     }
