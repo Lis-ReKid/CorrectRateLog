@@ -18,21 +18,26 @@ public class UpdateHistoryCompleteDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         var builder = new AlertDialog.Builder(getActivity());
-        var listener = new UpdateHistoryCompleteDialogFragment.UpdateDialogButtonClickListener();
         builder.setTitle(R.string.dialog_update_complete_title);
-        builder.setNeutralButton(R.string.dialog_create_complete_neutral, listener);
+        builder.setNeutralButton(R.string.dialog_create_complete_neutral, (dialogInterface, which) -> {
+            onClose();
+        });
         return builder.create();
     }
-    public class UpdateDialogButtonClickListener implements DialogInterface.OnClickListener {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            // ホームに戻る
-            if(which == DialogInterface.BUTTON_NEUTRAL) {
-                // ホーム画面をリフレッシュして遷移
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        }
+
+    /**
+     * ダイアログを閉じる時に呼ぶ
+     * ホーム画面をリフレッシュして遷移
+     */
+    private void onClose() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        super.onCancel(dialog);
+        onClose();
     }
 }
