@@ -18,14 +18,15 @@ public class HistoryModel implements AutoCloseable {
         SQLiteDatabase db = _helper.getWritableDatabase();
         // SQLを作成
         var sqlInsert = "INSERT INTO Histories " +
-                "(learned_date, learned_time, correct_number, entire_number, correct_rate)" +
-                "VALUES(?, ?, ?, ?, ?)";
+                "(category_id, learned_date, learned_time, correct_number, entire_number, correct_rate)" +
+                "VALUES(?, ?, ?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindString(1, history.getLearnedDate().toString());
-        stmt.bindString(2, history.getLearnedTime().toString());
-        stmt.bindLong(3, history.getCorrectNum());
-        stmt.bindLong(4, history.getEntireNum());
-        stmt.bindDouble(5, history.getCorrectRate().getCorrectRate());
+        stmt.bindLong(1, 0);
+        stmt.bindString(2, history.getLearnedDate().toString());
+        stmt.bindString(3, history.getLearnedTime().toString());
+        stmt.bindLong(4, history.getCorrectNum());
+        stmt.bindLong(5, history.getEntireNum());
+        stmt.bindDouble(6, history.getCorrectRate().getCorrectRate());
         // SQLを実行
         stmt.executeInsert();
     }
