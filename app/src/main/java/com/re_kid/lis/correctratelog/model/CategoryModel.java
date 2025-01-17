@@ -1,9 +1,25 @@
 package com.re_kid.lis.correctratelog.model;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
+
 import com.re_kid.lis.correctratelog.DatabaseHelper;
+import com.re_kid.lis.correctratelog.obj.Category;
 
 public class CategoryModel implements AutoCloseable{
     DatabaseHelper _helper;
+
+    public void create(final Category category) {
+        SQLiteDatabase db = _helper.getWritableDatabase();
+        // SQLを作成
+        var sqlInsert = "INSERT INTO Categories" +
+                "(category_name)" +
+                "VALUES (?)";
+        SQLiteStatement stmt = db.compileStatement(sqlInsert);
+        stmt.bindString(1, category.getName());
+        // SQLを実行
+        stmt.executeInsert();
+    }
     @Override
     public void close() throws Exception {
         _helper.close();
