@@ -39,4 +39,6 @@
     <string name="dialog_delete_confirm_msg">本当に削除しますか？</string>
     <string name="toast_delete_complete">削除しました。</string>
     <string name="toast_delete_failed">削除に失敗しました。</string>
+    <!-- カテゴリ一覧回り -->
+    <string name="tv_category_list_title">カテゴリー一覧</string>
 </resources>
