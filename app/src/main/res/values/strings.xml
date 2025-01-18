@@ -41,5 +41,6 @@
     <string name="toast_delete_failed">削除に失敗しました。</string>
     <!-- カテゴリ回り -->
     <string name="tv_category_list_title">カテゴリ一覧</string>
+    <string name="create_category_title">カテゴリ新規登録</string>
     <string name="hint_category_name">新規カテゴリ名</string>
 </resources>

@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.re_kid.lis.correctratelog.dialog.CreateCategoryDialog;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 
 public class CategoryListActivity extends AppCompatActivity {
@@ -26,6 +27,12 @@ public class CategoryListActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        // 登録ボタン押下時処理
+        findViewById(R.id.btMoveToCategoryCreate).setOnClickListener(v -> {
+            var dialog = new CreateCategoryDialog();
+            dialog.show(getSupportFragmentManager(), "CreateCategoryDialog");
         });
 
         // カテゴリリストを作成
