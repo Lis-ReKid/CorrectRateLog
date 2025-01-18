@@ -1,5 +1,6 @@
 package com.re_kid.lis.correctratelog.model;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
@@ -20,6 +21,14 @@ public class CategoryModel implements AutoCloseable{
         // SQLを実行
         stmt.executeInsert();
     }
+
+    public Cursor selectAll() {
+        SQLiteDatabase db = _helper.getWritableDatabase();
+        // SQLを作成
+        var sql = "SELECT * FROM Categories ORDER BY _id DESC";
+        return db.rawQuery(sql, null);
+    }
+
     @Override
     public void close() throws Exception {
         _helper.close();
