@@ -1,5 +1,6 @@
 package com.re_kid.lis.correctratelog.model;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -9,6 +10,10 @@ import com.re_kid.lis.correctratelog.obj.Category;
 
 public class CategoryModel implements AutoCloseable{
     DatabaseHelper _helper;
+
+    public CategoryModel(Context context) {
+        this._helper = new DatabaseHelper(context);
+    }
 
     public void create(final Category category) {
         SQLiteDatabase db = _helper.getWritableDatabase();
