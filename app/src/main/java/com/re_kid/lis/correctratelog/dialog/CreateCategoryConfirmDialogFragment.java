@@ -32,11 +32,15 @@ public class CreateCategoryConfirmDialogFragment extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (which == Dialog.BUTTON_POSITIVE) {
+                // DB登録
                 try (var model = new CategoryModel(getActivity())) {
                     model.create(new Category(0, _categoryName));
                 } catch (Exception e) {
                     return;
                 }
+                // 登録完了ダイアログを表示
+                var completeDialog = new CreateCategoryCompleteDialogFragment();
+                completeDialog.show(getActivity().getSupportFragmentManager(), "CreateCategoryCompleteDialogFragment");
             }
         }
     }
