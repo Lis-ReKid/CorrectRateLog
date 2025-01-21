@@ -22,12 +22,12 @@ public class CreateCategoryDialog extends DialogFragment {
         view.findViewById(R.id.btCategoryCreate).setOnClickListener(v -> {
             // 入力内容を取得
             EditText etCategoryName = view.findViewById(R.id.etCategoryName);
-            var textCategoryName = etCategoryName.getText();
+            var categoryName = etCategoryName.getText().toString();
             // 未入力なら何もしない
-            if (textCategoryName.toString().isEmpty()) return;
+            if (categoryName.isEmpty()) return;
             // 確認ダイアログを表示
             var bundle = new Bundle();
-            bundle.putString("categoryName", textCategoryName.toString());
+            bundle.putString("categoryName", categoryName);
             var dialog = new CreateCategoryConfirmDialogFragment();
             dialog.setArguments(bundle);
             dialog.show(getActivity().getSupportFragmentManager(), "CreateCategoryConfirmDialog");
