@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.re_kid.lis.correctratelog.dialog.CreateCategoryDialogFragment;
+import com.re_kid.lis.correctratelog.dialog.FirstCreateCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 
@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         try (var model = new CategoryModel(MainActivity.this)) {
             Cursor cursor = model.selectAll();
             if(cursor.getCount() == 0) {
-                var dialog = new CreateCategoryDialogFragment();
-                dialog.show(MainActivity.this.getSupportFragmentManager(), "CreateCategoryDialog");
+                var dialog = new FirstCreateCategoryDialogFragment();
+                dialog.show(MainActivity.this.getSupportFragmentManager(), "FirstCreateCategoryDialog");
             }
         } catch (Exception e) {
             finish();
