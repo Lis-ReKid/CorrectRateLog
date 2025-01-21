@@ -27,7 +27,7 @@ public class CreateCategoryDialog extends DialogFragment {
             if (textCategoryName.toString().isEmpty()) return;
             // 確認ダイアログを表示
             var bundle = new Bundle();
-            bundle.putString("CategoryName", textCategoryName.toString());
+            bundle.putString("categoryName", textCategoryName.toString());
             var dialog = new CreateCategoryConfirmDialogFragment();
             dialog.setArguments(bundle);
             dialog.show(getActivity().getSupportFragmentManager(), "CreateCategoryConfirmDialog");

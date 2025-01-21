@@ -15,9 +15,11 @@ public class CreateCategoryConfirmDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        var categoryName = requireArguments().getString("categoryName");
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new ButtonClickListener();
-        builder.setMessage(getString(R.string.dialog_create_category_confirm_msg) + "\n" + "カテゴリ名（仮）")
+        builder.setTitle(R.string.dialog_create_category_confirm_msg)
+                .setMessage(categoryName)
                 .setPositiveButton(R.string.btn_create, listener)
                 .setNeutralButton(R.string.btn_cancel, listener);
         return builder.create();
