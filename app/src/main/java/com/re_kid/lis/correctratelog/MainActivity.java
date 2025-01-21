@@ -12,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.re_kid.lis.correctratelog.dialog.CreateCategoryDialog;
+import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +27,17 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // カテゴリ件数チェック
+        try (var model = new CategoryModel(MainActivity.this)) {
+            Cursor cursor = model.selectAll();
+            if(cursor.getCount() == 0) {
+                var dialog = new CreateCategoryDialog();
+                dialog.show(MainActivity.this.getSupportFragmentManager(), "CreateCategoryDialog");
+            }
+        } catch (Exception e) {
+            finish();
+        }
 
         // フラグメントの取得
         try(HistoryModel model = new HistoryModel(MainActivity.this)) {
