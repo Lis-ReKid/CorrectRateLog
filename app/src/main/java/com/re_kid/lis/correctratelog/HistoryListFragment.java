@@ -62,6 +62,12 @@ public class HistoryListFragment extends Fragment {
             startActivity(intent);
         });
 
+        // カテゴリ一覧画面遷移ボタンリスナ登録
+        view.findViewById(R.id.btMoveToCategoryList).setOnClickListener(v -> {
+            var intent = new Intent(getActivity(), CategoryListActivity.class);
+            startActivity(intent);
+        });
+
         // 履歴リストを生成
         ListView lvHistory = view.findViewById(R.id.lvHistory);
         String[] from = {"_id", "_id", "learned_date", "learned_time", "correct_rate", "correct_number",

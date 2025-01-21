@@ -5,8 +5,11 @@ public class Category {
     private final String name;
 
     public Category(int id, String name) {
-        if (id < 0) throw new IllegalArgumentException("不正なカテゴリです。");
         this.id = id;
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
