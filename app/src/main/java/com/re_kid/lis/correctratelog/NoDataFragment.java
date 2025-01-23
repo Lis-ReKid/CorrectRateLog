@@ -22,8 +22,14 @@ public class NoDataFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // 履歴新規登録画面遷移ボタンリスナ登録
         view.findViewById(R.id.btn_show_create_history_view).setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
+            startActivity(intent);
+        });
+        // カテゴリ一覧画面遷移ボタンリスナ登録
+        view.findViewById(R.id.btMoveToCategoryListNoData).setOnClickListener(v -> {
+            var intent = new Intent(getActivity(), CategoryListActivity.class);
             startActivity(intent);
         });
     }
