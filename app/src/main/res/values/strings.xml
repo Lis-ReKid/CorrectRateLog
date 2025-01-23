@@ -42,6 +42,7 @@
     <!-- カテゴリ回り -->
     <string name="tv_category_list_title">カテゴリ一覧</string>
     <string name="create_category_title">カテゴリ新規登録</string>
+    <string name="tv_category_create_dialog_msg">カテゴリ名を入力してください\n例：TOEIC、ITパスポート</string>
     <string name="hint_category_name">新規カテゴリ名</string>
     <string name="dialog_create_category_confirm_msg">以下のカテゴリを登録しますか？</string>
 </resources>
