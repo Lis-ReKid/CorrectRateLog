@@ -15,7 +15,6 @@
         android:hint="@string/hint_category_name"
         android:inputType="text"
         app:layout_constraintEnd_toStartOf="@+id/btCategoryCreate"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCreateCategoryDialogMsg" />
 
