@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.re_kid.lis.correctratelog.CategoryListActivity;
+import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
 
 public class CreateCategoryCompleteDialogFragment extends DialogFragment {
@@ -22,9 +23,17 @@ public class CreateCategoryCompleteDialogFragment extends DialogFragment {
     }
     @Override
     public void onDestroyView() {
-        Intent intent = new Intent(getActivity(), CategoryListActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        // 親アクティビティをリフレッシュ
+        if (getActivity() instanceof CategoryListActivity) {
+            Intent intent = new Intent(getActivity(), CategoryListActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        if (getActivity() instanceof MainActivity) {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
         super.onDestroyView();
     }
 }
