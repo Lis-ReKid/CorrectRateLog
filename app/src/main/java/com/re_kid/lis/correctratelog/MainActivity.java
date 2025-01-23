@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         // カテゴリ件数チェック
         try (var model = new CategoryModel(MainActivity.this)) {
             Cursor cursor = model.selectAll();
+            // カテゴリ未登録の時、登録ダイアログを表示
             if(cursor.getCount() == 0) {
                 var dialog = new FirstCreateCategoryDialogFragment();
                 dialog.show(MainActivity.this.getSupportFragmentManager(), "FirstCreateCategoryDialog");
