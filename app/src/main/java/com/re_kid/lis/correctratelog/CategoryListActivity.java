@@ -13,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.re_kid.lis.correctratelog.dialog.CreateCategoryDialog;
+import com.re_kid.lis.correctratelog.dialog.CreateCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 
 public class CategoryListActivity extends AppCompatActivity {
@@ -31,7 +31,7 @@ public class CategoryListActivity extends AppCompatActivity {
 
         // 登録ボタン押下時処理
         findViewById(R.id.btMoveToCategoryCreate).setOnClickListener(v -> {
-            var dialog = new CreateCategoryDialog();
+            var dialog = new CreateCategoryDialogFragment();
             dialog.show(getSupportFragmentManager(), "CreateCategoryDialog");
         });
 

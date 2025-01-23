@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.re_kid.lis.correctratelog.CategoryListActivity;
 import com.re_kid.lis.correctratelog.R;
 
 public class CreateCategoryCompleteDialogFragment extends DialogFragment {
@@ -22,7 +21,8 @@ public class CreateCategoryCompleteDialogFragment extends DialogFragment {
     }
     @Override
     public void onDestroyView() {
-        Intent intent = new Intent(getActivity(), CategoryListActivity.class);
+        // 親アクティビティをリフレッシュ
+        var intent = new Intent(getActivity(), getActivity().getClass());
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         super.onDestroyView();

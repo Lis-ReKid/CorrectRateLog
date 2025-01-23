@@ -12,7 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.re_kid.lis.correctratelog.R;
 
-public class CreateCategoryDialog extends DialogFragment {
+public class CreateCategoryDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
