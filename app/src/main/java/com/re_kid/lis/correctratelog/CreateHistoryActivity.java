@@ -3,10 +3,14 @@ package com.re_kid.lis.correctratelog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CursorAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -21,6 +25,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.CreateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
+import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
@@ -39,6 +44,23 @@ public class CreateHistoryActivity extends AppCompatActivity
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // カテゴリ選択スピナ選択肢をセット
+        Spinner spnCategoryName = findViewById(R.id.spnCategoryName);
+        String[] from = {"_id", "category_name"};
+        int[] to = {R.id.spnCategoryIdRow, R.id.spnCategoryNameRow};
+        Cursor cursor;
+        SimpleCursorAdapter adapter;
+        try (var model = new CategoryModel(CreateHistoryActivity.this)) {
+            cursor = model.selectAll();
+            adapter = new SimpleCursorAdapter(CreateHistoryActivity.this,
+                    R.layout.spn_category_row,
+                    cursor, from, to,
+                    CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+            spnCategoryName.setAdapter(adapter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // 日時の初期値入力
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
