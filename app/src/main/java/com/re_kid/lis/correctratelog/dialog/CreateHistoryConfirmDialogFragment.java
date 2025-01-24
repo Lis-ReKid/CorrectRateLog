@@ -39,7 +39,7 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // DB登録
                 try(var model = new HistoryModel(getActivity())) {
-                    var history = new History(0, _history.getLearnedDate(), _history.getLearnedTime(),
+                    var history = new History(0, _history.getCategory(), _history.getLearnedDate(), _history.getLearnedTime(),
                             _history.getCorrectNum(), _history.getEntireNum(), _history.getCorrectRate());
                     model.createHistory(history);
                 } catch (Exception e) {

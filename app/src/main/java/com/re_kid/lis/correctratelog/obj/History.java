@@ -72,6 +72,10 @@ public class History implements Parcelable {
         dest.writeParcelable(correctRate, PARCELABLE_WRITE_RETURN_VALUE);
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
     public int getId() {
         return id;
     }
