@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.UpdateHistoryConfirmDialogFragment;
+import com.re_kid.lis.correctratelog.obj.Category;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
@@ -106,6 +107,7 @@ public class UpdateHistoryActivity extends AppCompatActivity
             try {
                 newHistory = new History(
                         Integer.parseInt(etHistoryId.getText().toString()),
+                        new Category(0, ""),
                         learnedDate,
                         learnedTime,
                         correctNum,
