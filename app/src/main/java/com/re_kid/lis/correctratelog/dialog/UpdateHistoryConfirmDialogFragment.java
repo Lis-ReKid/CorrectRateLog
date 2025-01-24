@@ -39,7 +39,7 @@ public class UpdateHistoryConfirmDialogFragment extends DialogFragment {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 // DB更新
                 try (var model = new HistoryModel(getActivity())) {
-                    var history = new History(_history.getId(), _history.getLearnedDate(), _history.getLearnedTime(),
+                    var history = new History(_history.getId(), _history.getCategory(), _history.getLearnedDate(), _history.getLearnedTime(),
                             _history.getCorrectNum(), _history.getEntireNum(), _history.getCorrectRate());
                     model.update(history);
                 } catch (Exception e) {
