@@ -31,6 +31,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "FOREIGN KEY(history_id) REFERENCES Histories(_id) ON DELETE CASCADE, "
             + "FOREIGN KEY(tag_id) REFERENCES Tags(_id) ON DELETE CASCADE)";
 
+    private static final String CREATE_VIEW_HISTORY = "CREATE VIEW v_Histories AS SELECT " +
+            "h._id AS history_id, " +
+            "h.learned_date, " +
+            "h.learned_time, " +
+            "h.correct_number, " +
+            "h.entire_number, " +
+            "h.correct_rate, " +
+            "COALESCE(c._id, 0) AS category_id, " +
+            "COALESCE(c.category_name, 'カテゴリ未登録') " +
+            "FROM Histories h " +
+            "LEFT JOIN Categories c " +
+            "ON h.category_id = c._id";
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -41,6 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_CATEGORY);
         db.execSQL(CREATE_TAGS);
         db.execSQL(CREATE_HIST_TAG);
+        db.execSQL(CREATE_VIEW_HISTORY);
     }
 
     @Override
