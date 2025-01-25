@@ -21,7 +21,7 @@ public class HistoryModel implements AutoCloseable {
                 "(category_id, learned_date, learned_time, correct_number, entire_number, correct_rate)" +
                 "VALUES(?, ?, ?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindLong(1, 0);
+        stmt.bindLong(1, history.getCategory().getId());
         stmt.bindString(2, history.getLearnedDate().toString());
         stmt.bindString(3, history.getLearnedTime().toString());
         stmt.bindLong(4, history.getCorrectNum());
