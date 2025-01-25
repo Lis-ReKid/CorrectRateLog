@@ -23,7 +23,8 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new CreateHistoryConfirmButtonClickListener();
         builder.setTitle(R.string.dialog_create_confirm_title);
-        builder.setMessage(getText(R.string.tv_learned_date) + " : " + _history.getLearnedDate().toString() + " " +
+        builder.setMessage(getText(R.string.tv_category_name) + "：" + _history.getCategory().getName() + "\n" +
+                getText(R.string.tv_learned_date) + " : " + _history.getLearnedDate().toString() + " " +
                 _history.getLearnedTime().toString() + "\n" +
                 getText(R.string.tv_correct_number) + " : " + _history.getCorrectNum() + getText(R.string.tv_quiz_unit) + "\n" +
                 getText(R.string.tv_entire_number) + " : " + _history.getEntireNum() + getText(R.string.tv_quiz_unit));
