@@ -70,7 +70,7 @@ public class HistoryListFragment extends Fragment {
 
         // 履歴リストを生成
         ListView lvHistory = view.findViewById(R.id.lvHistory);
-        String[] from = {"_id", "_id", "learned_date", "learned_time", "correct_rate", "correct_number",
+        String[] from = {"_id", "category_name", "learned_date", "learned_time", "correct_rate", "correct_number",
                 "entire_number"};
         int[] to = {R.id.tv_history_id, R.id.tv_hist_tag_row_temp, R.id.tvLearnedDateRow, R.id.tvLearnedTimeRow,
                 R.id.tv_correct_rate_row, R.id.tv_correct_number_row, R.id.tv_entire_number_row};
@@ -106,12 +106,6 @@ public class HistoryListFragment extends Fragment {
             if (view.getId() == R.id.tv_correct_rate_row) {
                 var cr = new CorrectRate(cursor.getDouble(columnIndex));
                 ((TextView) view).setText(cr.toString());
-                result = true;
-            }
-            // 履歴タイトル整形
-            if (view.getId() == R.id.tv_hist_tag_row_temp) {
-                var text = getText(R.string.no_tag_history) + cursor.getString(columnIndex);
-                ((TextView) view).setText(text);
                 result = true;
             }
             return result;
