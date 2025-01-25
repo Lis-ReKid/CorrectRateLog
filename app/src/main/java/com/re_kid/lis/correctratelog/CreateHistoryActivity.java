@@ -60,7 +60,7 @@ public class CreateHistoryActivity extends AppCompatActivity
                     CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
             spnCategoryName.setAdapter(adapter);
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(this, R.string.toast_get_category_failed, Toast.LENGTH_SHORT).show();
         }
 
         // 日時の初期値入力
