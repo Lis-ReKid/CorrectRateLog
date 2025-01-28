@@ -3,10 +3,14 @@ package com.re_kid.lis.correctratelog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CursorAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -21,6 +25,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.CreateHistoryConfirmDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
+import com.re_kid.lis.correctratelog.model.CategoryModel;
+import com.re_kid.lis.correctratelog.obj.Category;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
@@ -39,6 +45,23 @@ public class CreateHistoryActivity extends AppCompatActivity
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // カテゴリ選択スピナ選択肢をセット
+        Spinner spnCategoryName = findViewById(R.id.spnCategoryName);
+        String[] from = {"_id", "category_name"};
+        int[] to = {R.id.spnCategoryIdRow, R.id.spnCategoryNameRow};
+        Cursor cursor;
+        SimpleCursorAdapter adapter;
+        try (var model = new CategoryModel(CreateHistoryActivity.this)) {
+            cursor = model.selectAll();
+            adapter = new SimpleCursorAdapter(CreateHistoryActivity.this,
+                    R.layout.spn_category_row,
+                    cursor, from, to,
+                    CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+            spnCategoryName.setAdapter(adapter);
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.toast_get_category_failed, Toast.LENGTH_SHORT).show();
+        }
 
         // 日時の初期値入力
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
@@ -81,15 +104,22 @@ public class CreateHistoryActivity extends AppCompatActivity
 
     public void onCreateBtnClick(View view) {
         // viewを取得
+        TextView tvCategoryId = findViewById(R.id.spnCategoryIdRow);
+        TextView tvCategoryName = findViewById(R.id.spnCategoryNameRow);
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
         TextView tvLearnedTime = findViewById(R.id.tv_learned_time);
         EditText etCorrectNumber = findViewById(R.id.et_correct_number);
         EditText etEntireNumber = findViewById(R.id.et_entire_number);
         // 入力内容を取得
+        var textCategoryId = tvCategoryId.getText();
+        var textCategoryName = tvCategoryName.getText();
         var textLearnedDate = tvLearnedDate.getText();
         var textLearnedTime = tvLearnedTime.getText();
         var textCorrectNum = etCorrectNumber.getText();
         var textEntireNum = etEntireNumber.getText();
+        // カテゴリを取得
+        var category = new Category(Integer.parseInt(textCategoryId.toString()),
+                textCategoryName.toString());
         // 未入力チェック
         if(textCorrectNum.toString().isEmpty()) {
             Toast.makeText(this, R.string.toast_not_entered_msg, Toast.LENGTH_SHORT).show();
@@ -109,7 +139,7 @@ public class CreateHistoryActivity extends AppCompatActivity
         // 不正値チェック
         try {
         correctRate = new CorrectRate(correctNum, entireNum);
-        history = new History(0, learnedDate, learnedTime, correctNum, entireNum, correctRate);
+        history = new History(0, category, learnedDate, learnedTime, correctNum, entireNum, correctRate);
         } catch (IllegalArgumentException e) {
             var msg = e.getMessage();
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

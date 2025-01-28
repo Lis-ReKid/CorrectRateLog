@@ -21,7 +21,7 @@ public class HistoryModel implements AutoCloseable {
                 "(category_id, learned_date, learned_time, correct_number, entire_number, correct_rate)" +
                 "VALUES(?, ?, ?, ?, ?, ?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindLong(1, 0);
+        stmt.bindLong(1, history.getCategory().getId());
         stmt.bindString(2, history.getLearnedDate().toString());
         stmt.bindString(3, history.getLearnedTime().toString());
         stmt.bindLong(4, history.getCorrectNum());
@@ -32,7 +32,7 @@ public class HistoryModel implements AutoCloseable {
     }
     public Cursor selectAll() {
         SQLiteDatabase db = _helper.getWritableDatabase();
-        var sql = "SELECT * FROM Histories ORDER BY _id DESC";
+        var sql = "SELECT * FROM v_Histories ORDER BY _id DESC";
         return db.rawQuery(sql, null);
     }
 
