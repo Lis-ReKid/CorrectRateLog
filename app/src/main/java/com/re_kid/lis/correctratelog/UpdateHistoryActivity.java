@@ -65,13 +65,13 @@ public class UpdateHistoryActivity extends AppCompatActivity
         }
 
         // 初期値入力
-        var categoryId = history.getCategory().getId();
+        var oldCategoryId = history.getCategory().getId();
         var categoryPosition = -1;
         if(cursor.moveToFirst()) {
             do {
                 var position = cursor.getColumnIndex("_id");
                 var tmpId = cursor.getInt(position);
-                if (tmpId == categoryId) {
+                if (tmpId == oldCategoryId) {
                     categoryPosition = cursor.getPosition();
                     break;
                 }
@@ -111,10 +111,17 @@ public class UpdateHistoryActivity extends AppCompatActivity
         // 更新ボタン押下時処理
         findViewById(R.id.btn_update_history).setOnClickListener(v -> {
             // 入力内容を取得
+            TextView tvCategoryId = findViewById(R.id.spnCategoryIdRow);
+//            var textCategoryId = tvCategoryId.getText();
+            var categoryId = Integer.parseInt(tvCategoryId.getText().toString());
+            TextView tvCategoryName = findViewById(R.id.spnCategoryNameRow);
+            var categoryName = tvCategoryName.getText().toString();
             var learnedDate = LearnedDate.parse(tvLearnedDate.getText().toString());
             var learnedTime = LearnedTime.parse(tvLearnedTime.getText().toString());
             var textCorrectNum = etCorrectNumber.getText();
             var textEntireNum = etEntireNumber.getText();
+            // カテゴリを取得
+            var category = new Category(categoryId, categoryName);
             // 未入力チェック
             if(textCorrectNum.toString().isEmpty()) {
                 Toast.makeText(this, R.string.toast_not_entered_msg, Toast.LENGTH_SHORT).show();
@@ -142,7 +149,7 @@ public class UpdateHistoryActivity extends AppCompatActivity
             try {
                 newHistory = new History(
                         Integer.parseInt(etHistoryId.getText().toString()),
-                        new Category(0, ""),
+                        category,
                         learnedDate,
                         learnedTime,
                         correctNum,
