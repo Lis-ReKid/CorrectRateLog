@@ -40,7 +40,8 @@ public class HistoryModel implements AutoCloseable {
         // sql作成
         SQLiteDatabase db = _helper.getWritableDatabase();
         var sql = "UPDATE Histories " +
-                "SET learned_date = ?, " +
+                "SET category_id = ?," +
+                "learned_date = ?, " +
                 "learned_time = ?, " +
                 "correct_number = ?, " +
                 "entire_number = ?, " +
@@ -48,12 +49,13 @@ public class HistoryModel implements AutoCloseable {
                 " WHERE _id = ?";
         SQLiteStatement stmt = db.compileStatement(sql);
         // 各変数をバインド
-        stmt.bindString(1, history.getLearnedDate().toString());
-        stmt.bindString(2, history.getLearnedTime().toString());
-        stmt.bindLong(3, history.getCorrectNum());
-        stmt.bindLong(4, history.getEntireNum());
-        stmt.bindDouble(5, history.getCorrectRate().getCorrectRate());
-        stmt.bindLong(6, history.getId());
+        stmt.bindLong(1, history.getCategory().getId());
+        stmt.bindString(2, history.getLearnedDate().toString());
+        stmt.bindString(3, history.getLearnedTime().toString());
+        stmt.bindLong(4, history.getCorrectNum());
+        stmt.bindLong(5, history.getEntireNum());
+        stmt.bindDouble(6, history.getCorrectRate().getCorrectRate());
+        stmt.bindLong(7, history.getId());
         // 更新
         stmt.executeUpdateDelete();
     }
