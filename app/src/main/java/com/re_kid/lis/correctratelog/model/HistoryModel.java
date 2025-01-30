@@ -40,7 +40,7 @@ public class HistoryModel implements AutoCloseable {
     public Cursor selectByCategory(Category category) {
         SQLiteDatabase db = _helper.getWritableDatabase();
         var sql = "SELECT * FROM v_Histories WHERE category_id = " +
-                category.getId() +
+                category.getId() + " " +
                 "ORDER BY _id DESC";
         return db.rawQuery(sql, null);
     }
