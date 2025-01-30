@@ -1,7 +1,6 @@
 package com.re_kid.lis.correctratelog.dialog;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +19,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.re_kid.lis.correctratelog.CorrectRateFragment;
 import com.re_kid.lis.correctratelog.HistoryListFragment;
-import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
@@ -33,6 +31,7 @@ public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
         var builder = new AlertDialog.Builder(getActivity());
         View view = requireActivity().getLayoutInflater()
                 .inflate(R.layout.filter_by_category_dialog, null);
+
         // カテゴリ選択スピナ選択肢をセット
         Spinner spnCategoryName = view.findViewById(R.id.spnCategory);
         String[] from = {"_id", "category_name"};
@@ -49,9 +48,9 @@ public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
         } catch (Exception e) {
             Toast.makeText(getActivity(), R.string.toast_get_category_failed, Toast.LENGTH_SHORT).show();
         }
+
         // 選択ボタンリスナ登録
-        var btnselectCategory = view.findViewById(R.id.btnSelectCategory);
-        btnselectCategory.setOnClickListener(v -> {
+        view.findViewById(R.id.btnSelectCategory).setOnClickListener(v -> {
             // カテゴリ取得
             TextView textCategoryId = spnCategoryName.findViewById(R.id.spnCategoryIdRow);
             TextView textCategoryName = spnCategoryName.findViewById(R.id.spnCategoryNameRow);
@@ -72,6 +71,10 @@ public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
                 Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+
+        // リセットボタンリスナ登録
+
+
         // ダイアログをビルド
         builder.setTitle(R.string.title_filter_by_category)
                 .setView(view);
