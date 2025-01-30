@@ -2,9 +2,13 @@ package com.re_kid.lis.correctratelog;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.widget.CursorAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -18,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.re_kid.lis.correctratelog.dialog.DatePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.TimePickerDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.UpdateHistoryConfirmDialogFragment;
+import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.obj.Category;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
@@ -42,7 +47,37 @@ public class UpdateHistoryActivity extends AppCompatActivity
         var intent = getIntent();
         History history = intent.getParcelableExtra("history");
 
+        // カテゴリ選択スピナ選択肢をセット
+        Spinner spnCategoryName = findViewById(R.id.spnCategoryName);
+        String[] from = {"_id", "category_name"};
+        int[] to = {R.id.spnCategoryIdRow, R.id.spnCategoryNameRow};
+        Cursor cursor = null;
+        SimpleCursorAdapter adapter;
+        try (var model = new CategoryModel(UpdateHistoryActivity.this)) {
+            cursor = model.selectAll();
+            adapter = new SimpleCursorAdapter(UpdateHistoryActivity.this,
+                    R.layout.spn_category_row,
+                    cursor, from, to,
+                    CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+            spnCategoryName.setAdapter(adapter);
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.toast_get_category_failed, Toast.LENGTH_SHORT).show();
+        }
+
         // 初期値入力
+        var oldCategoryId = history.getCategory().getId();
+        var categoryPosition = -1;
+        if(cursor.moveToFirst()) {
+            do {
+                var position = cursor.getColumnIndex("_id");
+                var tmpId = cursor.getInt(position);
+                if (tmpId == oldCategoryId) {
+                    categoryPosition = cursor.getPosition();
+                    break;
+                }
+            } while (cursor.moveToNext());
+        }
+        spnCategoryName.setSelection(categoryPosition);
         EditText etHistoryId = findViewById(R.id.et_history_id);
         etHistoryId.setText(String.valueOf(history.getId()));
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
@@ -76,10 +111,16 @@ public class UpdateHistoryActivity extends AppCompatActivity
         // 更新ボタン押下時処理
         findViewById(R.id.btn_update_history).setOnClickListener(v -> {
             // 入力内容を取得
+            TextView tvCategoryId = findViewById(R.id.spnCategoryIdRow);
+            var categoryId = Integer.parseInt(tvCategoryId.getText().toString());
+            TextView tvCategoryName = findViewById(R.id.spnCategoryNameRow);
+            var categoryName = tvCategoryName.getText().toString();
             var learnedDate = LearnedDate.parse(tvLearnedDate.getText().toString());
             var learnedTime = LearnedTime.parse(tvLearnedTime.getText().toString());
             var textCorrectNum = etCorrectNumber.getText();
             var textEntireNum = etEntireNumber.getText();
+            // カテゴリを取得
+            var category = new Category(categoryId, categoryName);
             // 未入力チェック
             if(textCorrectNum.toString().isEmpty()) {
                 Toast.makeText(this, R.string.toast_not_entered_msg, Toast.LENGTH_SHORT).show();
@@ -107,7 +148,7 @@ public class UpdateHistoryActivity extends AppCompatActivity
             try {
                 newHistory = new History(
                         Integer.parseInt(etHistoryId.getText().toString()),
-                        new Category(0, ""),
+                        category,
                         learnedDate,
                         learnedTime,
                         correctNum,
