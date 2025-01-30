@@ -47,4 +47,5 @@
     <string name="dialog_create_category_confirm_msg">以下のカテゴリを登録しますか？</string>
     <string name="tv_category_name">カテゴリ名</string>
     <string name="toast_get_category_failed">カテゴリの取得に失敗しました。</string>
+    <string name="btn_show_category_filter_dialog">カテゴリ選択</string>
 </resources>
