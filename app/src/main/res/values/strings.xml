@@ -6,6 +6,7 @@
     <string name="btn_cancel">キャンセル</string>
     <string name="toast_canceled">キャンセルしました。</string>
     <string name="btn_select">選択</string>
+    <string name="btn_filter_reset">絞り込みを解除</string>
     <!-- ホーム画面回り -->
     <string name="app_name">正答率チェッカー</string>
     <string name="no_data_msg">データがありません。\n学習履歴を登録しましょう！</string>

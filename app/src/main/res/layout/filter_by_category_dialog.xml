@@ -23,4 +23,14 @@
         android:text="@string/btn_select"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spnCategory" />
+
+    <Button
+        android:id="@+id/btnFilterReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/btn_filter_reset"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelectCategory"
+        app:layout_constraintTop_toBottomOf="@+id/spnCategory" />
 </androidx.constraintlayout.widget.ConstraintLayout>
