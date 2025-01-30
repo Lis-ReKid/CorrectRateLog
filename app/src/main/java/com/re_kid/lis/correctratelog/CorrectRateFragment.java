@@ -44,9 +44,14 @@ public class CorrectRateFragment extends Fragment {
 
         // 正答率を取得して表示
         TextView tvAccuracyRate = view.findViewById(R.id.tv_correct_rate);
-        List<History> histories = History.getHistories(historiesCursor);
-        var correctRate = CorrectRate.getTotalCorrectRate(histories);
-        tvAccuracyRate.setText(correctRate.toString());
+        var count = historiesCursor.getCount();
+        if (count == 0) {
+            tvAccuracyRate.setText("-");
+        } else {
+            List<History> histories = History.getHistories(historiesCursor);
+            var correctRate = CorrectRate.getTotalCorrectRate(histories);
+            tvAccuracyRate.setText(correctRate.toString());
+        }
     }
 
     @Override
