@@ -112,7 +112,6 @@ public class UpdateHistoryActivity extends AppCompatActivity
         findViewById(R.id.btn_update_history).setOnClickListener(v -> {
             // 入力内容を取得
             TextView tvCategoryId = findViewById(R.id.spnCategoryIdRow);
-//            var textCategoryId = tvCategoryId.getText();
             var categoryId = Integer.parseInt(tvCategoryId.getText().toString());
             TextView tvCategoryName = findViewById(R.id.spnCategoryNameRow);
             var categoryName = tvCategoryName.getText().toString();
