@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 import com.re_kid.lis.correctratelog.DatabaseHelper;
+import com.re_kid.lis.correctratelog.obj.Category;
 import com.re_kid.lis.correctratelog.obj.History;
 
 public class HistoryModel implements AutoCloseable {
@@ -36,6 +37,13 @@ public class HistoryModel implements AutoCloseable {
         return db.rawQuery(sql, null);
     }
 
+    public Cursor selectByCategory(Category category) {
+        SQLiteDatabase db = _helper.getWritableDatabase();
+        var sql = "SELECT * FROM v_Histories WHERE category_id = " +
+                category.getId() +
+                "ORDER BY _id DESC";
+        return db.rawQuery(sql, null);
+    }
     public void update(History history) {
         // sql作成
         SQLiteDatabase db = _helper.getWritableDatabase();
