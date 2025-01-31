@@ -15,6 +15,7 @@
     <string name="no_tag_history">タグ未登録の履歴</string>
     <string name="get_histories_failed_msg">履歴の取得に失敗しました。</string>
     <string name="dialog_history_detail_title">学習履歴の確認</string>
+    <string name="tv_zero_data_msg">該当する履歴がありませんでした。\n学習履歴を登録しましょう！</string>
     <!-- 履歴登録回り-->
     <string name="create_history_header">学習履歴新規登録</string>
     <string name="tv_learned_date">学習日時</string>

@@ -23,6 +23,7 @@ import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.Category;
+import com.re_kid.lis.correctratelog.zeroDataFragment;
 
 public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
     @NonNull
@@ -63,9 +64,15 @@ public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 transaction.setReorderingAllowed(true);
-                // 検索結果1件以上の時
                 transaction.replace(R.id.top_fragment_container, CorrectRateFragment.newInstance(newHistoryCursor), null);
-                transaction.replace(R.id.bottom_fragment_container, HistoryListFragment.newInstance(newHistoryCursor), null);
+                // 検索結果0件の時
+                if (count == 0) {
+                    transaction.replace(R.id.bottom_fragment_container, new zeroDataFragment(), null);
+                }
+                // 検索結果1件以上の時
+                else {
+                    transaction.replace(R.id.bottom_fragment_container, HistoryListFragment.newInstance(newHistoryCursor), null);
+                }
                 transaction.commit();
             } catch (Exception e) {
                 Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
