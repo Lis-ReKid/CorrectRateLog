@@ -69,7 +69,9 @@ public class HistoryListFragment extends Fragment {
             startActivity(intent);
         });
 
+        // 絞り込みボタンリスナ登録
         view.findViewById(R.id.btnShowFilteringDialog).setOnClickListener(v -> {
+            // 絞り込みダイアログを表示
             new FilterHistoryByCategoryDialogFragment()
                     .show(getActivity().getSupportFragmentManager(),
                             "FilterHistoryByCategoryFragment");

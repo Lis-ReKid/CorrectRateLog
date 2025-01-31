@@ -29,6 +29,7 @@ public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        // ビルダの取得とカスタムビューのインフレート
         var builder = new AlertDialog.Builder(getActivity());
         View view = requireActivity().getLayoutInflater()
                 .inflate(R.layout.filter_by_category_dialog, null);
