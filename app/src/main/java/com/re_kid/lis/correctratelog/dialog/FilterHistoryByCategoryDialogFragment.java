@@ -73,7 +73,21 @@ public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
         });
 
         // リセットボタンリスナ登録
-
+        view.findViewById(R.id.btnFilterReset).setOnClickListener(v -> {
+            Cursor allHistoryCursor;
+            try {
+                var model = new HistoryModel(getActivity());
+                allHistoryCursor = model.selectAll();
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.setReorderingAllowed(true);
+                transaction.replace(R.id.top_fragment_container, CorrectRateFragment.newInstance(allHistoryCursor), null);
+                transaction.replace(R.id.bottom_fragment_container, HistoryListFragment.newInstance(allHistoryCursor), null);
+                transaction.commit();
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         // ダイアログをビルド
         builder.setTitle(R.string.title_filter_by_category)
