@@ -17,6 +17,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 
+import com.re_kid.lis.correctratelog.dialog.FilterHistoryByCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.HistoryDetailDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
@@ -66,6 +67,14 @@ public class HistoryListFragment extends Fragment {
         view.findViewById(R.id.btMoveToCategoryList).setOnClickListener(v -> {
             var intent = new Intent(getActivity(), CategoryListActivity.class);
             startActivity(intent);
+        });
+
+        // 絞り込みボタンリスナ登録
+        view.findViewById(R.id.btnShowFilteringDialog).setOnClickListener(v -> {
+            // 絞り込みダイアログを表示
+            new FilterHistoryByCategoryDialogFragment()
+                    .show(getActivity().getSupportFragmentManager(),
+                            "FilterHistoryByCategoryFragment");
         });
 
         // 履歴リストを生成
