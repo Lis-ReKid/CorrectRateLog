@@ -78,7 +78,7 @@ public class UpdateHistoryActivity extends AppCompatActivity
             } while (cursor.moveToNext());
         }
         spnCategoryName.setSelection(categoryPosition);
-        EditText etHistoryId = findViewById(R.id.et_history_id);
+        EditText etHistoryId = findViewById(R.id.etHistoryId);
         etHistoryId.setText(String.valueOf(history.getId()));
         TextView tvLearnedDate = findViewById(R.id.tv_learned_date);
         tvLearnedDate.setText(history.getLearnedDate().toString());
