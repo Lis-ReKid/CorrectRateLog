@@ -27,7 +27,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/tv_learned_date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_history_header" />
+        app:layout_constraintTop_toBottomOf="@+id/spnCategoryName" />
 
     <TextView
         android:id="@+id/tv_correct_number"
@@ -54,10 +54,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/tv_quiz_number_hint"
         android:inputType="number"
         android:minHeight="48dp"
-        android:textColorHint="#546E7A"
         app:layout_constraintStart_toEndOf="@+id/tv_correct_number"
         app:layout_constraintTop_toBottomOf="@+id/tv_learned_date"
         tools:ignore="Autofill,DuplicateSpeakableTextCheck" />
@@ -69,10 +67,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/tv_quiz_number_hint"
         android:inputType="number"
         android:minHeight="48dp"
-        android:textColorHint="#546E7A"
         app:layout_constraintStart_toEndOf="@+id/tv_entire_number"
         app:layout_constraintTop_toBottomOf="@+id/et_correct_number"
         tools:ignore="Autofill" />
@@ -116,7 +112,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/tv_learned_date_label"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_history_header" />
+        app:layout_constraintTop_toBottomOf="@+id/spnCategoryName" />
 
     <TextView
         android:id="@+id/tv_learned_time"
@@ -125,6 +121,25 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/tv_learned_date"
+        app:layout_constraintTop_toBottomOf="@+id/spnCategoryName" />
+
+    <Spinner
+        android:id="@+id/spnCategoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/tvCategoryName"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_history_header" />
+
+    <TextView
+        android:id="@+id/tvCategoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/tv_category_name"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_history_header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

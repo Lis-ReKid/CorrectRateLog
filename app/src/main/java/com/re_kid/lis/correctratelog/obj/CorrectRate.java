@@ -1,12 +1,16 @@
 package com.re_kid.lis.correctratelog.obj;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Locale;
 
-public class CorrectRate {
+public class CorrectRate implements Parcelable {
     private final double correctRate;
     public CorrectRate(final int correctNum, final int entireNum) {
         // 正答数0未満でエラー
@@ -27,6 +31,32 @@ public class CorrectRate {
         this.correctRate = correctRate;
     }
 
+    protected CorrectRate(Parcel in) {
+        correctRate = in.readDouble();
+    }
+
+    public static final Creator<CorrectRate> CREATOR = new Creator<>() {
+        @Override
+        public CorrectRate createFromParcel(Parcel in) {
+            return new CorrectRate(in);
+        }
+
+        @Override
+        public CorrectRate[] newArray(int size) {
+            return new CorrectRate[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeDouble(correctRate);
+    }
+
     /**
      * double型で正答率を返します。
      * @return 率（小数点以下３桁）
@@ -35,9 +65,19 @@ public class CorrectRate {
         return correctRate;
     }
 
+    public static CorrectRate getTotalCorrectRate(List<History> histories) {
+        var totalCorrectNum = 0;
+        var totalEntireNum = 0;
+        for (History history : histories) {
+            totalCorrectNum += history.getCorrectNum();
+            totalEntireNum += history.getEntireNum();
+        }
+        return new CorrectRate(totalCorrectNum, totalEntireNum);
+    }
+
     @NonNull
     @Override
     public String toString() {
-        return String.format(Locale.getDefault(), "%.1f", correctRate * 100);
+        return String.format(Locale.getDefault(), "%.1f%%", correctRate * 100);
     }
 }

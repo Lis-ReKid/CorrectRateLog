@@ -2,7 +2,6 @@ package com.re_kid.lis.correctratelog.dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,12 +12,12 @@ public class DatePickerDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        String datePrm = requireArguments().getString("Date");
-        Context context = requireContext();
+        var datePrm = requireArguments().getString("Date");
+        var context = requireContext();
         DatePickerDialog.OnDateSetListener listener = (DatePickerDialog.OnDateSetListener)getActivity();
-        int year = Integer.parseInt(datePrm != null ? datePrm.substring(0, 4) : "2000");
-        int month = Integer.parseInt(datePrm != null ? datePrm.substring(5, 7) : "01");
-        int day = Integer.parseInt(datePrm != null ? datePrm.substring(8, 10) : "01");
+        var year = Integer.parseInt(datePrm != null ? datePrm.substring(0, 4) : "2000");
+        var month = Integer.parseInt(datePrm != null ? datePrm.substring(5, 7) : "01");
+        var day = Integer.parseInt(datePrm != null ? datePrm.substring(8, 10) : "01");
         return new DatePickerDialog(context, listener, year, month -1, day);
     }
 }

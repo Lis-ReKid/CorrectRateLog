@@ -1,45 +1,54 @@
 package com.re_kid.lis.correctratelog.dialog;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-import com.re_kid.lis.correctratelog.CreateHistoryActivity;
-import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
+import com.re_kid.lis.correctratelog.model.HistoryModel;
+import com.re_kid.lis.correctratelog.obj.History;
 
 public class CreateHistoryConfirmDialogFragment extends DialogFragment {
+    private History _history;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.dialog_create_title);
-        builder.setPositiveButton(R.string.dialog_create_positive, new CreateDialogButtonClickListener());
-        builder.setNeutralButton(R.string.dialog_Create_neutral, new CreateDialogButtonClickListener());
+        _history = requireArguments().getParcelable("history");
+        var builder = new AlertDialog.Builder(getActivity());
+        var listener = new CreateHistoryConfirmButtonClickListener();
+        builder.setTitle(R.string.dialog_create_confirm_title);
+        builder.setMessage(getText(R.string.tv_category_name) + "：" + _history.getCategory().getName() + "\n" +
+                getText(R.string.tv_learned_date) + " : " + _history.getLearnedDate().toString() + " " +
+                _history.getLearnedTime().toString() + "\n" +
+                getText(R.string.tv_correct_number) + " : " + _history.getCorrectNum() + getText(R.string.tv_quiz_unit) + "\n" +
+                getText(R.string.tv_entire_number) + " : " + _history.getEntireNum() + getText(R.string.tv_quiz_unit));
+        builder.setPositiveButton(R.string.btn_create, listener);
+        builder.setNegativeButton(R.string.btn_cancel, listener);
         return builder.create();
     }
-    public class CreateDialogButtonClickListener implements DialogInterface.OnClickListener {
+
+    private class CreateHistoryConfirmButtonClickListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            // 続けて登録
+            // 登録を確定
             if(which == DialogInterface.BUTTON_POSITIVE) {
-                // 入力フォームをリフレッシュ
-                Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-            // ホームに戻る
-            else if(which == DialogInterface.BUTTON_NEUTRAL) {
-                // ホーム画面をリフレッシュして遷移
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                // DB登録
+                try(var model = new HistoryModel(getActivity())) {
+                    var history = new History(0, _history.getCategory(), _history.getLearnedDate(), _history.getLearnedTime(),
+                            _history.getCorrectNum(), _history.getEntireNum(), _history.getCorrectRate());
+                    model.createHistory(history);
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
+                }
+                // 登録完了ダイアログを表示
+                var dialogFragment = new CreateHistoryCompleteDialogFragment();
+                dialogFragment.show(getActivity().getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
             }
         }
     }

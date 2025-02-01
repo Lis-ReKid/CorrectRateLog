@@ -1,5 +1,8 @@
 package com.re_kid.lis.correctratelog.obj;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import java.time.LocalDateTime;
@@ -7,7 +10,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class LearnedTime {
+public class LearnedTime implements Parcelable {
     private final LocalTime learnedTime;
     private static final Locale _LOCALE = Locale.getDefault();
     private static final DateTimeFormatter _FORMATTER = DateTimeFormatter.ofPattern("HH:mm", _LOCALE);
@@ -17,6 +20,32 @@ public class LearnedTime {
     }
     private LearnedTime(final int hourOfDay, final int minute) {
         this.learnedTime = LocalTime.of(hourOfDay, minute);
+    }
+
+    protected LearnedTime(Parcel in) {
+        learnedTime = LocalTime.parse(in.readString(), _FORMATTER);
+    }
+
+    public static final Creator<LearnedTime> CREATOR = new Creator<>() {
+        @Override
+        public LearnedTime createFromParcel(Parcel in) {
+            return new LearnedTime(in);
+        }
+
+        @Override
+        public LearnedTime[] newArray(int size) {
+            return new LearnedTime[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(this.toString());
     }
 
     /**
@@ -43,8 +72,8 @@ public class LearnedTime {
      * @return LearnedTimeインスタンス
      */
     public static LearnedTime now() {
-        final LocalDateTime nowDateTime = LocalDateTime.now();
-        return new LearnedTime(_FORMATTER.format(nowDateTime));
+        final var nowTime = LocalDateTime.now();
+        return new LearnedTime(_FORMATTER.format(nowTime));
     }
     @NonNull
     @Override
