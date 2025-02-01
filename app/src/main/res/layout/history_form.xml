@@ -114,4 +114,13 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/et_entire_number"
         app:layout_constraintStart_toEndOf="@+id/et_entire_number" />
 
+    <EditText
+        android:id="@+id/etHistoryId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
