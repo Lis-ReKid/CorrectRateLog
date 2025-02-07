@@ -1,6 +1,5 @@
 package com.re_kid.lis.correctratelog;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
@@ -8,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 
-import com.re_kid.lis.correctratelog.dialog.FilterHistoryByCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.HistoryDetailDialogFragment;
 import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
@@ -57,26 +57,18 @@ public class HistoryListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // 登録画面遷移ボタンリスナ登録
-        view.findViewById(R.id.btn_create).setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), CreateHistoryActivity.class);
-            startActivity(intent);
-        });
-
-        // カテゴリ一覧画面遷移ボタンリスナ登録
-        view.findViewById(R.id.btMoveToCategoryList).setOnClickListener(v -> {
-            var intent = new Intent(getActivity(), CategoryListActivity.class);
-            startActivity(intent);
-        });
-
-        // 絞り込みボタンリスナ登録
-        view.findViewById(R.id.btnShowFilteringDialog).setOnClickListener(v -> {
-            // 絞り込みダイアログを表示
-            new FilterHistoryByCategoryDialogFragment()
-                    .show(getActivity().getSupportFragmentManager(),
-                            "FilterHistoryByCategoryFragment");
-        });
-
+        // 各種ボタンリスナ登録
+        View.OnClickListener listener = (View.OnClickListener) getActivity();
+        if (listener != null) {
+            // 登録画面遷移ボタンリスナ登録
+            view.findViewById(R.id.btn_create).setOnClickListener(listener);
+            // カテゴリ一覧画面遷移ボタンリスナ登録
+            view.findViewById(R.id.btMoveToCategoryList).setOnClickListener(listener);
+            // 絞り込みボタンリスナ登録
+            view.findViewById(R.id.btnShowFilteringDialog).setOnClickListener(listener);
+        } else {
+            Log.e("HistoryListFragment", "OnClickListener is null");
+        }
         // 履歴リストを生成
         ListView lvHistory = view.findViewById(R.id.lvHistory);
         String[] from = {"_id", "category_name", "learned_date", "learned_time", "correct_rate", "correct_number",

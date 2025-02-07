@@ -1,7 +1,9 @@
 package com.re_kid.lis.correctratelog;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -12,11 +14,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.re_kid.lis.correctratelog.dialog.FilterHistoryByCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.FirstCreateCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,5 +65,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+    @Override
+    public void onClick(View v) {
+        var btnId = v.getId();
+        if (btnId == R.id.btn_create) {
+            Intent intent = new Intent(MainActivity.this, CreateHistoryActivity.class);
+            startActivity(intent);
+        } else if (btnId == R.id.btMoveToCategoryList) {
+            var intent = new Intent(MainActivity.this, CategoryListActivity.class);
+            startActivity(intent);
+        } else if (btnId == R.id.btnShowFilteringDialog) {
+            new FilterHistoryByCategoryDialogFragment()
+                    .show(getSupportFragmentManager(),
+                            "FilterHistoryByCategoryFragment");
+        }
     }
 }
