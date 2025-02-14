@@ -17,7 +17,9 @@ public class DeleteCategoryDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        // カテゴリを取得
         _category = requireArguments().getParcelable("category");
+        // ダイアログをビルド
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new DeleteCategoryDialogOnClickListener();
         builder.setMessage(_category.getName())
@@ -30,6 +32,8 @@ public class DeleteCategoryDialogFragment extends DialogFragment {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if(which == DialogInterface.BUTTON_POSITIVE) {
+                // 削除ボタン押下時処理
+                // 削除確認ダイアログを表示
                 var deleteCategoryConfirmDialogFragment = new DeleteCategoryConfirmDialogFragment();
                 var args = new Bundle();
                 args.putParcelable("category", _category);
