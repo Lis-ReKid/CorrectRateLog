@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.re_kid.lis.correctratelog.dialog.CreateCategoryDialogFragment;
+import com.re_kid.lis.correctratelog.dialog.DeleteCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
+import com.re_kid.lis.correctratelog.obj.Category;
 
 public class CategoryListActivity extends AppCompatActivity {
 
@@ -53,5 +56,22 @@ public class CategoryListActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // カテゴリリストアイテムにリスナ登録
+        lvCategory.setOnItemClickListener((parent, view, position, id) -> {
+            // カテゴリを取得
+            var tvCategoryId = (TextView) findViewById(R.id.tvCategoryIdRow);
+            var tvCategoryName = (TextView) findViewById(R.id.tvCategoryNameRow);
+            var categoryId = Integer.parseInt(tvCategoryId.getText().toString());
+            var categoryName = tvCategoryName.getText().toString();
+            // 削除ダイアログを作成、表示
+            var dialog = new DeleteCategoryDialogFragment();
+            var args = new Bundle();
+            var category = new Category(categoryId, categoryName);
+            args.putParcelable("category", category);
+            dialog.setArguments(args);
+            dialog.show(getSupportFragmentManager(), "DeleteCategoryDialogFragment");
+        });
+
     }
 }
