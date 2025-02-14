@@ -2,6 +2,7 @@ package com.re_kid.lis.correctratelog;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
@@ -60,10 +61,11 @@ public class CategoryListActivity extends AppCompatActivity {
         // カテゴリリストアイテムにリスナ登録
         lvCategory.setOnItemClickListener((parent, view, position, id) -> {
             // カテゴリを取得
-            var tvCategoryId = (TextView) findViewById(R.id.tvCategoryIdRow);
-            var tvCategoryName = (TextView) findViewById(R.id.tvCategoryNameRow);
-            var categoryId = Integer.parseInt(tvCategoryId.getText().toString());
-            var categoryName = tvCategoryName.getText().toString();
+            SQLiteCursor parentItem = (SQLiteCursor)parent.getItemAtPosition(position);
+            var categoryIdIndex = parentItem.getColumnIndex("_id");
+            var categoryNameIndex = parentItem.getColumnIndex("category_name");
+            var categoryId = parentItem.getInt(categoryIdIndex);
+            var categoryName = parentItem.getString(categoryNameIndex);
             var category = new Category(categoryId, categoryName);
             // 削除ダイアログを作成、表示
             var dialog = new DeleteCategoryDialogFragment();
