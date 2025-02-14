@@ -34,6 +34,14 @@ public class CategoryModel implements AutoCloseable{
         return db.rawQuery(sql, null);
     }
 
+    public void delete(Category category) {
+        SQLiteDatabase db = _helper.getWritableDatabase();
+        var sql = "DELETE FROM Categories WHERE _id = ?";
+        SQLiteStatement stmt = db.compileStatement(sql);
+        var id = category.getId();
+        stmt.bindLong(1, id);
+        stmt.executeUpdateDelete();
+    }
     @Override
     public void close() throws Exception {
         _helper.close();

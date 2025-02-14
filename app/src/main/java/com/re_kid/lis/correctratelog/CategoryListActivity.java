@@ -2,10 +2,12 @@ package com.re_kid.lis.correctratelog;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +16,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.re_kid.lis.correctratelog.dialog.CreateCategoryDialogFragment;
+import com.re_kid.lis.correctratelog.dialog.DeleteCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
+import com.re_kid.lis.correctratelog.obj.Category;
 
 public class CategoryListActivity extends AppCompatActivity {
 
@@ -53,5 +57,23 @@ public class CategoryListActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // カテゴリリストアイテムにリスナ登録
+        lvCategory.setOnItemClickListener((parent, view, position, id) -> {
+            // カテゴリを取得
+            SQLiteCursor parentItem = (SQLiteCursor)parent.getItemAtPosition(position);
+            var categoryIdIndex = parentItem.getColumnIndex("_id");
+            var categoryNameIndex = parentItem.getColumnIndex("category_name");
+            var categoryId = parentItem.getInt(categoryIdIndex);
+            var categoryName = parentItem.getString(categoryNameIndex);
+            var category = new Category(categoryId, categoryName);
+            // 削除ダイアログを作成、表示
+            var dialog = new DeleteCategoryDialogFragment();
+            var args = new Bundle();
+            args.putParcelable("category", category);
+            dialog.setArguments(args);
+            dialog.show(getSupportFragmentManager(), "DeleteCategoryDialogFragment");
+        });
+
     }
 }
