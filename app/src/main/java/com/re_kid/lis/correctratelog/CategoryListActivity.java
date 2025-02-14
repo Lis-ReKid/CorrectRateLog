@@ -64,10 +64,10 @@ public class CategoryListActivity extends AppCompatActivity {
             var tvCategoryName = (TextView) findViewById(R.id.tvCategoryNameRow);
             var categoryId = Integer.parseInt(tvCategoryId.getText().toString());
             var categoryName = tvCategoryName.getText().toString();
+            var category = new Category(categoryId, categoryName);
             // 削除ダイアログを作成、表示
             var dialog = new DeleteCategoryDialogFragment();
             var args = new Bundle();
-            var category = new Category(categoryId, categoryName);
             args.putParcelable("category", category);
             dialog.setArguments(args);
             dialog.show(getSupportFragmentManager(), "DeleteCategoryDialogFragment");
