@@ -1,3 +1,55 @@
 <resources>
-    <string name="app_name">AccuracyChecker</string>
+    <!-- General -->
+    <string name="btn_back">前の画面に戻る</string>
+    <string name="tv_slash">/</string>
+    <string name="btn_close">閉じる</string>
+    <string name="btn_cancel">キャンセル</string>
+    <string name="toast_canceled">キャンセルしました。</string>
+    <string name="btn_select">選択</string>
+    <string name="btn_filter_reset">絞り込みを解除</string>
+    <!-- ホーム画面回り -->
+    <string name="app_name">正答率チェッカー</string>
+    <string name="no_data_msg">データがありません。\n学習履歴を登録しましょう！</string>
+    <string name="btn_show_history_create_view">学習履歴を登録する</string>
+    <string name="correct_rate_title">正答率</string>
+    <string name="no_tag_history">タグ未登録の履歴</string>
+    <string name="get_histories_failed_msg">履歴の取得に失敗しました。</string>
+    <string name="dialog_history_detail_title">学習履歴の確認</string>
+    <string name="tv_zero_data_msg">該当する履歴がありませんでした。\n学習履歴を登録しましょう！</string>
+    <!-- 履歴登録回り-->
+    <string name="create_history_header">学習履歴新規登録</string>
+    <string name="tv_learned_date">学習日時</string>
+    <string name="tv_correct_number">正答数</string>
+    <string name="tv_entire_number">問題数</string>
+    <string name="tv_quiz_unit">問</string>
+    <string name="btn_create_history">履歴を登録する</string>
+    <string name="btn_create">登録</string>
+    <string name="dialog_create_confirm_title">以下の内容で登録しますか？</string>
+    <string name="dialog_create_complete_title">登録完了！</string>
+    <string name="dialog_create_complete_positive">続けて登録</string>
+    <string name="dialog_create_complete_neutral">ホームに戻る</string>
+    <string name="create_failed_msg">登録に失敗しました。</string>
+    <string name="toast_not_entered_msg">未入力の項目があります。</string>
+    <!-- 履歴更新回り -->
+    <string name="update_history_header">学習履歴更新</string>
+    <string name="btn_update_history">履歴を更新する</string>
+    <string name="btn_update">更新</string>
+    <string name="update_failed_msg">登録内容の変更に失敗しました。</string>
+    <string name="dialog_update_confirm_title">以下の内容で更新しますか？</string>
+    <string name="dialog_update_complete_title">更新完了！</string>
+    <!-- 削除回り -->
+    <string name="btn_delete">削除</string>
+    <string name="dialog_delete_confirm_msg">本当に削除しますか？</string>
+    <string name="toast_delete_complete">削除しました。</string>
+    <string name="toast_delete_failed">削除に失敗しました。</string>
+    <!-- カテゴリ回り -->
+    <string name="tv_category_list_title">カテゴリ一覧</string>
+    <string name="create_category_title">カテゴリ新規登録</string>
+    <string name="tv_category_create_dialog_msg">カテゴリ名を入力してください\n例：TOEIC、ITパスポート</string>
+    <string name="hint_category_name">新規カテゴリ名</string>
+    <string name="dialog_create_category_confirm_msg">以下のカテゴリを登録しますか？</string>
+    <string name="tv_category_name">カテゴリ名</string>
+    <string name="toast_get_category_failed">カテゴリの取得に失敗しました。</string>
+    <string name="btn_show_category_filter_dialog">カテゴリ選択</string>
+    <string name="title_filter_by_category">カテゴリを選択してください</string>
 </resources>
