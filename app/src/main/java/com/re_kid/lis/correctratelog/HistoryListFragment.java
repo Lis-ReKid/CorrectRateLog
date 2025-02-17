@@ -82,6 +82,7 @@ public class HistoryListFragment extends Fragment {
 
         // 履歴リストにイベントリスナを登録
         lvHistory.setOnItemClickListener(((parent, view1, position, id) -> {
+            ((MainActivity) requireActivity()).enableWaitHandler(1000L, parent);
             // リストの内容を取得
             SQLiteCursor parentText = (SQLiteCursor)parent.getItemAtPosition(position);
             // ダイアログを取得

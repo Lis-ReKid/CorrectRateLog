@@ -3,6 +3,7 @@ package com.re_kid.lis.correctratelog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
@@ -80,5 +81,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .show(getSupportFragmentManager(),
                             "FilterHistoryByCategoryFragment");
         }
+        enableWaitHandler(100L, v);
+    }
+
+    public void enableWaitHandler(long stopTime, final View view) {
+        view.setEnabled(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                view.setEnabled(true);
+            }
+        }, stopTime);
     }
 }
