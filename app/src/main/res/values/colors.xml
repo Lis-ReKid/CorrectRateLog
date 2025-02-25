@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray_dark">#616161</color> <!-- 少し明るめのダークグレー -->
+    <color name="gray_medium">#9E9E9E</color> <!-- ほどよいグレー -->
+    <color name="gray_light">#F5F5F5</color> <!-- かなり明るいグレー -->
 </resources>
