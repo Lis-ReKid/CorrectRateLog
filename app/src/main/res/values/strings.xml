@@ -52,4 +52,8 @@
     <string name="toast_get_category_failed">カテゴリの取得に失敗しました。</string>
     <string name="btn_show_category_filter_dialog">カテゴリ選択</string>
     <string name="title_filter_by_category">カテゴリを選択してください</string>
+    <!-- 通知回り -->
+    <string name="notification_name">学習を応援します</string>
+    <string name="notification_title">勉強、はかどっていますか？</string>
+    <string name="notification_msg">結果を記録して成果を確認しましょう！</string>
 </resources>
