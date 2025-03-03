@@ -131,8 +131,21 @@ public class CreateHistoryActivity extends AppCompatActivity
         }
         var learnedDate = LearnedDate.parse(textLearnedDate.toString());
         var learnedTime = LearnedTime.parse(textLearnedTime.toString());
-        var correctNum = Integer.parseInt(textCorrectNum.toString());
-        var entireNum = Integer.parseInt(textEntireNum.toString());
+        int correctNum = 0;
+        int entireNum = 1;
+        // intの範囲内かチェック
+        try {
+        correctNum = Integer.parseInt(textCorrectNum.toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, getString(R.string.toast_validation_correct_num), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
+            entireNum = Integer.parseInt(textEntireNum.toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, getString(R.string.toast_validation_entire_num), Toast.LENGTH_SHORT).show();
+            return;
+        }
         CorrectRate correctRate;
         History history;
         // 正答率を取得
