@@ -75,6 +75,8 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
         @WorkerThread
         @Override
         public void run() {
+            // Android8.0以上のみ
+            // 通知チャネルを作成
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                 NotificationChannel channel = new NotificationChannel("remindNotification",
                         "remindNotification",
@@ -82,10 +84,12 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
                 NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(channel);
             }
+            // 通知タップ時のアクションを作成
             Intent intent = new Intent(getContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(getContext() ,0, intent,
                     PendingIntent.FLAG_IMMUTABLE);
+            // 通知のビルダを作成
             NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "remindNotification")
                     .setSmallIcon(R.drawable.stylus_note_24dp_e8eaed_fill0_wght400_grad0_opsz24)
                     .setContentTitle(getString(R.string.notification_title))
@@ -93,18 +97,23 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
+            // マネージャを作成
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
+            // 通知の許可を確認
             if(ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.POST_NOTIFICATIONS)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.POST_NOTIFICATIONS},
                         1);
+                return;
             }
+            // 24時間待機
             try {
                 Thread.sleep(86400000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            // 通知を発行
             notificationManagerCompat.notify(1001, builder.build());
         }
     }
