@@ -1,9 +1,15 @@
 package com.re_kid.lis.correctratelog;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CursorAdapter;
@@ -17,7 +23,11 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -31,6 +41,9 @@ import com.re_kid.lis.correctratelog.obj.CorrectRate;
 import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.LearnedDate;
 import com.re_kid.lis.correctratelog.obj.LearnedTime;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CreateHistoryActivity extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -154,6 +167,11 @@ public class CreateHistoryActivity extends AppCompatActivity
         var dialogFragment = new CreateHistoryConfirmDialogFragment();
         dialogFragment.setArguments(bundle);
         dialogFragment.show(getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
+
+        // 1日後に通知
+        RemindNotification notification = new RemindNotification();
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.submit(notification);
     }
 
     @Override
@@ -173,5 +191,42 @@ public class CreateHistoryActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+    class RemindNotification implements Runnable {
+        @WorkerThread
+        @Override
+        public void run() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                NotificationChannel channel = new NotificationChannel("remindNotification",
+                        "remindNotification",
+                        NotificationManager.IMPORTANCE_DEFAULT);
+                NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                notificationManager.createNotificationChannel(channel);
+            }
+            Intent intent = new Intent(CreateHistoryActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(CreateHistoryActivity.this ,0, intent,
+                    PendingIntent.FLAG_IMMUTABLE);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(CreateHistoryActivity.this, "remindNotification")
+                    .setSmallIcon(R.drawable.stylus_note_24dp_e8eaed_fill0_wght400_grad0_opsz24)
+                    .setContentTitle(getString(R.string.notification_title))
+                    .setContentText(getString(R.string.notification_msg))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(CreateHistoryActivity.this);
+            if(ActivityCompat.checkSelfPermission(CreateHistoryActivity.this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(CreateHistoryActivity.this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        1);
+            }
+            try {
+                Thread.sleep(86400000 );
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            notificationManagerCompat.notify(1001, builder.build());
+        }
     }
 }
