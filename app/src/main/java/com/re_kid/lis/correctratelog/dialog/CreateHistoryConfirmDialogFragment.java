@@ -1,18 +1,33 @@
 package com.re_kid.lis.correctratelog.dialog;
 
+import android.Manifest;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 
+import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.History;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CreateHistoryConfirmDialogFragment extends DialogFragment {
     private History _history;
@@ -46,10 +61,51 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), R.string.create_failed_msg, Toast.LENGTH_SHORT).show();
                 }
+                // 1日後に通知
+                RemindNotification notification = new RemindNotification();
+                ExecutorService service = Executors.newSingleThreadExecutor();
+                service.submit(notification);
                 // 登録完了ダイアログを表示
                 var dialogFragment = new CreateHistoryCompleteDialogFragment();
                 dialogFragment.show(getActivity().getSupportFragmentManager(), "CreateHistoryConfirmDialogFragment");
             }
+        }
+    }
+    class RemindNotification implements Runnable {
+        @WorkerThread
+        @Override
+        public void run() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                NotificationChannel channel = new NotificationChannel("remindNotification",
+                        "remindNotification",
+                        NotificationManager.IMPORTANCE_DEFAULT);
+                NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+                notificationManager.createNotificationChannel(channel);
+            }
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(getContext() ,0, intent,
+                    PendingIntent.FLAG_IMMUTABLE);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "remindNotification")
+                    .setSmallIcon(R.drawable.stylus_note_24dp_e8eaed_fill0_wght400_grad0_opsz24)
+                    .setContentTitle(getString(R.string.notification_title))
+                    .setContentText(getString(R.string.notification_msg))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
+            if(ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        1);
+            }
+            try {
+                Thread.sleep(86400000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            notificationManagerCompat.notify(1001, builder.build());
         }
     }
 }
