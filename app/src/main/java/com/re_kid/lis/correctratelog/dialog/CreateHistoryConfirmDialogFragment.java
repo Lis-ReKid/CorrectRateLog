@@ -102,9 +102,6 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
             // 通知の許可を確認
             if(ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.POST_NOTIFICATIONS)
                     != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
-                        1);
                 return;
             }
             // 24時間待機
