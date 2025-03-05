@@ -80,6 +80,7 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                 NotificationChannel channel = new NotificationChannel("remindNotification",
                         "remindNotification",
+                        getString(R.string.notification_name),
                         NotificationManager.IMPORTANCE_DEFAULT);
                 NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
                 notificationManager.createNotificationChannel(channel);
