@@ -72,14 +72,14 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
         }
     }
     class RemindNotification implements Runnable {
+        String CHANNEL_ID = "remindNotification";
         @WorkerThread
         @Override
         public void run() {
             // Android8.0以上のみ
             // 通知チャネルを作成
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                NotificationChannel channel = new NotificationChannel("remindNotification",
-                        "remindNotification",
+                NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
                         getString(R.string.notification_name),
                         NotificationManager.IMPORTANCE_DEFAULT);
                 NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
