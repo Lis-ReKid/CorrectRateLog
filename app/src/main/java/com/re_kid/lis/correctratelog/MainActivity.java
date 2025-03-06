@@ -2,7 +2,6 @@ package com.re_kid.lis.correctratelog;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.re_kid.lis.correctratelog.dialog.DataMigrationDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.FilterHistoryByCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.FirstCreateCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
@@ -67,6 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
+        // データ移行ボタンリスナ登録
+        findViewById(R.id.btnMoveToMigrationDialog).setOnClickListener(view -> {
+            DataMigrationDialogFragment migrationDialog = new DataMigrationDialogFragment();
+            migrationDialog.show(getSupportFragmentManager(), "DataMigrationDialogFragment");
+        });
 
         // 初回のみ通知権限をリクエスト
         requestNotificationPermissionIfNeeded();
