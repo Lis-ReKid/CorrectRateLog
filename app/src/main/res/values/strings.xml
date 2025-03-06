@@ -56,4 +56,6 @@
     <string name="notification_name">学習を応援します！</string>
     <string name="notification_title">勉強、はかどっていますか？</string>
     <string name="notification_msg">結果を記録して成果を確認しましょう！</string>
+    <!-- データ移行 -->
+    <string name="btn_migration">データ移行はこちら</string>
 </resources>
