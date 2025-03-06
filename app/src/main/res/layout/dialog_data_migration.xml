@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvMigrationFrom" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvMigrationTo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnConfirmMigrationId"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMigrationTo" />
 
     <Button
         android:id="@+id/btnConfirmMigrationId"
@@ -60,6 +60,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/etMigrationId"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMigrationTo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
