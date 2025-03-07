@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +24,21 @@ public class MigrationDialogFragment extends DialogFragment {
         View view = requireActivity().getLayoutInflater()
                 .inflate(R.layout.form_migration_id, null);
         // データ移行ID確定ボタンリスナ登録
-        view.findViewById(R.id.btnConfirmMigrationId).setOnClickListener(new MigrateConfirmListener());
+        view.findViewById(R.id.btnConfirmMigrationId).setOnClickListener(v -> {
+            var result = false;
+            // 何らかの処理
+            EditText etMigrationId = view.findViewById(R.id.etMigrationId);
+            if (etMigrationId.getText().toString().isEmpty())return;
+            // データ移行に成功したらメイン画面をリロード
+            if (result) {
+                var intent = new Intent(getActivity(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return;
+            }
+            var dialog = new MigrationFailedDialogFragment();
+            dialog.show(getActivity().getSupportFragmentManager(), "MigrationDialogFragment");
+        });
         // ダイアログをビルド
         var listener = new ButtonClickListener();
         builder.setTitle(R.string.dialog_title_migration)
