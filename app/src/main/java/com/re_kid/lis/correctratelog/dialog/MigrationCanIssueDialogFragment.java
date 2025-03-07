@@ -21,6 +21,15 @@ public class MigrationCanIssueDialogFragment extends MigrationDialogFragment {
         // カスタムビューをインフレート
         View view = requireActivity().getLayoutInflater()
                 .inflate(R.layout.dialog_data_migration, null);
+        // データ移行ID発行ボタンリスナ登録
+        view.findViewById(R.id.btnIssueId).setOnClickListener(v -> {
+            String migrationId = "testpass";
+            var dialog = new MigrationIdIssuedDialogFragment();
+            var args = new Bundle();
+            args.putString("migrationId", migrationId);
+            dialog.setArguments(args);
+            dialog.show(getActivity().getSupportFragmentManager(), "MigragionIdIssuedDialogFragment");
+        });
         // データ移行ID確定ボタンリスナ登録
         view.findViewById(R.id.btnConfirmMigrationId).setOnClickListener(v -> {
             var result = false;

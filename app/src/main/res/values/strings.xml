@@ -64,4 +64,6 @@
     <string name="tv_migration_to">古い端末からデータを引き継ぐ</string>
     <string name="btn_issue_id">IDを発行する</string>
     <string name="dialog_migration_failed">データ移行に失敗しました</string>
+    <string name="dialog_migration_id_issued">IDを発行しました</string>
+    <string name="dialog_migration_id_annotation">※IDの有効期限は2週間です</string>
 </resources>
