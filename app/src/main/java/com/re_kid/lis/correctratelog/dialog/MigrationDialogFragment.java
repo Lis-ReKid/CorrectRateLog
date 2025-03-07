@@ -2,6 +2,7 @@ package com.re_kid.lis.correctratelog.dialog;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
 
 public class MigrationDialogFragment extends DialogFragment {
@@ -20,6 +22,8 @@ public class MigrationDialogFragment extends DialogFragment {
         // カスタムビューをインフレート
         View view = requireActivity().getLayoutInflater()
                 .inflate(R.layout.form_migration_id, null);
+        // データ移行ID確定ボタンリスナ登録
+        view.findViewById(R.id.btnConfirmMigrationId).setOnClickListener(new MigrateConfirmListener());
         // ダイアログをビルド
         var listener = new ButtonClickListener();
         builder.setTitle(R.string.dialog_title_migration)
@@ -27,6 +31,23 @@ public class MigrationDialogFragment extends DialogFragment {
                 .setNegativeButton(R.string.btn_cancel, listener);
         this.setCancelable(false);
         return builder.create();
+    }
+
+    protected class MigrateConfirmListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            var result = false;
+            // 何らかの処理
+            // データ移行に成功したらメイン画面をリロード
+            if (result) {
+                var intent = new Intent(getActivity(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return;
+            }
+            var dialog = new MigrationFailedDialogFragment();
+            dialog.show(getActivity().getSupportFragmentManager(), "MigrationDialogFragment");
+        }
     }
 
     private class ButtonClickListener implements DialogInterface.OnClickListener {

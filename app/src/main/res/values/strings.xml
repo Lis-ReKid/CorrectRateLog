@@ -63,4 +63,5 @@
     <string name="tv_migration_from">新しい端末にデータを引き継ぐ</string>
     <string name="tv_migration_to">古い端末からデータを引き継ぐ</string>
     <string name="btn_issue_id">IDを発行する</string>
+    <string name="dialog_migration_failed">データ移行に失敗しました</string>
 </resources>
