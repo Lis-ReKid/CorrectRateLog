@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.re_kid.lis.correctratelog.R;
 
-public class DataMigrationDialogFragment extends DialogFragment {
+public class MigrationCanIssueDialogFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

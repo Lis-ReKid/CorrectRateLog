@@ -18,7 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.re_kid.lis.correctratelog.dialog.DataMigrationDialogFragment;
+import com.re_kid.lis.correctratelog.dialog.MigrationCanIssueDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.FilterHistoryByCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.FirstCreateCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // データ移行ボタンリスナ登録
         findViewById(R.id.btnMoveToMigrationDialog).setOnClickListener(view -> {
-            DataMigrationDialogFragment migrationDialog = new DataMigrationDialogFragment();
+            MigrationCanIssueDialogFragment migrationDialog = new MigrationCanIssueDialogFragment();
             migrationDialog.show(getSupportFragmentManager(), "DataMigrationDialogFragment");
         });
 
