@@ -16,8 +16,10 @@ public class DataMigrationDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         var builder = new AlertDialog.Builder(getActivity());
+        // カスタムビューをインフレート
         View view = requireActivity().getLayoutInflater()
                 .inflate(R.layout.dialog_data_migration, null);
+        // ダイアログをビルド
         builder.setTitle(R.string.dialog_title_migration)
                 .setView(view);
         return builder.create();
