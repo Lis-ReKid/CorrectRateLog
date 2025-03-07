@@ -7,11 +7,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 
 import com.re_kid.lis.correctratelog.R;
 
-public class MigrationCanIssueDialogFragment extends DialogFragment {
+public class MigrationCanIssueDialogFragment extends MigrationDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
