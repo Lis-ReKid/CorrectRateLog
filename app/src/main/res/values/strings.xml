@@ -31,6 +31,8 @@
     <string name="dialog_create_complete_neutral">ホームに戻る</string>
     <string name="create_failed_msg">登録に失敗しました。</string>
     <string name="toast_not_entered_msg">未入力の項目があります。</string>
+    <string name="toast_validation_correct_num">正答数の値が不正です。</string>
+    <string name="toast_validation_entire_num">問題数の値が不正です。</string>
     <!-- 履歴更新回り -->
     <string name="update_history_header">学習履歴更新</string>
     <string name="btn_update_history">履歴を更新する</string>
