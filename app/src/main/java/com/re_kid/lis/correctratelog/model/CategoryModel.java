@@ -22,7 +22,7 @@ public class CategoryModel implements AutoCloseable{
                 "(category_name)" +
                 "VALUES (?)";
         SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindString(1, category.getName());
+        stmt.bindString(1, category.getCategoryName());
         // SQLを実行
         stmt.executeInsert();
     }

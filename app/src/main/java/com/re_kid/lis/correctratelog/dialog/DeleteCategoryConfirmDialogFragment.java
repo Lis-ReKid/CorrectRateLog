@@ -25,7 +25,7 @@ public class DeleteCategoryConfirmDialogFragment extends DialogFragment {
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new DeleteCategoryConfirmDialogOnClickListener();
         builder.setTitle(R.string.dialog_delete_confirm_msg)
-                .setMessage(_category.getName())
+                .setMessage(_category.getCategoryName())
                 .setPositiveButton(R.string.btn_delete, listener)
                 .setNeutralButton(R.string.btn_cancel, listener);
         return builder.create();

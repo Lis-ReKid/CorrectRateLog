@@ -1,22 +1,26 @@
 package com.re_kid.lis.correctratelog.obj;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category implements Parcelable {
     private final int id;
-    private final String name;
+    private final String categoryName;
 
     public Category(int id, String name) {
         this.id = id;
-        this.name = name;
+        this.categoryName = name;
     }
 
     protected Category(Parcel in) {
         id = in.readInt();
-        name = in.readString();
+        categoryName = in.readString();
     }
 
     public static final Creator<Category> CREATOR = new Creator<>() {
@@ -35,8 +39,8 @@ public class Category implements Parcelable {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
     @Override
@@ -47,6 +51,23 @@ public class Category implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeString(name);
+        dest.writeString(categoryName);
+    }
+
+    public static Category parse(Cursor cursor) {
+        var idIndex = cursor.getColumnIndex("_id");
+        var id = cursor.getInt(idIndex);
+        var categoryNameIndex = cursor.getColumnIndex("category_name");
+        var categoryName = cursor.getString(categoryNameIndex);
+        return new Category(id, categoryName);
+    }
+
+    public static List<Category> getCategories(Cursor cursor) {
+        List<Category> list = new ArrayList<>();
+        while(cursor.moveToNext()) {
+            // Historyオブジェクトを生成してListに格納
+            list.add(Category.parse(cursor));
+        }
+        return list;
     }
 }

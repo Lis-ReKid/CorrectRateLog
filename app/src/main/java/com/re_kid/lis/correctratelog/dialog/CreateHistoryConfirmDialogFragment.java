@@ -1,6 +1,5 @@
 package com.re_kid.lis.correctratelog.dialog;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -38,7 +37,7 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new CreateHistoryConfirmButtonClickListener();
         builder.setTitle(R.string.dialog_create_confirm_title);
-        builder.setMessage(getText(R.string.tv_category_name) + "：" + _history.getCategory().getName() + "\n" +
+        builder.setMessage(getText(R.string.tv_category_name) + "：" + _history.getCategory().getCategoryName() + "\n" +
                 getText(R.string.tv_learned_date) + " : " + _history.getLearnedDate().toString() + " " +
                 _history.getLearnedTime().toString() + "\n" +
                 getText(R.string.tv_correct_number) + " : " + _history.getCorrectNum() + getText(R.string.tv_quiz_unit) + "\n" +

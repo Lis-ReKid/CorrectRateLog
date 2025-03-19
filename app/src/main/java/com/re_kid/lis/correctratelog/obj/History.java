@@ -6,9 +6,13 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.re_kid.lis.correctratelog.serializer.HistorySerializer;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonSerialize(using = HistorySerializer.class)
 public class History implements Parcelable {
     private final int id;
     private final Category category;
