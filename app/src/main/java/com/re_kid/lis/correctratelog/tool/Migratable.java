@@ -51,7 +51,6 @@ public interface Migratable {
             os = con.getOutputStream();
             os.write(migrateDataJson.getBytes(StandardCharsets.UTF_8));
             os.flush();
-            System.out.println(con.getResponseCode());
             is = con.getInputStream();
             return IOUtils.toString(is, StandardCharsets.UTF_8);
         } catch (MalformedURLException e) {
