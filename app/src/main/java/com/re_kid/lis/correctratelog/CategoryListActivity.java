@@ -46,7 +46,8 @@ public class CategoryListActivity extends AppCompatActivity {
         int[] to = {R.id.tvCategoryIdRow, R.id.tvCategoryNameRow};
         Context context = CategoryListActivity.this;
         Cursor cursor;
-        try (var model = new CategoryModel(context)) {
+        try {
+            var model = new CategoryModel(DatabaseHelper.getSQLiteDatabase(context));
             cursor = model.selectAll();
             var adapter = new SimpleCursorAdapter(CategoryListActivity.this,
                     R.layout.category_row,

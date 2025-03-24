@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         // カテゴリ件数チェック
-        try (var model = new CategoryModel(MainActivity.this)) {
+        try {
+            var model = new CategoryModel(DatabaseHelper.getSQLiteDatabase(MainActivity.this));
             Cursor cursor = model.selectAll();
             // カテゴリ未登録の時、登録ダイアログを表示
             if(cursor.getCount() == 0) {
@@ -51,7 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         // フラグメントの取得
-        try(HistoryModel model = new HistoryModel(MainActivity.this)) {
+        try {
+            HistoryModel model = new HistoryModel(DatabaseHelper.getSQLiteDatabase(MainActivity.this));
             Cursor cursor = model.selectAll();
             int count = cursor.getCount();
             FragmentManager manager = getSupportFragmentManager();

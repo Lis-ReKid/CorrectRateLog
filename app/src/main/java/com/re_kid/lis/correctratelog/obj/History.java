@@ -3,9 +3,12 @@ package com.re_kid.lis.correctratelog.obj;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.re_kid.lis.correctratelog.serializer.HistorySerializer;
 
@@ -144,5 +147,19 @@ public class History implements Parcelable {
             list.add(History.parse(cursor));
         }
         return list;
+    }
+
+    public static List<History> stringList2CategoryList(List<String> historyStrings) {
+        List<History> historyList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
+        for (String historyString : historyStrings) {
+            try {
+                historyList.add(mapper.readValue(historyString, History.class));
+            } catch (JsonProcessingException e) {
+                Log.e("JSONError", "HistoryクラスのJSON変換に失敗しました。");
+                throw new RuntimeException(e);
+            }
+        }
+        return historyList;
     }
 }

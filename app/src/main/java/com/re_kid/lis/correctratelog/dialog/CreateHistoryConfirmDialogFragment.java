@@ -20,6 +20,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 
+import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
@@ -53,7 +54,8 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
             // 登録を確定
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // DB登録
-                try(var model = new HistoryModel(getActivity())) {
+                try{
+                    var model = new HistoryModel(DatabaseHelper.getSQLiteDatabase(getActivity()));
                     var history = new History(0, _history.getCategory(), _history.getLearnedDate(), _history.getLearnedTime(),
                             _history.getCorrectNum(), _history.getEntireNum(), _history.getCorrectRate());
                     model.createHistory(history);

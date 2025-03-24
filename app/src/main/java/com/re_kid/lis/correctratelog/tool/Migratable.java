@@ -1,10 +1,12 @@
 package com.re_kid.lis.correctratelog.tool;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.Category;
@@ -24,10 +26,10 @@ import java.nio.charset.StandardCharsets;
 public interface Migratable {
     default String issueId(Context context) throws JsonProcessingException {
         // Historyリストを取得
-        var historyModel = new HistoryModel(context);
+        var historyModel = new HistoryModel(DatabaseHelper.getSQLiteDatabase(context));
         var histories = History.getHistories(historyModel.selectAll());
         // Categoryリストを取得
-        var categoryModel = new CategoryModel(context);
+        var categoryModel = new CategoryModel(DatabaseHelper.getSQLiteDatabase(context));
         var categories = Category.getCategories(categoryModel.selectAll());
         // データ移行クラスを取得
         var migrationData = new MigrationData(histories, categories);

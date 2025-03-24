@@ -3,8 +3,12 @@ package com.re_kid.lis.correctratelog.obj;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,5 +73,19 @@ public class Category implements Parcelable {
             list.add(Category.parse(cursor));
         }
         return list;
+    }
+
+    public static List<Category> stringList2CategoryList(List<String> categoryStrings) {
+        List<Category> categoryList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
+        for (String categorystring : categoryStrings) {
+            try {
+                categoryList.add(mapper.readValue(categorystring, Category.class));
+            } catch (JsonProcessingException e) {
+                Log.e("JSONError", "CategoryクラスのJSON変換に失敗しました。");
+                throw new RuntimeException(e);
+            }
+        }
+        return categoryList;
     }
 }

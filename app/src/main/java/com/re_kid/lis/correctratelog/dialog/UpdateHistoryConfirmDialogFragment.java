@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.History;
@@ -39,7 +40,8 @@ public class UpdateHistoryConfirmDialogFragment extends DialogFragment {
             // 更新を確定
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 // DB更新
-                try (var model = new HistoryModel(getActivity())) {
+                try {
+                    var model = new HistoryModel(DatabaseHelper.getSQLiteDatabase(getActivity()));
                     var history = new History(_history.getId(), _history.getCategory(), _history.getLearnedDate(), _history.getLearnedTime(),
                             _history.getCorrectNum(), _history.getEntireNum(), _history.getCorrectRate());
                     model.update(history);
