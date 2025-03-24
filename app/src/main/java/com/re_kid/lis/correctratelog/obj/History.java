@@ -9,13 +9,16 @@ import androidx.annotation.NonNull;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.re_kid.lis.correctratelog.serializer.HistoryDeserializer;
 import com.re_kid.lis.correctratelog.serializer.HistorySerializer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @JsonSerialize(using = HistorySerializer.class)
+@JsonDeserialize(using = HistoryDeserializer.class)
 public class History implements Parcelable {
     private final int id;
     private final Category category;
@@ -25,6 +28,16 @@ public class History implements Parcelable {
     private final int entireNum;
     private final CorrectRate correctRate;
     private final static int MAX = 9999;
+
+    public History() {
+        this.id = 0;
+        this.category = null;
+        this.learnedDate = null;
+        this.learnedTime = null;
+        this.correctNum = 0;
+        this.entireNum = 0;
+        this.correctRate = null;
+    }
 
     public History(int id, Category category, LearnedDate learnedDate, LearnedTime learnedTime,
                    int correctNum, int entireNum, CorrectRate correctRate) {

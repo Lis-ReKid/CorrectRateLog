@@ -14,8 +14,16 @@ import androidx.fragment.app.DialogFragment;
 
 import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
+import com.re_kid.lis.correctratelog.tool.Migratable;
 
-public class MigrationDialogFragment extends DialogFragment {
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class MigrationDialogFragment extends DialogFragment implements Migratable {
+    String _ID;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -26,17 +34,29 @@ public class MigrationDialogFragment extends DialogFragment {
         // データ移行ID確定ボタンリスナ登録
         view.findViewById(R.id.btnConfirmMigrationId).setOnClickListener(v -> {
             var result = false;
-            // 何らかの処理
+            // 入力チェック
             EditText etMigrationId = view.findViewById(R.id.etMigrationId);
             if (etMigrationId.getText().toString().isEmpty())return;
-            // データ移行に成功したらメイン画面をリロード
-            if (etMigrationId.getText().toString().equals("testpass")) result = true;
+            // データを移行
+            _ID = etMigrationId.getText().toString();
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
+            Future<Boolean> future = executorService.submit(new migrateConnection());
+            // 移行可否を取得
+            try {
+                result = future.get();
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            // データ移行成功でメイン画面をリロード
             if (result) {
                 var intent = new Intent(getActivity(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return;
             }
+            // データ移行失敗でダイアログを表示
             var dialog = new MigrationFailedDialogFragment();
             dialog.show(getActivity().getSupportFragmentManager(), "MigrationDialogFragment");
         });
@@ -71,6 +91,13 @@ public class MigrationDialogFragment extends DialogFragment {
         public void onClick(DialogInterface dialogInterface, int i) {
             var dialog = new FirstCreateCategoryDialogFragment();
             dialog.show(getActivity().getSupportFragmentManager(), "FirstCreateCategoryDialogFragment");
+        }
+    }
+
+    private class migrateConnection implements Callable<Boolean> {
+        @Override
+        public Boolean call() throws Exception {
+            return migrate(getContext(), _ID);
         }
     }
 }

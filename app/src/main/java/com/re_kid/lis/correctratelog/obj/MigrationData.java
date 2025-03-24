@@ -11,6 +11,10 @@ import java.util.List;
 public class MigrationData {
     private final List<String> histories;
     private final List<String> categories;
+    public MigrationData(){
+        this.histories = null;
+        this.categories = null;
+    }
 
     public MigrationData(List<History> histories, List<Category> categories) {
         var mapper = new ObjectMapper();

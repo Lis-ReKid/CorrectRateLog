@@ -16,6 +16,10 @@ import java.util.List;
 public class Category implements Parcelable {
     private final int id;
     private final String categoryName;
+    public Category() {
+        this.id = 0;
+        categoryName = null;
+    }
 
     public Category(int id, String name) {
         this.id = id;

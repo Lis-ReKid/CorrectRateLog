@@ -20,8 +20,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public interface Migratable {
     default String issueId(Context context) throws JsonProcessingException {
@@ -70,5 +72,56 @@ public interface Migratable {
             // InputStreamを解放
             IOUtils.closeQuietly(is);
         }
+    }
+
+    default boolean migrate(Context context, String id) {
+        boolean result = false;
+        // 移行データを取得
+        HttpURLConnection con = null;
+        InputStream is = null;
+        MigrationData data = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            URL url = new URL("http://10.0.2.2:8080/migrate/" + id);
+            con = (HttpURLConnection) url.openConnection();
+//            con.setConnectTimeout(3000);
+//            con.setReadTimeout(3000);
+            con.setRequestMethod("GET");
+            con.connect();
+            // 該当データがない時引継ぎ失敗
+            if (con.getResponseCode() == 404) return false;
+            is = con.getInputStream();
+            data = mapper.readValue(is, MigrationData.class);
+        } catch (MalformedURLException e) {
+            Log.e("MalformedURLException", "URL変換エラー");
+        } catch (ProtocolException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        List<Category> categoryList = Category.stringList2CategoryList(data.getCategories());
+        List<History> historyList = History.stringList2CategoryList(data.getHistories());
+        SQLiteDatabase db = DatabaseHelper.getSQLiteDatabase(context);
+        try {
+            // トランザクション開始
+            db.beginTransaction();
+            // Model取得
+            CategoryModel categoryModel = new CategoryModel(db);
+            HistoryModel historyModel = new HistoryModel(db);
+            // 既存のデータ全部消す
+            categoryModel.deleteAll();
+            historyModel.deleteAll();
+            // 新規データ入れる
+            categoryModel.migrate(categoryList);
+            historyModel.migrate(historyList);
+            // トランザクション成功をマーク
+            db.setTransactionSuccessful();
+            result = true;
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+        // トランザクション終了
+        return result;
     }
 }

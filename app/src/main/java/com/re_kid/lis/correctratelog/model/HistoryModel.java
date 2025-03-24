@@ -1,13 +1,13 @@
 package com.re_kid.lis.correctratelog.model;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
-import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.obj.Category;
 import com.re_kid.lis.correctratelog.obj.History;
+
+import java.util.List;
 
 public class HistoryModel{
     SQLiteDatabase _db;
@@ -68,5 +68,30 @@ public class HistoryModel{
         SQLiteStatement stmt = _db.compileStatement(sqlDelete);
         stmt.bindLong(1, id);
         stmt.executeUpdateDelete();
+    }
+
+    public void deleteAll() {
+        var sqlDelete = "DELETE FROM Histories";
+        SQLiteStatement stmt = _db.compileStatement(sqlDelete);
+        stmt.executeUpdateDelete();
+    }
+
+    public void migrate(List<History> historyList) {
+        for (History history : historyList) {
+            // SQLを作成
+            var sqlInsert = "INSERT INTO Histories " +
+                    "(_id, category_id, learned_date, learned_time, correct_number, entire_number, correct_rate)" +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?)";
+            SQLiteStatement stmt = _db.compileStatement(sqlInsert);
+            stmt.bindLong(1, history.getId());
+            stmt.bindLong(2, history.getCategory().getId());
+            stmt.bindString(3, history.getLearnedDate().toString());
+            stmt.bindString(4, history.getLearnedTime().toString());
+            stmt.bindLong(5, history.getCorrectNum());
+            stmt.bindLong(6, history.getEntireNum());
+            stmt.bindDouble(7, history.getCorrectRate().getCorrectRate());
+            // SQLを実行
+            stmt.executeInsert();
+        }
     }
 }
