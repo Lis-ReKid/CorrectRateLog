@@ -67,6 +67,8 @@ public interface Migratable {
             }
             // OutputStreamを解放
             IOUtils.closeQuietly(os);
+            // InputStreamを解放
+            IOUtils.closeQuietly(is);
         }
     }
 }
