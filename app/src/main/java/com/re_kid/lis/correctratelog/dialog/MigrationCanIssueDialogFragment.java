@@ -35,7 +35,7 @@ public class MigrationCanIssueDialogFragment extends MigrationDialogFragment imp
             String migrationId = "testpass";
             // GreetingオブジェクトをJSONで取得
             ExecutorService executorService = Executors.newSingleThreadExecutor();
-            Future<String> future = executorService.submit(new GreetingConnection());
+            Future<String> future = executorService.submit(new migrateConnection());
             try {
                 migrationId = future.get();
             } catch (ExecutionException e) {
@@ -72,11 +72,11 @@ public class MigrationCanIssueDialogFragment extends MigrationDialogFragment imp
         return builder.create();
     }
 
-    private class GreetingConnection implements Callable<String> {
+    private class migrateConnection implements Callable<String> {
         @Override
         @WorkerThread
         public String call() throws JsonProcessingException {
-            var greeting =  getGreeting(getContext());
+            var greeting =  issueId(getContext());
             return greeting;
         }
     }

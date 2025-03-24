@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.Category;
-import com.re_kid.lis.correctratelog.obj.Greeting;
 import com.re_kid.lis.correctratelog.obj.History;
 import com.re_kid.lis.correctratelog.obj.MigrationData;
 
@@ -23,7 +22,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public interface Migratable {
-    default String getGreeting(Context context) throws JsonProcessingException {
+    default String issueId(Context context) throws JsonProcessingException {
         // Historyリストを取得
         var historyModel = new HistoryModel(context);
         var histories = History.getHistories(historyModel.selectAll());
