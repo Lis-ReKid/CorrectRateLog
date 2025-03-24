@@ -32,7 +32,7 @@ public class MigrationCanIssueDialogFragment extends MigrationDialogFragment imp
                 .inflate(R.layout.dialog_data_migration, null);
         // データ移行ID発行ボタンリスナ登録
         view.findViewById(R.id.btnIssueId).setOnClickListener(v -> {
-            String migrationId = "testpass";
+            String migrationId = null;
             // GreetingオブジェクトをJSONで取得
             ExecutorService executorService = Executors.newSingleThreadExecutor();
             Future<String> future = executorService.submit(new migrateConnection());
