@@ -89,8 +89,8 @@ public class MigrationCanIssueDialogFragment extends MigrationDialogFragment imp
         @Override
         @WorkerThread
         public String call() throws JsonProcessingException {
-            var greeting =  issueId(getContext());
-            return greeting;
+            var id =  issueId(getContext());
+            return id;
         }
     }
 
