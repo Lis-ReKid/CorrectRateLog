@@ -3,12 +3,22 @@ package com.re_kid.lis.correctratelog.obj;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.re_kid.lis.correctratelog.serializer.HistoryDeserializer;
+import com.re_kid.lis.correctratelog.serializer.HistorySerializer;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonSerialize(using = HistorySerializer.class)
+@JsonDeserialize(using = HistoryDeserializer.class)
 public class History implements Parcelable {
     private final int id;
     private final Category category;
@@ -18,6 +28,16 @@ public class History implements Parcelable {
     private final int entireNum;
     private final CorrectRate correctRate;
     private final static int MAX = 9999;
+
+    public History() {
+        this.id = 0;
+        this.category = null;
+        this.learnedDate = null;
+        this.learnedTime = null;
+        this.correctNum = 0;
+        this.entireNum = 0;
+        this.correctRate = null;
+    }
 
     public History(int id, Category category, LearnedDate learnedDate, LearnedTime learnedTime,
                    int correctNum, int entireNum, CorrectRate correctRate) {
@@ -140,5 +160,19 @@ public class History implements Parcelable {
             list.add(History.parse(cursor));
         }
         return list;
+    }
+
+    public static List<History> stringList2CategoryList(List<String> historyStrings) {
+        List<History> historyList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
+        for (String historyString : historyStrings) {
+            try {
+                historyList.add(mapper.readValue(historyString, History.class));
+            } catch (JsonProcessingException e) {
+                Log.e("JSONError", "HistoryクラスのJSON変換に失敗しました。");
+                throw new RuntimeException(e);
+            }
+        }
+        return historyList;
     }
 }

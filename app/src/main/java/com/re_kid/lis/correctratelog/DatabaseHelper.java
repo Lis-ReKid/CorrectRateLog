@@ -47,6 +47,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public static SQLiteDatabase getSQLiteDatabase(Context context) {
+        DatabaseHelper db = new DatabaseHelper(context);
+        return db.getWritableDatabase();
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_HISTORIES);

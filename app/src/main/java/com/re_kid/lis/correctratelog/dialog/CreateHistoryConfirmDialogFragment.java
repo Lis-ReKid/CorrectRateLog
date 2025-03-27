@@ -1,6 +1,5 @@
 package com.re_kid.lis.correctratelog.dialog;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -21,6 +20,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 
+import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.MainActivity;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
@@ -38,7 +38,7 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new CreateHistoryConfirmButtonClickListener();
         builder.setTitle(R.string.dialog_create_confirm_title);
-        builder.setMessage(getText(R.string.tv_category_name) + "：" + _history.getCategory().getName() + "\n" +
+        builder.setMessage(getText(R.string.tv_category_name) + "：" + _history.getCategory().getCategoryName() + "\n" +
                 getText(R.string.tv_learned_date) + " : " + _history.getLearnedDate().toString() + " " +
                 _history.getLearnedTime().toString() + "\n" +
                 getText(R.string.tv_correct_number) + " : " + _history.getCorrectNum() + getText(R.string.tv_quiz_unit) + "\n" +
@@ -54,7 +54,8 @@ public class CreateHistoryConfirmDialogFragment extends DialogFragment {
             // 登録を確定
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // DB登録
-                try(var model = new HistoryModel(getActivity())) {
+                try{
+                    var model = new HistoryModel(DatabaseHelper.getSQLiteDatabase(getActivity()));
                     var history = new History(0, _history.getCategory(), _history.getLearnedDate(), _history.getLearnedTime(),
                             _history.getCorrectNum(), _history.getEntireNum(), _history.getCorrectRate());
                     model.createHistory(history);

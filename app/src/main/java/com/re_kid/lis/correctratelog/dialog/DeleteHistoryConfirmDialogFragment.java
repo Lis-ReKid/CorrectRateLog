@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 
@@ -36,7 +37,8 @@ public class DeleteHistoryConfirmDialogFragment extends DialogFragment {
             // 削除ボタンを押下
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // 削除を実行
-                try(var model = new HistoryModel(getActivity())) {
+                try{
+                    var model = new HistoryModel(DatabaseHelper.getSQLiteDatabase(getActivity()));
                     model.delete(_id);
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), getText(R.string.toast_delete_failed), Toast.LENGTH_LONG).show();

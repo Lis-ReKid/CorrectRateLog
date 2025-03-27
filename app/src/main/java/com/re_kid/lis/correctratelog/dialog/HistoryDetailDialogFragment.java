@@ -22,7 +22,7 @@ public class HistoryDetailDialogFragment extends DialogFragment {
         // 引数を取得
         _history = requireArguments().getParcelable("history");
         // 詳細メッセージを作成
-        var detailMsg = getText(R.string.tv_category_name) + "：" + _history.getCategory().getName() + "\n" +
+        var detailMsg = getText(R.string.tv_category_name) + "：" + _history.getCategory().getCategoryName() + "\n" +
                 getText(R.string.tv_learned_date) + " : " + _history.getLearnedDate().toString() + " " +
                 _history.getLearnedTime().toString() + "\n" +
                 getText(R.string.correct_rate_title) + " : " + _history.getCorrectRate().toString() + " " +

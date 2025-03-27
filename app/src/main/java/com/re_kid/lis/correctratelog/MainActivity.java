@@ -2,7 +2,6 @@ package com.re_kid.lis.correctratelog;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.re_kid.lis.correctratelog.dialog.MigrationCanIssueDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.FilterHistoryByCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.dialog.FirstCreateCategoryDialogFragment;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         // カテゴリ件数チェック
-        try (var model = new CategoryModel(MainActivity.this)) {
+        try {
+            var model = new CategoryModel(DatabaseHelper.getSQLiteDatabase(MainActivity.this));
             Cursor cursor = model.selectAll();
             // カテゴリ未登録の時、登録ダイアログを表示
             if(cursor.getCount() == 0) {
@@ -51,7 +52,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         // フラグメントの取得
-        try(HistoryModel model = new HistoryModel(MainActivity.this)) {
+        try {
+            HistoryModel model = new HistoryModel(DatabaseHelper.getSQLiteDatabase(MainActivity.this));
             Cursor cursor = model.selectAll();
             int count = cursor.getCount();
             FragmentManager manager = getSupportFragmentManager();
@@ -67,6 +69,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
+        // データ移行ボタンリスナ登録
+        findViewById(R.id.btnMoveToMigrationDialog).setOnClickListener(view -> {
+            MigrationCanIssueDialogFragment migrationDialog = new MigrationCanIssueDialogFragment();
+            migrationDialog.show(getSupportFragmentManager(), "DataMigrationDialogFragment");
+        });
 
         // 初回のみ通知権限をリクエスト
         requestNotificationPermissionIfNeeded();

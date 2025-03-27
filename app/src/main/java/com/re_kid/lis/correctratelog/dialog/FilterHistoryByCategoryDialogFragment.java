@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.re_kid.lis.correctratelog.CorrectRateFragment;
+import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.HistoryListFragment;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
@@ -40,7 +41,8 @@ public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
         int[] to = {R.id.spnCategoryIdRow, R.id.spnCategoryNameRow};
         Cursor cursor;
         SimpleCursorAdapter adapter;
-        try (var model = new CategoryModel(getActivity())) {
+        try {
+            var model = new CategoryModel(DatabaseHelper.getSQLiteDatabase(getActivity()));
             cursor = model.selectAll();
             adapter = new SimpleCursorAdapter(getActivity(),
                     R.layout.spn_category_row,
@@ -59,7 +61,8 @@ public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
             var category = new Category(Integer.parseInt(textCategoryId.getText().toString()),
                     textCategoryName.getText().toString());
             // フラグメント再生成
-            try (var model = new HistoryModel(getActivity())) {
+            try {
+                var model = new HistoryModel(DatabaseHelper.getSQLiteDatabase(getActivity()));
                 Cursor newHistoryCursor = model.selectByCategory(category);
                 int count = newHistoryCursor.getCount();
                 FragmentManager manager = getActivity().getSupportFragmentManager();
@@ -84,7 +87,7 @@ public class FilterHistoryByCategoryDialogFragment extends DialogFragment {
         view.findViewById(R.id.btnFilterReset).setOnClickListener(v -> {
             Cursor allHistoryCursor;
             try {
-                var model = new HistoryModel(getActivity());
+                var model = new HistoryModel(DatabaseHelper.getSQLiteDatabase(getActivity()));
                 allHistoryCursor = model.selectAll();
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();

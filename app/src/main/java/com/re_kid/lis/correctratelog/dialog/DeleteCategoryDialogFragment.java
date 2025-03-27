@@ -22,7 +22,7 @@ public class DeleteCategoryDialogFragment extends DialogFragment {
         // ダイアログをビルド
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new DeleteCategoryDialogOnClickListener();
-        builder.setMessage(_category.getName())
+        builder.setMessage(_category.getCategoryName())
                 .setPositiveButton(R.string.btn_delete, listener)
                 .setNeutralButton(R.string.btn_cancel, listener);
         return builder.create();

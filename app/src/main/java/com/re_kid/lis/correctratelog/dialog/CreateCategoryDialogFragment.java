@@ -13,10 +13,11 @@ import androidx.fragment.app.DialogFragment;
 import com.re_kid.lis.correctratelog.R;
 
 public class CreateCategoryDialogFragment extends DialogFragment {
+    AlertDialog.Builder builder;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        var builder = new AlertDialog.Builder(getActivity());
+        builder = new AlertDialog.Builder(getActivity());
         View view = requireActivity().getLayoutInflater()
                 .inflate(R.layout.category_create_dialog, null);
         view.findViewById(R.id.btCategoryCreate).setOnClickListener(v -> {
@@ -34,6 +35,10 @@ public class CreateCategoryDialogFragment extends DialogFragment {
         });
         builder.setTitle(R.string.create_category_title)
                 .setView(view);
+        setMigrationButton();
         return builder.create();
+    }
+    protected void setMigrationButton() {
+        return;
     }
 }
