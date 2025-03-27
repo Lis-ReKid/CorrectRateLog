@@ -1,49 +1,62 @@
 package com.re_kid.lis.correctratelog.model;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
-import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.obj.Category;
 
-public class CategoryModel implements AutoCloseable{
-    DatabaseHelper _helper;
+import java.util.List;
 
-    public CategoryModel(Context context) {
-        this._helper = new DatabaseHelper(context);
+public class CategoryModel {
+    SQLiteDatabase _db;
+
+    public CategoryModel(SQLiteDatabase db) {
+        this._db = db;
     }
 
     public void create(final Category category) {
-        SQLiteDatabase db = _helper.getWritableDatabase();
         // SQLを作成
         var sqlInsert = "INSERT INTO Categories" +
                 "(category_name)" +
                 "VALUES (?)";
-        SQLiteStatement stmt = db.compileStatement(sqlInsert);
-        stmt.bindString(1, category.getName());
+        SQLiteStatement stmt = _db.compileStatement(sqlInsert);
+        stmt.bindString(1, category.getCategoryName());
         // SQLを実行
         stmt.executeInsert();
     }
 
     public Cursor selectAll() {
-        SQLiteDatabase db = _helper.getWritableDatabase();
         // SQLを作成
         var sql = "SELECT * FROM Categories ORDER BY _id DESC";
-        return db.rawQuery(sql, null);
+        return _db.rawQuery(sql, null);
     }
 
     public void delete(Category category) {
-        SQLiteDatabase db = _helper.getWritableDatabase();
         var sql = "DELETE FROM Categories WHERE _id = ?";
-        SQLiteStatement stmt = db.compileStatement(sql);
+        SQLiteStatement stmt = _db.compileStatement(sql);
         var id = category.getId();
         stmt.bindLong(1, id);
         stmt.executeUpdateDelete();
     }
-    @Override
-    public void close() throws Exception {
-        _helper.close();
+
+    public void deleteAll() {
+        var sqlDelete = "DELETE FROM Categories";
+        SQLiteStatement stmt = _db.compileStatement(sqlDelete);
+        stmt.executeUpdateDelete();
+    }
+
+    public void migrate(List<Category> categoryList) {
+        for (Category category : categoryList) {
+            // SQLを作成
+            var sqlInsert = "INSERT INTO Categories" +
+                    "(_id, category_name)" +
+                    "VALUES (?, ?)";
+            SQLiteStatement stmt = _db.compileStatement(sqlInsert);
+            stmt.bindString(1, String.valueOf(category.getId()));
+            stmt.bindString(2, category.getCategoryName());
+            // SQLを実行
+            stmt.executeInsert();
+        }
     }
 }

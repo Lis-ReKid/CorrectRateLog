@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.obj.Category;
@@ -25,7 +26,7 @@ public class DeleteCategoryConfirmDialogFragment extends DialogFragment {
         var builder = new AlertDialog.Builder(getActivity());
         var listener = new DeleteCategoryConfirmDialogOnClickListener();
         builder.setTitle(R.string.dialog_delete_confirm_msg)
-                .setMessage(_category.getName())
+                .setMessage(_category.getCategoryName())
                 .setPositiveButton(R.string.btn_delete, listener)
                 .setNeutralButton(R.string.btn_cancel, listener);
         return builder.create();
@@ -37,7 +38,7 @@ public class DeleteCategoryConfirmDialogFragment extends DialogFragment {
             if(which == DialogInterface.BUTTON_POSITIVE) {
                 // 削除確定時処理
                 // 削除処理
-                var model = new CategoryModel(getActivity());
+                var model = new CategoryModel(DatabaseHelper.getSQLiteDatabase(getActivity()));
                 model.delete(_category);
                 // 元の画面をリフレッシュ
                 var intent = new Intent(getActivity(), getActivity().getClass());

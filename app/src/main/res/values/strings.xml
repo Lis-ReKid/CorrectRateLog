@@ -6,6 +6,7 @@
     <string name="btn_cancel">キャンセル</string>
     <string name="toast_canceled">キャンセルしました。</string>
     <string name="btn_select">選択</string>
+    <string name="btn_confirm">確定</string>
     <string name="btn_filter_reset">絞り込みを解除</string>
     <!-- ホーム画面回り -->
     <string name="app_name">正答率チェッカー</string>
@@ -58,4 +59,13 @@
     <string name="notification_name">学習を応援します！</string>
     <string name="notification_title">勉強、はかどっていますか？</string>
     <string name="notification_msg">結果を記録して成果を確認しましょう！</string>
+    <!-- データ移行 -->
+    <string name="dialog_title_migration">データ移行</string>
+    <string name="btn_migration">データ移行はこちら</string>
+    <string name="tv_migration_from">新しい端末にデータを引き継ぐ</string>
+    <string name="tv_migration_to">古い端末からデータを引き継ぐ</string>
+    <string name="btn_issue_id">IDを発行する</string>
+    <string name="dialog_migration_failed">データ移行に失敗しました</string>
+    <string name="dialog_migration_id_issued">IDを発行しました</string>
+    <string name="dialog_migration_id_annotation">※IDの有効期限は2週間です</string>
 </resources>

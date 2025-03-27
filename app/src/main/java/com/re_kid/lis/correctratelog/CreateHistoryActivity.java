@@ -52,7 +52,8 @@ public class CreateHistoryActivity extends AppCompatActivity
         int[] to = {R.id.spnCategoryIdRow, R.id.spnCategoryNameRow};
         Cursor cursor;
         SimpleCursorAdapter adapter;
-        try (var model = new CategoryModel(CreateHistoryActivity.this)) {
+        try {
+            var model = new CategoryModel(DatabaseHelper.getSQLiteDatabase(CreateHistoryActivity.this));
             cursor = model.selectAll();
             adapter = new SimpleCursorAdapter(CreateHistoryActivity.this,
                     R.layout.spn_category_row,

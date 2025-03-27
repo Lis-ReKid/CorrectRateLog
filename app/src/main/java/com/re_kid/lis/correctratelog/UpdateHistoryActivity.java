@@ -53,7 +53,8 @@ public class UpdateHistoryActivity extends AppCompatActivity
         int[] to = {R.id.spnCategoryIdRow, R.id.spnCategoryNameRow};
         Cursor cursor = null;
         SimpleCursorAdapter adapter;
-        try (var model = new CategoryModel(UpdateHistoryActivity.this)) {
+        try {
+            var model = new CategoryModel(DatabaseHelper.getSQLiteDatabase(UpdateHistoryActivity.this));
             cursor = model.selectAll();
             adapter = new SimpleCursorAdapter(UpdateHistoryActivity.this,
                     R.layout.spn_category_row,

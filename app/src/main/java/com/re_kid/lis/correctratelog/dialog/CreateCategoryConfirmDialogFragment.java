@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.re_kid.lis.correctratelog.DatabaseHelper;
 import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.obj.Category;
@@ -33,7 +34,8 @@ public class CreateCategoryConfirmDialogFragment extends DialogFragment {
         public void onClick(DialogInterface dialog, int which) {
             if (which == Dialog.BUTTON_POSITIVE) {
                 // DB登録
-                try (var model = new CategoryModel(getActivity())) {
+                try {
+                    var model = new CategoryModel(DatabaseHelper.getSQLiteDatabase(getActivity()));
                     model.create(new Category(0, _categoryName));
                 } catch (Exception e) {
                     return;
