@@ -4,14 +4,14 @@ plugins {
 
 android {
     namespace = "com.re_kid.lis.correctratelog"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.re_kid.lis.correctratelog"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 9
-        versionName = "v1.2.1"
+        versionName = "v1.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,11 +34,11 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation("androidx.core:core-ktx:1.15.0")
-    implementation("com.fasterxml.jackson.core:jackson-core:2.18.2")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
-    implementation("com.fasterxml.jackson.core:jackson-annotations:2.18.2")
-    implementation("commons-io:commons-io:2.18.0")
+    implementation(libs.corektx)
+    implementation(libs.jackson.core)
+    implementation(libs.jackson.databind)
+    implementation(libs.jackson.annotations)
+    implementation(libs.commons.io)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
