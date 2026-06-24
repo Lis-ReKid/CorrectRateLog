@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -71,7 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         // データ移行ボタンリスナ登録
-        findViewById(R.id.btnMoveToMigrationDialog).setOnClickListener(view -> {
+        TextView btnMoveToMigrationDialog = findViewById(R.id.btnMoveToMigrationDialog);
+        btnMoveToMigrationDialog.setEnabled(false);
+        btnMoveToMigrationDialog.setOnClickListener(view -> {
             MigrationCanIssueDialogFragment migrationDialog = new MigrationCanIssueDialogFragment();
             migrationDialog.show(getSupportFragmentManager(), "DataMigrationDialogFragment");
         });
