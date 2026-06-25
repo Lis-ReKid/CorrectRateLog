@@ -44,7 +44,7 @@ public interface Migratable {
         OutputStream os = null;
         InputStream is = null;
         try {
-            URL url = new URL("http://re-kid.com:8080/correctratelog/issue");
+            URL url = new URL("http://correctratelog.re-kid.com:8080/correctratelog/issue");
             con = (HttpURLConnection) url.openConnection();
 //            con.setConnectTimeout(3000);
 //            con.setReadTimeout(3000);
@@ -82,7 +82,7 @@ public interface Migratable {
         MigrationData data = null;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            URL url = new URL("http://re-kid.com:8080/correctratelog/migrate/" + id);
+            URL url = new URL("http://correctratelog.re-kid.com:8080/correctratelog/migrate/" + id);
             con = (HttpURLConnection) url.openConnection();
 //            con.setConnectTimeout(3000);
 //            con.setReadTimeout(3000);
