@@ -61,7 +61,7 @@
     <string name="notification_msg">結果を記録して成果を確認しましょう！</string>
     <!-- データ移行 -->
     <string name="dialog_title_migration">データ移行</string>
-    <string name="btn_migration">データ移行はこちら\n（メンテナンス中）</string>
+    <string name="btn_migration">データ移行はこちら</string>
     <string name="tv_migration_from">新しい端末にデータを引き継ぐ</string>
     <string name="tv_migration_to">古い端末からデータを引き継ぐ</string>
     <string name="btn_issue_id">IDを発行する</string>

@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // データ移行ボタンリスナ登録
         TextView btnMoveToMigrationDialog = findViewById(R.id.btnMoveToMigrationDialog);
-        btnMoveToMigrationDialog.setEnabled(false);
         btnMoveToMigrationDialog.setOnClickListener(view -> {
             MigrationCanIssueDialogFragment migrationDialog = new MigrationCanIssueDialogFragment();
             migrationDialog.show(getSupportFragmentManager(), "DataMigrationDialogFragment");
