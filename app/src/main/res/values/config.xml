@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_base_url">http://correctratelog.re-kid.com:8080/correctratelog</string>
+    <string name="api_issue_endpoint">/issue</string>
+    <string name="api_migrate_endpoint">/migrate</string>
+</resources>

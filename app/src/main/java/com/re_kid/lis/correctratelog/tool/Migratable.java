@@ -7,6 +7,7 @@ import android.util.Log;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.re_kid.lis.correctratelog.DatabaseHelper;
+import com.re_kid.lis.correctratelog.R;
 import com.re_kid.lis.correctratelog.model.CategoryModel;
 import com.re_kid.lis.correctratelog.model.HistoryModel;
 import com.re_kid.lis.correctratelog.obj.Category;
@@ -44,7 +45,7 @@ public interface Migratable {
         OutputStream os = null;
         InputStream is = null;
         try {
-            URL url = new URL("http://correctratelog.re-kid.com:8080/correctratelog/issue");
+            URL url = new URL(context.getString(R.string.api_base_url) + context.getString(R.string.api_issue_endpoint));
             con = (HttpURLConnection) url.openConnection();
 //            con.setConnectTimeout(3000);
 //            con.setReadTimeout(3000);
@@ -82,7 +83,7 @@ public interface Migratable {
         MigrationData data = null;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            URL url = new URL("http://correctratelog.re-kid.com:8080/correctratelog/migrate/" + id);
+            URL url = new URL(context.getString(R.string.api_base_url) + context.getString(R.string.api_migrate_endpoint) + "/" + id);
             con = (HttpURLConnection) url.openConnection();
 //            con.setConnectTimeout(3000);
 //            con.setReadTimeout(3000);
