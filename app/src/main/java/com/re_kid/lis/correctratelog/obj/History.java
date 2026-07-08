@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @JsonSerialize(using = HistorySerializer.class)
 @JsonDeserialize(using = HistoryDeserializer.class)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class History implements Parcelable {
     private final int id;
     private final Category category;
