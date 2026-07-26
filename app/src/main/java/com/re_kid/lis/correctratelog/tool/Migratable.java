@@ -39,7 +39,6 @@ public interface Migratable {
         // dataをJSON化
         var mapper = new ObjectMapper();
         String migrateDataJson = mapper.writeValueAsString(migrationData);
-        System.out.println(migrateDataJson);
 
         HttpURLConnection con = null;
         OutputStream os = null;
