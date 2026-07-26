@@ -10,8 +10,8 @@ android {
         applicationId = "com.re_kid.lis.correctratelog"
         minSdk = 26
         targetSdk = 36
-        versionCode = 13
-        versionName = "v1.2.5"
+        versionCode = 14
+        versionName = "v1.2.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
